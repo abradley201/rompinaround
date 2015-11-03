@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+	</head>
+<body color="white" onload="DrawPicture('SelectPic1','JoanP1');DrawPicture('SelectPic2','ImaP1');DrawPicture('SelectPic3','StephP1')">
+
+  <div class="container" id="container">
+                    
+    <div class="message" id="message"><img src="/assets/Banner.png" height="200" width="200">
+
+    <div class="frontText" id="frontText"></div>
+
+  	<div class="login" id="login">
+
+		<p style="font-size:45px">
+       <%= session[:account] %>
+       	<br><br><br><br>
+
+       	<button onclick="window.location.href='/logout'">Logout</button>
+
+
+    </div>
+
+  	</div>
+
+
+
+
+    <div class="data" id="data">
+
+      		<center>
+          <canvas id="SelectPic1" onclick="SelectSquare(1)" width="150px" height="150px"></canvas><span>  </span><canvas id="SelectPic2" onclick="SelectSquare(2)" width="150px" height="150px"></canvas><span>  </span><canvas id="SelectPic3" onclick="SelectSquare(3)" width="150px" height="150px"></canvas><span>  </span><br><br>
+
+          	<button onclick="DuelMatchMaker('<%= session[:account]%>')">Duel Search</button>
+          	</center>
+
+
+
+        </div>
+
+
+      </div>
+
+
+</body>
+</html>
