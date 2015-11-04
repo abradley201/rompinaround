@@ -40,7 +40,6 @@ end
 
 gem 'mysql2', '~> 0.3.18'
 
-gem 'capistrano-bundler'
 
 
 group :development, :test do
