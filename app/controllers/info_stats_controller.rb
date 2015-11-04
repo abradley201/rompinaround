@@ -54,6 +54,10 @@ class InfoStatsController < ApplicationController
 
             if session[:account] == nil
 
+                  if params[:info_stat][:account] == nil
+                    render "ANF"
+                  end
+
     		      @info = InfoStat.find_by_account(params[:info_stat][:account])
 
     		      if @info.nil? 
