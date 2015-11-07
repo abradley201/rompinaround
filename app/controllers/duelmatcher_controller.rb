@@ -21,7 +21,7 @@ class DuelmatcherController < ApplicationController
 					@SelectedHero_maxmp = BaseStat.find_by_character(@SelectedHero).maxmp
 
 
-					GameStat.create(:account => session[:account], :game => @gameNumber, :character => @SelectedHero, :hp => @SelectedHero_hp, :maxhp => @SelectedHero_maxhp, :shield => 0, :mp => @SelectedHero_mp, :maxmp => @SelectedHero_maxmp, :pos => 0, :kills => 0, :deaths => 0, :status => "()", :exp => 0, :BoardCode => "()")
+					GameStat.create(:account => session[:account], :game => @gameNumber, :character => @SelectedHero, :hp => @SelectedHero_hp, :maxhp => @SelectedHero_maxhp, :shield => 0, :mp => @SelectedHero_mp, :maxmp => @SelectedHero_maxmp, :pos => 0, :kills => 0, :deaths => 0, :status => "()", :exp => 0, :allies => "black", :BoardCode => "()")
 
 
 					BaseStat.update(BaseStat.find_by_account(session[:account]).id, :account => nil, :game => nil)
@@ -67,7 +67,7 @@ class DuelmatcherController < ApplicationController
 
 						BaseStat.update(BaseStat.find_by_account(otherAccount).id, :game => @gameNumber)
 					
-						GameStat.create(:account => session[:account], :game => @gameNumber, :character => @SelectedHero, :hp => @SelectedHero_hp, :maxhp => @SelectedHero_maxhp, :shield => 0, :mp => @SelectedHero_mp, :maxmp => @SelectedHero_maxmp, :pos => 0, :kills => 0, :deaths => 0, :status => "()", :exp => 0, :BoardCode => "()")
+						GameStat.create(:account => session[:account], :game => @gameNumber, :character => @SelectedHero, :hp => @SelectedHero_hp, :maxhp => @SelectedHero_maxhp, :shield => 0, :mp => @SelectedHero_mp, :maxmp => @SelectedHero_maxmp, :pos => 0, :kills => 0, :deaths => 0, :status => "()", :exp => 0, :allies => "white", :BoardCode => "()")
 
 
 					render :json => { :account => otherAccount }
