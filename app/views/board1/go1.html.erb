@@ -34,16 +34,26 @@
 
     var SelectedHero;
 
+    var enemyHero;
+
 
     function assignSelectedHero() {
 
-      SelectedHero = '<%= h @SelectedHero -%>'; alert(SelectedHero);
+      SelectedHero = '<%= h @SelectedHero -%>';  
 
       if (SelectedHero == "Joan") { SelectedHero = Joan }
 
       if (SelectedHero == "Ima") { SelectedHero = Ima }
 
       if (SelectedHero == "Steph") { SelectedHero = Steph }
+
+      enemyHero = '<%= h @enemyHero -%>';
+
+      if (enemyHero == "Joan") { enemyHero = Joan }
+
+      if (enemyHero == "Ima") { enemyHero = Ima }
+
+      if (enemyHero == "Steph") { enemyHero = Steph }
 
 
     }

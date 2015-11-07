@@ -74,6 +74,36 @@ class InfoStatsController < ApplicationController
 
                         session[:account] = @info.account
 
+                            if GameStat.inGameStat?(session[:account]) == true
+
+                                @gameNumber = GameStat.find_by_account(session[:account]).game
+
+                                allPlayersGameNumbers = GameStat.pluck(:game)
+
+                                playersWithYourGameNumber = Array.new
+
+                                y = 0
+
+                                while y < allPlayersGameNumbers.length
+
+                                if allPlayersGameNumbers[y] == @gameNumber
+
+                                playersWithYourGameNumber.push(allPlayersGameNumbers[y])
+
+                                end
+
+                                y = y + 1
+
+                                end
+
+                                if playersWithYourGameNumber.length == 2
+
+                                redirect_to "/board1"
+
+                                end
+
+                            end
+
 
     			     else
     				    render "PNM"
