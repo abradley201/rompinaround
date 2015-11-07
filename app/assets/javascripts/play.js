@@ -1,5 +1,5 @@
 
-var piece = function(id, ppic, bpic, hp, maxhp, shield, mp, maxmp, pos, kills, deaths, status, exp) {
+var piece = function(id, ppic, bpic, hp, maxhp, shield, mp, maxmp, pos, kills, deaths, status, exp, allies) {
     
     this.id = id;
     
@@ -27,17 +27,20 @@ var piece = function(id, ppic, bpic, hp, maxhp, shield, mp, maxmp, pos, kills, d
             
     this.exp = exp;
 
+    this.allies = allies;
+
  
 };
 
-Joan = new piece("Joan", "JoanP1", "JoanB1", 20, 20, 0, 10, 10, 0, 0, 0, "()", 0);
 
-Ima = new piece("Ima", "ImaP1", "ImaB1", 20, 20, 0, 10, 10, 0, 0, 0, "()", 0);
+    Joan = new piece("Joan", "JoanP1", "JoanB1", 20, 20, 0, 10, 10, 0, 0, 0, null, 0, null);
 
-Steph = new piece("Steph", "StephP1", "StephB1", 20, 20, 0, 10, 10, 0, 0, 0, "()", 0);
+    Ima = new piece("Ima", "ImaP1", "ImaB1", 20, 20, 0, 10, 10, 0, 0, 0, null, 0, null);
+
+    Steph = new piece("Steph", "StephP1", "StephB1", 20, 20, 0, 10, 10, 0, 0, 0, null, 0, null);
 
 
-var SelectedHero;
+    var SelectedHero;
 
 
 

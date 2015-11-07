@@ -17,18 +17,37 @@
       
 </head>   
 
-<body onKeyPress="google(event)" onload="CreateContent(600,600,'#b0c4de');CreateBoard(40,40,10,10);place(Joan_pos, Joan);place(Ima_pos, Ima);ClearUI();HPMPbars();">
+<body onKeyPress="google(event)" onload="CreateContent(600,600,'#b0c4de');CreateBoard(40,40,10,10);assignSelectedHero();ClearUI();HPMPbars();">
 
     <div class="container" id="container">
 
 
     <script type="text/javascript" charset="utf-8">
 
-    var Joan;
-    var Ima;
 
-    var Joan_pos;
-    var Ima_pos;
+    Joan = new piece("Joan", "JoanP1", "JoanB1", 20, 20, 0, 10, 10, 0, 0, 0, null, 0, null);
+
+    Ima = new piece("Ima", "ImaP1", "ImaB1", 20, 20, 0, 10, 10, 0, 0, 0, null, 0, null);
+
+    Steph = new piece("Steph", "StephP1", "StephB1", 20, 20, 0, 10, 10, 0, 0, 0, null, 0, null);
+
+
+    var SelectedHero;
+
+
+    function assignSelectedHero() {
+
+      SelectedHero = '<%= h @SelectedHero -%>'; alert(SelectedHero);
+
+      if (SelectedHero == "Joan") { SelectedHero = Joan }
+
+      if (SelectedHero == "Ima") { SelectedHero = Ima }
+
+      if (SelectedHero == "Steph") { SelectedHero = Steph }
+
+
+    }
+
 
     function getData() {
     Joan_pos = Number('<%= h @Joan_pos -%>');
@@ -40,7 +59,7 @@
 
      }
 
-    getData();
+    
 
 
 
@@ -59,9 +78,6 @@
     </script>
 
     <!-- < % BaseStat.replace() % >? to update database -->
-    <!-- YourHero is global piece of who you control -->
-    <!-- server checks to see if base_stats has accounts inserted into it. if yes for two, clears the base_stats account column and makes a game by copying data into game_stats and creating a map for map_stats. these two tables are coordinated by a game number column -->
-    <!-- If Joan and Ima have an account in BaseStats, go to board1-->
     <!-- how do we secure database.yml? -->
 
 
