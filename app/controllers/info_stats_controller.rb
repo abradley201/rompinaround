@@ -78,27 +78,17 @@ class InfoStatsController < ApplicationController
 
                                 @gameNumber = GameStat.find_by_account(session[:account]).game
 
-                                allPlayersGameNumbers = GameStat.pluck(:game)
+                                if GameStat.inGameStat?(session[:account]) == true
 
-                                playersWithYourGameNumber = Array.new
+                                    @gameNumber = GameStat.find_by_account(session[:account]).game
 
-                                y = 0
+                                    @gameArray = GameStat.where(game:@gameNumber)
 
-                                while y < allPlayersGameNumbers.length
+                                    if @gameArray.length == 2
 
-                                if allPlayersGameNumbers[y] == @gameNumber
+                                        redirect_to "/board1"
 
-                                playersWithYourGameNumber.push(allPlayersGameNumbers[y])
-
-                                end
-
-                                y = y + 1
-
-                                end
-
-                                if playersWithYourGameNumber.length == 2
-
-                                redirect_to "/board1"
+                                    end
 
                                 end
 
@@ -119,25 +109,9 @@ class InfoStatsController < ApplicationController
 
                     @gameNumber = GameStat.find_by_account(session[:account]).game
 
-                    allPlayersGameNumbers = GameStat.pluck(:game)
+                    @gameArray = GameStat.where(game:@gameNumber)
 
-                    playersWithYourGameNumber = Array.new
-
-                    y = 0
-
-                    while y < allPlayersGameNumbers.length
-
-                        if allPlayersGameNumbers[y] == @gameNumber
-
-                            playersWithYourGameNumber.push(allPlayersGameNumbers[y])
-
-                        end
-
-                        y = y + 1
-
-                    end
-
-                    if playersWithYourGameNumber.length == 2
+                    if @gameArray.length == 2
 
                     redirect_to "/board1"
 
