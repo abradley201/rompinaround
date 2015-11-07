@@ -54,7 +54,17 @@ class InfoStatsController < ApplicationController
 
             if session[:account] == nil
 
+                  begin
+
     		      @info = InfoStat.find_by_account(params[:info_stat][:account])
+
+                  rescue Exception => ex
+
+                    if ex == NoMethodError 
+                        render "ANF"
+                    end
+
+                  end
 
     		      if @info.nil? 
     			     render "ANF"
@@ -70,6 +80,8 @@ class InfoStatsController < ApplicationController
     			     end
 
     		      end
+
+                
 
             else
 
