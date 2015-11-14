@@ -3,7 +3,8 @@
 var command = "nothing";
 var target = "none";
 
-
+//change to do requests immediately at key press. also detect if nothing is done
+//then update once every second
 
 function google(evt){ 
                      
@@ -17,41 +18,25 @@ function google(evt){
 
     									command = "w";
 
-    									if (document.getElementById(yourHero.pos - e).className == "on")
-    									{ var c=document.getElementById(yourHero.pos - e);
-       									var ctx=c.getContext("2d");
-       									ctx.fillStyle="#81F7F3";
-       									ctx.fillRect(0, 0, 50, 50) } }
+    									 }
                      
     if (String.fromCharCode(key)=="a"){ 
 
     									command = "a";
 
-    									if (document.getElementById(yourHero.pos - 1).className == "on")
-    									{ var c=document.getElementById(yourHero.pos - 1);
-       									var ctx=c.getContext("2d");
-       									ctx.fillStyle="#81F7F3";
-       									ctx.fillRect(0, 0, 50, 50) } }
+    									 }
 
     if (String.fromCharCode(key)=="s"){ 
 
     									command = "s";
 
-    									if (document.getElementById(yourHero.pos + e).className == "on")
-    									{ var c=document.getElementById(yourHero.pos + e);
-       									var ctx=c.getContext("2d");
-       									ctx.fillStyle="#81F7F3";
-       									ctx.fillRect(0, 0, 50, 50) } }
+    									 }
                      
     if (String.fromCharCode(key)=="d"){ 
 
     									command = "d";
 
-    									if (document.getElementById(yourHero.pos + 1).className == "on")
-    									{ var c=document.getElementById(yourHero.pos + 1);
-       									var ctx=c.getContext("2d");
-       									ctx.fillStyle="#81F7F3";
-       									ctx.fillRect(0, 0, 50, 50) } }
+    									 }
                                        
                      
                      
