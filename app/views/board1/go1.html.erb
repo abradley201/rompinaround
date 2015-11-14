@@ -113,37 +113,11 @@
         place(enemyHero.pos,enemyHero);
 
     }
-
-
-    function getData() {
-    Joan_pos = Number('<%= h @Joan_pos -%>');
-    Ima_pos = Number('<%= h @Ima_pos -%>');
-
-    Joan = new piece("Joan", "JoanP1", "JoanB1", 20, 20, 0, 10, 10, Joan_pos, 0, 0, "()", 0);
-
-    Ima = new piece("Ima", "ImaP1", "ImaB1", 20, 20, 0, 10, 10, Ima_pos, 0, 0, "()", 0);
-
-     }
-
     
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        setTimeout(function(){ SendCommand() }, 1000);
 
     </script>
 
-    <!-- < % BaseStat.replace() % >? to update database -->
 
 
      </div> 

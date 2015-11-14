@@ -22,6 +22,8 @@ Rails.application.routes.draw do
 
   post 'makematch' => 'duelmatcher#makematch'
 
+  post 'pacemaker' => 'board1#pacemaker'
+
   get 'cancelsearch' => 'duelmatcher#cancelsearch'
 
 

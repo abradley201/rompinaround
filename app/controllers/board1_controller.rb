@@ -97,32 +97,158 @@ class Board1Controller < ApplicationController
                     end
 
                   end
-	
-    #use .split and .join for arrays
-    #['f', 'o', 'o', 'o'].reject(&:empty?).join(' ')
 
     
 	end
 
 	def pacemaker
 
+		e = 12
+
+
+		@yourHero = GameStat.find_by_account(session[:account])
+
 		@gameNumber = GameStat.find_by_account(session[:account]).game
+
+		@gameArray = GameStat.where(game:@gameNumber)
+
+		if @gameArray.first.account != session[:account]
+
+			@enemyHero = @gameArray.first
+
+		else
+
+			@enemyHero = @gameArray.last
+
+		end
+
 
 		@turns = MapStat.find_by_game(@gameNumber).turns
 
 		@creation = MapStat.find_by_game(@gameNumber).creation
 
+
 		if Time.now.to_i >= @creation + @turns
 
+			@mapInfo = MapStat.find_by_game(@gameNumber).map.split
 
-			#do turn here
+			if params[:command] == "w"
 
-			#insert @turn + 1 at end
+				if @yourHero.pos - e > 0 && @mapInfo[@yourHero.pos - e] == "n"
 
+					@mapInfo[@yourHero.pos] = "n"
+
+					@mapInfo[@yourHero.pos - e] = "o"
+
+					@mapInfo = @mapInfo.reject(&:empty?).join(' ')
+
+					MapStat.update(MapStat.find_by_game(@gameNumber).id, :map => @mapInfo)
+
+					GameStat.update(@yourHero.id, :pos => @yourHero.pos - e)					
+
+
+
+					render :json => { :yourHp => @yourHero.hp, :yourMaxhp => @yourHero.maxhp, :yourShield => @yourHero.shield, :yourMp => @yourHero.mp, :yourMaxmp => @yourHero.maxmp, :yourPos => @yourHero.pos, :yourKills => @yourHero.kills, :yourDeaths => @yourHero.deaths, :yourStatus => @yourHero.status, :yourExp => @yourHero.exp, :yourAllies => @yourHero.allies, :yourAction => "successful", :enemyHp => @enemyHero.hp, :enemyMaxhp => @enemyHero.maxhp, :enemyShield => @enemyHero.shield, :enemyMp => @enemyHero.mp, :enemyMaxmp => @enemyHero.maxmp, :enemyPos => @enemyHero.pos, :enemyKills => @enemyHero.kills, :enemyDeaths => @enemyHero.deaths, :enemyStatus => @enemyHero.status, :enemyExp => @enemyHero.exp, :enemyAllies => @enemyHero.allies, :enemyAction => @enemyHero.action }
+
+				else
+
+					render :json => { :yourHp => @yourHero.hp, :yourMaxhp => @yourHero.maxhp, :yourShield => @yourHero.shield, :yourMp => @yourHero.mp, :yourMaxmp => @yourHero.maxmp, :yourPos => @yourHero.pos, :yourKills => @yourHero.kills, :yourDeaths => @yourHero.deaths, :yourStatus => @yourHero.status, :yourExp => @yourHero.exp, :yourAllies => @yourHero.allies, :yourAction => "failure", :enemyHp => @enemyHero.hp, :enemyMaxhp => @enemyHero.maxhp, :enemyShield => @enemyHero.shield, :enemyMp => @enemyHero.mp, :enemyMaxmp => @enemyHero.maxmp, :enemyPos => @enemyHero.pos, :enemyKills => @enemyHero.kills, :enemyDeaths => @enemyHero.deaths, :enemyStatus => @enemyHero.status, :enemyExp => @enemyHero.exp, :enemyAllies => @enemyHero.allies, :enemyAction => @enemyHero.action }
+
+				end
+
+			end
+
+			if params[:command] == "a"
+
+				if @yourHero.pos - 1 > 0 && @mapInfo[@yourHero.pos - 1] == "n"
+
+					@mapInfo[@yourHero.pos] = "n"
+
+					@mapInfo[@yourHero.pos - 1] = "o"
+
+					@mapInfo = @mapInfo.reject(&:empty?).join(' ')
+
+					MapStat.update(MapStat.find_by_game(@gameNumber).id, :map => @mapInfo)
+
+					GameStat.update(@yourHero.id, :pos => @yourHero.pos - 1)
+
+
+
+					render :json => { :yourHp => @yourHero.hp, :yourMaxhp => @yourHero.maxhp, :yourShield => @yourHero.shield, :yourMp => @yourHero.mp, :yourMaxmp => @yourHero.maxmp, :yourPos => @yourHero.pos, :yourKills => @yourHero.kills, :yourDeaths => @yourHero.deaths, :yourStatus => @yourHero.status, :yourExp => @yourHero.exp, :yourAllies => @yourHero.allies, :yourAction => "successful", :enemyHp => @enemyHero.hp, :enemyMaxhp => @enemyHero.maxhp, :enemyShield => @enemyHero.shield, :enemyMp => @enemyHero.mp, :enemyMaxmp => @enemyHero.maxmp, :enemyPos => @enemyHero.pos, :enemyKills => @enemyHero.kills, :enemyDeaths => @enemyHero.deaths, :enemyStatus => @enemyHero.status, :enemyExp => @enemyHero.exp, :enemyAllies => @enemyHero.allies, :enemyAction => @enemyHero.action }
+
+				else
+
+					render :json => { :yourHp => @yourHero.hp, :yourMaxhp => @yourHero.maxhp, :yourShield => @yourHero.shield, :yourMp => @yourHero.mp, :yourMaxmp => @yourHero.maxmp, :yourPos => @yourHero.pos, :yourKills => @yourHero.kills, :yourDeaths => @yourHero.deaths, :yourStatus => @yourHero.status, :yourExp => @yourHero.exp, :yourAllies => @yourHero.allies, :yourAction => "failure", :enemyHp => @enemyHero.hp, :enemyMaxhp => @enemyHero.maxhp, :enemyShield => @enemyHero.shield, :enemyMp => @enemyHero.mp, :enemyMaxmp => @enemyHero.maxmp, :enemyPos => @enemyHero.pos, :enemyKills => @enemyHero.kills, :enemyDeaths => @enemyHero.deaths, :enemyStatus => @enemyHero.status, :enemyExp => @enemyHero.exp, :enemyAllies => @enemyHero.allies, :enemyAction => @enemyHero.action }
+
+				end
+
+			end
+
+			if params[:command] == "s"
+
+				if @yourHero.pos + e < 119 && @mapInfo[@yourHero.pos + e] == "n"
+
+					@mapInfo[@yourHero.pos] = "n"
+
+					@mapInfo[@yourHero.pos + e] = "o"
+
+					@mapInfo = @mapInfo.reject(&:empty?).join(' ')
+
+					MapStat.update(MapStat.find_by_game(@gameNumber).id, :map => @mapInfo)
+
+					GameStat.update(@yourHero.id, :pos => @yourHero.pos + e)
+
+					
+
+					render :json => { :yourHp => @yourHero.hp, :yourMaxhp => @yourHero.maxhp, :yourShield => @yourHero.shield, :yourMp => @yourHero.mp, :yourMaxmp => @yourHero.maxmp, :yourPos => @yourHero.pos, :yourKills => @yourHero.kills, :yourDeaths => @yourHero.deaths, :yourStatus => @yourHero.status, :yourExp => @yourHero.exp, :yourAllies => @yourHero.allies, :yourAction => "successful", :enemyHp => @enemyHero.hp, :enemyMaxhp => @enemyHero.maxhp, :enemyShield => @enemyHero.shield, :enemyMp => @enemyHero.mp, :enemyMaxmp => @enemyHero.maxmp, :enemyPos => @enemyHero.pos, :enemyKills => @enemyHero.kills, :enemyDeaths => @enemyHero.deaths, :enemyStatus => @enemyHero.status, :enemyExp => @enemyHero.exp, :enemyAllies => @enemyHero.allies, :enemyAction => @enemyHero.action }
+
+				else
+
+					render :json => { :yourHp => @yourHero.hp, :yourMaxhp => @yourHero.maxhp, :yourShield => @yourHero.shield, :yourMp => @yourHero.mp, :yourMaxmp => @yourHero.maxmp, :yourPos => @yourHero.pos, :yourKills => @yourHero.kills, :yourDeaths => @yourHero.deaths, :yourStatus => @yourHero.status, :yourExp => @yourHero.exp, :yourAllies => @yourHero.allies, :yourAction => "failure", :enemyHp => @enemyHero.hp, :enemyMaxhp => @enemyHero.maxhp, :enemyShield => @enemyHero.shield, :enemyMp => @enemyHero.mp, :enemyMaxmp => @enemyHero.maxmp, :enemyPos => @enemyHero.pos, :enemyKills => @enemyHero.kills, :enemyDeaths => @enemyHero.deaths, :enemyStatus => @enemyHero.status, :enemyExp => @enemyHero.exp, :enemyAllies => @enemyHero.allies, :enemyAction => @enemyHero.action }
+
+				end
+
+			end
+
+			if params[:command] == "d"
+
+				if @yourHero.pos + 1 < 119 && @mapInfo[@yourHero.pos + 1] == "n"
+
+					@mapInfo[@yourHero.pos] = "n"
+
+					@mapInfo[@yourHero.pos + 1] = "o"
+
+					@mapInfo = @mapInfo.reject(&:empty?).join(' ')
+
+					MapStat.update(MapStat.find_by_game(@gameNumber).id, :map => @mapInfo)
+
+					GameStat.update(@yourHero.id, :pos => @yourHero.pos + 1)
+
+					
+
+					render :json => { :yourHp => @yourHero.hp, :yourMaxhp => @yourHero.maxhp, :yourShield => @yourHero.shield, :yourMp => @yourHero.mp, :yourMaxmp => @yourHero.maxmp, :yourPos => @yourHero.pos, :yourKills => @yourHero.kills, :yourDeaths => @yourHero.deaths, :yourStatus => @yourHero.status, :yourExp => @yourHero.exp, :yourAllies => @yourHero.allies, :yourAction => "successful", :enemyHp => @enemyHero.hp, :enemyMaxhp => @enemyHero.maxhp, :enemyShield => @enemyHero.shield, :enemyMp => @enemyHero.mp, :enemyMaxmp => @enemyHero.maxmp, :enemyPos => @enemyHero.pos, :enemyKills => @enemyHero.kills, :enemyDeaths => @enemyHero.deaths, :enemyStatus => @enemyHero.status, :enemyExp => @enemyHero.exp, :enemyAllies => @enemyHero.allies, :enemyAction => @enemyHero.action }
+
+				else
+
+					render :json => { :yourHp => @yourHero.hp, :yourMaxhp => @yourHero.maxhp, :yourShield => @yourHero.shield, :yourMp => @yourHero.mp, :yourMaxmp => @yourHero.maxmp, :yourPos => @yourHero.pos, :yourKills => @yourHero.kills, :yourDeaths => @yourHero.deaths, :yourStatus => @yourHero.status, :yourExp => @yourHero.exp, :yourAllies => @yourHero.allies, :yourAction => "failure", :enemyHp => @enemyHero.hp, :enemyMaxhp => @enemyHero.maxhp, :enemyShield => @enemyHero.shield, :enemyMp => @enemyHero.mp, :enemyMaxmp => @enemyHero.maxmp, :enemyPos => @enemyHero.pos, :enemyKills => @enemyHero.kills, :enemyDeaths => @enemyHero.deaths, :enemyStatus => @enemyHero.status, :enemyExp => @enemyHero.exp, :enemyAllies => @enemyHero.allies, :enemyAction => @enemyHero.action }
+
+				end
+
+			end
+
+			if params[:command] == "nothing"
+
+				render :json => { :yourHp => @yourHero.hp, :yourMaxhp => @yourHero.maxhp, :yourShield => @yourHero.shield, :yourMp => @yourHero.mp, :yourMaxmp => @yourHero.maxmp, :yourPos => @yourHero.pos, :yourKills => @yourHero.kills, :yourDeaths => @yourHero.deaths, :yourStatus => @yourHero.status, :yourExp => @yourHero.exp, :yourAllies => @yourHero.allies, :yourAction => "nothing", :enemyHp => @enemyHero.hp, :enemyMaxhp => @enemyHero.maxhp, :enemyShield => @enemyHero.shield, :enemyMp => @enemyHero.mp, :enemyMaxmp => @enemyHero.maxmp, :enemyPos => @enemyHero.pos, :enemyKills => @enemyHero.kills, :enemyDeaths => @enemyHero.deaths, :enemyStatus => @enemyHero.status, :enemyExp => @enemyHero.exp, :enemyAllies => @enemyHero.allies, :enemyAction => @enemyHero.action }
+
+			end
+
+			
+
+			MapStat.update(MapStat.find_by_game(@gameNumber).id, :turns => @turns + 1)
 
 		else 
 
-			sleep(1)
+			render :json => { :yourHp => @yourHero.hp, :yourMaxhp => @yourHero.maxhp, :yourShield => @yourHero.shield, :yourMp => @yourHero.mp, :yourMaxmp => @yourHero.maxmp, :yourPos => @yourHero.pos, :yourKills => @yourHero.kills, :yourDeaths => @yourHero.deaths, :yourStatus => @yourHero.status, :yourExp => @yourHero.exp, :yourAllies => @yourHero.allies, :yourAction => "outofpace", :enemyHp => @enemyHero.hp, :enemyMaxhp => @enemyHero.maxhp, :enemyShield => @enemyHero.shield, :enemyMp => @enemyHero.mp, :enemyMaxmp => @enemyHero.maxmp, :enemyPos => @enemyHero.pos, :enemyKills => @enemyHero.kills, :enemyDeaths => @enemyHero.deaths, :enemyStatus => @enemyHero.status, :enemyExp => @enemyHero.exp, :enemyAllies => @enemyHero.allies, :enemyAction => @enemyHero.action }
 			
 		end
 

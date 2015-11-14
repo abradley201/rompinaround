@@ -43,6 +43,15 @@ var piece = function(id, ppic, bpic, hp, maxhp, shield, mp, maxmp, pos, kills, d
     var yourHero;
 
 
+function ClearBoard(x, y) {
+    var c=document.getElementById(x);
+    var ctx=c.getContext("2d");
+    ctx.clearRect(0, 0, 80, 80); 
+    if (y === undefined) {y = 1};
+    ctx.globalAlpha = y;
+
+};
+
 
 function OccupyCanvas(x) {
       document.getElementById(x).className = 'occupied';
@@ -238,3 +247,5 @@ xmlhttp.send();
 
  }
 
+
+ 
