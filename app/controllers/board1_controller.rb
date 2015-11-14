@@ -1,5 +1,3 @@
-require 'pry'
-
 class Board1Controller < ApplicationController
 	def go1
 
