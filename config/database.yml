@@ -13,14 +13,14 @@ development:
   <<: *default
   database: rompindatabase
   username: rompinadmin
-  password: LETSJAM999
+  password: <%= ENV['DATABASE_PASSWORD'] %>
   host: db.rompinaround.com
 
 production:
   <<: *default
   database: rompindatabase
   username: rompinadmin
-  password: LETSJAM999
+  password: <%= ENV['DATABASE_PASSWORD'] %>
   host: db.rompinaround.com
 
 
