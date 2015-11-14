@@ -40,7 +40,7 @@ var piece = function(id, ppic, bpic, hp, maxhp, shield, mp, maxmp, pos, kills, d
     Steph = new piece("Steph", "StephP1", "StephB1", 20, 20, 0, 10, 10, 0, 0, 0, null, 0, null);
 
 
-    var SelectedHero;
+    var yourHero;
 
 
 
@@ -111,7 +111,7 @@ function SelectSquare(p) { if ( IsSearching == true ) { return }; var HeroArray 
 
                 }
 
-                SelectedHero = HeroArray[p];
+                yourHero = HeroArray[p];
 
                 SelectedHeroNumber = p;
                 var which = 'SelectPic'+p;
@@ -143,7 +143,7 @@ function DuelMatchMaker() {
 
     if ( IsSearching == true ) { return }; 
 
-    if ( SelectedHero === undefined ) { document.getElementById("frontText").innerHTML = "please select a hero."; return }
+    if ( yourHero === undefined ) { document.getElementById("frontText").innerHTML = "please select a hero."; return }
 
     IsSearching = true;
 
@@ -199,7 +199,7 @@ function DuelMatchMaker() {
   }
 xmlhttp.open("POST","/makematch",true);
 xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
-xmlhttp.send("character=" + SelectedHero.id);
+xmlhttp.send("character=" + yourHero.id);
 
 
 

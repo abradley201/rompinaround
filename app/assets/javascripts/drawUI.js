@@ -1,14 +1,14 @@
 
 
 
-function ClearUI() { if (SelectedHero === undefined) { return }
+function ClearUI() { if (yourHero === undefined) { return }
         
      var ClearWidth = window.innerWidth;             
      
     var c=document.getElementById("UI");
     var ctx=c.getContext("2d");
     ctx.clearRect(0,0,ClearWidth,150);
-    DrawPicture("UI", SelectedHero.ppic);
+    DrawPicture("UI", yourHero.ppic);
                     
       ctx.beginPath();
       ctx.moveTo(window.innerWidth/2, 0);
@@ -21,10 +21,10 @@ function ClearUI() { if (SelectedHero === undefined) { return }
 
 
 
-function HPMPbars() { if (SelectedHero === undefined) { return }
+function HPMPbars() { if (yourHero === undefined) { return }
     
-    var HPMultiplier = SelectedHero.hp / SelectedHero.maxhp;
-    var MPMultiplier = SelectedHero.mp / SelectedHero.maxmp;
+    var HPMultiplier = yourHero.hp / yourHero.maxhp;
+    var MPMultiplier = yourHero.mp / yourHero.maxmp;
 
     var c=document.getElementById("UI");
     var ctx=c.getContext("2d");
@@ -44,14 +44,14 @@ function HPMPbars() { if (SelectedHero === undefined) { return }
     ctx.fillRect(160,10,HPMultiplier * window.innerWidth/8,25);
     
     ctx.font = "20px Georgia";
-    ctx.fillText(SelectedHero.hp + " / " + SelectedHero.maxhp, 125 + window.innerWidth/16, 60);
+    ctx.fillText(yourHero.hp + " / " + yourHero.maxhp, 125 + window.innerWidth/16, 60);
     
     ctx.beginPath();
     ctx.fillStyle="#3366FF";
     ctx.fillRect(160,85,MPMultiplier * window.innerWidth/8,25); 
     
     ctx.font = "20px Georgia";
-    ctx.fillText(SelectedHero.mp + " / " + SelectedHero.maxmp, 125 + window.innerWidth/16, 140);
+    ctx.fillText(yourHero.mp + " / " + yourHero.maxmp, 125 + window.innerWidth/16, 140);
         
 
 };

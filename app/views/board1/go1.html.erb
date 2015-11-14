@@ -17,7 +17,7 @@
       
 </head>   
 
-<body onKeyPress="google(event)" onload="CreateContent(600,600,'#b0c4de');CreateBoard(40,40,10,10);assignSelectedHero();ClearUI();HPMPbars();">
+<body onKeyPress="google(event)" onload="CreateContent(600,600,'#b0c4de');CreateBoard(40,40,10,10);assign();ClearUI();HPMPbars();">
 
     <div class="container" id="container">
 
@@ -32,20 +32,20 @@
     Steph = new piece("Steph", "StephP1", "StephB1", 20, 20, 0, 10, 10, 0, 0, 0, null, 0, null);
 
 
-    var SelectedHero;
+    var yourHero;
 
     var enemyHero;
 
 
-    function assignSelectedHero() {
+    function assign() {
 
-      SelectedHero = '<%= h @SelectedHero -%>';  
+      yourHero = '<%= h @yourHero -%>';  
 
-      if (SelectedHero == "Joan") { SelectedHero = Joan }
+      if (yourHero == "Joan") { yourHero = Joan }
 
-      if (SelectedHero == "Ima") { SelectedHero = Ima }
+      if (yourHero == "Ima") { yourHero = Ima }
 
-      if (SelectedHero == "Steph") { SelectedHero = Steph }
+      if (yourHero == "Steph") { yourHero = Steph }
 
       enemyHero = '<%= h @enemyHero -%>';
 
@@ -55,6 +55,62 @@
 
       if (enemyHero == "Steph") { enemyHero = Steph }
 
+
+        var yourHp = '<%= h @yourHp -%>';
+        var yourMaxhp = '<%= h @yourMaxhp -%>';
+        var yourShield = '<%= h @yourShield -%>';
+        var yourMp = '<%= h @yourMp -%>';
+        var yourMaxmp = '<%= h @yourMaxmp -%>';
+        var yourPos = '<%= h @yourPos -%>';
+        var yourKills = '<%= h @yourKills -%>';
+        var yourDeaths = '<%= h @yourDeaths -%>';
+        var yourStatus = '<%= h @yourStatus -%>';
+        var yourExp = '<%= h @yourExp -%>';
+        var yourAllies = '<%= h @yourAllies -%>';
+        var yourAction = '<%= h @yourAction -%>';
+
+        var enemyHp = '<%= h @enemyHp -%>';
+        var enemyMaxhp = '<%= h @enemyMaxhp -%>';
+        var enemyShield = '<%= h @enemyShield -%>';
+        var enemyMp = '<%= h @enemyMp -%>';
+        var enemyMaxmp = '<%= h @enemyMaxmp -%>';
+        var enemyPos = '<%= h @enemyPos -%>';
+        var enemyKills = '<%= h @enemyKills -%>';
+        var enemyDeaths = '<%= h @enemyDeaths -%>';
+        var enemyStatus = '<%= h @enemyStatus -%>';
+        var enemyExp = '<%= h @enemyExp -%>';
+        var enemyAllies = '<%= h @enemyAllies -%>';
+        var enemyAction = '<%= h @enemyAction -%>';
+
+
+        yourHero['hp'] = Number(yourHp);
+        yourHero['maxhp'] = Number(yourMaxhp);
+        yourHero['shield'] = Number(yourShield);
+        yourHero['mp'] = Number(yourMp);
+        yourHero['maxmp'] = Number(yourMaxmp);
+        yourHero['pos'] = Number(yourPos);
+        yourHero['kills'] = Number(yourKills);
+        yourHero['deaths'] = Number(yourDeaths);
+        yourHero['status'] = yourStatus;
+        yourHero['exp'] = Number(yourExp);
+        yourHero['allies'] = yourAllies;
+        yourHero['action'] = yourAction;
+
+        enemyHero['hp'] = Number(enemyHp);
+        enemyHero['maxhp'] = Number(enemyMaxhp);
+        enemyHero['shield'] = Number(enemyShield);
+        enemyHero['mp'] = Number(enemyMp);
+        enemyHero['maxmp'] = Number(enemyMaxmp);
+        enemyHero['pos'] = Number(enemyPos);
+        enemyHero['kills'] = Number(enemyKills);
+        enemyHero['deaths'] = Number(enemyDeaths);
+        enemyHero['status'] = enemyStatus;
+        enemyHero['exp'] = Number(enemyExp);
+        enemyHero['allies'] = enemyAllies;
+        enemyHero['action'] = enemyAction;
+
+        place(yourHero.pos,yourHero);
+        place(enemyHero.pos,enemyHero);
 
     }
 
@@ -88,7 +144,6 @@
     </script>
 
     <!-- < % BaseStat.replace() % >? to update database -->
-    <!-- how do we secure database.yml? -->
 
 
      </div> 

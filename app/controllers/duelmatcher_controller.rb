@@ -14,14 +14,14 @@ class DuelmatcherController < ApplicationController
 
 					@gameNumber = BaseStat.find_by_account(session[:account]).game
 
-					@SelectedHero = BaseStat.find_by_account(session[:account]).character
-					@SelectedHero_hp = BaseStat.find_by_character(@SelectedHero).hp
-					@SelectedHero_maxhp = BaseStat.find_by_character(@SelectedHero).maxhp
-					@SelectedHero_mp = BaseStat.find_by_character(@SelectedHero).mp
-					@SelectedHero_maxmp = BaseStat.find_by_character(@SelectedHero).maxmp
+					@yourHero = BaseStat.find_by_account(session[:account]).character
+					@yourHero_hp = BaseStat.find_by_character(@yourHero).hp
+					@yourHero_maxhp = BaseStat.find_by_character(@yourHero).maxhp
+					@yourHero_mp = BaseStat.find_by_character(@yourHero).mp
+					@yourHero_maxmp = BaseStat.find_by_character(@yourHero).maxmp
 
 
-					GameStat.create(:account => session[:account], :game => @gameNumber, :character => @SelectedHero, :hp => @SelectedHero_hp, :maxhp => @SelectedHero_maxhp, :shield => 0, :mp => @SelectedHero_mp, :maxmp => @SelectedHero_maxmp, :pos => 0, :kills => 0, :deaths => 0, :exp => 0, :allies => "black")
+					GameStat.create(:account => session[:account], :game => @gameNumber, :character => @yourHero, :hp => @yourHero_hp, :maxhp => @yourHero_maxhp, :shield => 0, :mp => @yourHero_mp, :maxmp => @yourHero_maxmp, :pos => 0, :kills => 0, :deaths => 0, :exp => 0, :allies => "black")
 
 
 					BaseStat.update(BaseStat.find_by_account(session[:account]).id, :account => nil, :game => nil)
@@ -45,11 +45,11 @@ class DuelmatcherController < ApplicationController
 
 					if validHeroes.include? params[:character]
 
-						@SelectedHero = params[:character]
-						@SelectedHero_hp = BaseStat.find_by_character(@SelectedHero).hp
-						@SelectedHero_maxhp = BaseStat.find_by_character(@SelectedHero).maxhp
-						@SelectedHero_mp = BaseStat.find_by_character(@SelectedHero).mp
-						@SelectedHero_maxmp = BaseStat.find_by_character(@SelectedHero).maxmp
+						@yourHero = params[:character]
+						@yourHero_hp = BaseStat.find_by_character(@yourHero).hp
+						@yourHero_maxhp = BaseStat.find_by_character(@yourHero).maxhp
+						@yourHero_mp = BaseStat.find_by_character(@yourHero).mp
+						@yourHero_maxmp = BaseStat.find_by_character(@yourHero).maxmp
 
 						@TheGames = GameStat.pluck(:game)
 
@@ -67,7 +67,7 @@ class DuelmatcherController < ApplicationController
 
 						BaseStat.update(BaseStat.find_by_account(otherAccount).id, :game => @gameNumber)
 					
-						GameStat.create(:account => session[:account], :game => @gameNumber, :character => @SelectedHero, :hp => @SelectedHero_hp, :maxhp => @SelectedHero_maxhp, :shield => 0, :mp => @SelectedHero_mp, :maxmp => @SelectedHero_maxmp, :pos => 0, :kills => 0, :deaths => 0, :exp => 0, :allies => "white")
+						GameStat.create(:account => session[:account], :game => @gameNumber, :character => @yourHero, :hp => @yourHero_hp, :maxhp => @yourHero_maxhp, :shield => 0, :mp => @yourHero_mp, :maxmp => @yourHero_maxmp, :pos => 0, :kills => 0, :deaths => 0, :exp => 0, :allies => "white")
 
 
 					render :json => { :account => otherAccount }

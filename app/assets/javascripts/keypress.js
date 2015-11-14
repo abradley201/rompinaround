@@ -28,10 +28,10 @@ function Move(x) {
 
 	if ( x == "w" )  {
 
-		if ( document.getElementById(SelectedHero.pos - e) == "on" ) {
+		if ( document.getElementById(yourHero.pos - e) == "on" ) {
 
-			//TurnCanvasOn(SelectedHero.pos);
-			//place(SelectedHero.)
+			//TurnCanvasOn(yourHero.pos);
+			//place(yourHero.)
 
 
 		}
