@@ -45,7 +45,7 @@ function google(evt){
 
 
 
-function SendCommand() {
+function SendCommand() { PaceCoolDown();
 
 
     var RepeatCommands;
@@ -53,7 +53,7 @@ function SendCommand() {
     RepeatCommands=window.setInterval(function(){Timer()},1000); 
 
 
-    function Timer() { 
+    function Timer() { if (counter != 0) { return };
 
     	var YouMoving = false;
     	var EnemyMoving = false;

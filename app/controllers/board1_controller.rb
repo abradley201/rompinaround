@@ -128,7 +128,7 @@ class Board1Controller < ApplicationController
 		@creation = MapStat.find_by_game(@gameNumber).creation
 
 
-		if Time.now.to_i >= @creation + @turns
+		if Time.now.to_i >= @creation + @turns * 5
 
 			@mapInfo = MapStat.find_by_game(@gameNumber).map.split
 

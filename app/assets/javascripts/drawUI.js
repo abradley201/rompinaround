@@ -9,13 +9,6 @@ function ClearUI() { if (yourHero === undefined) { return }
     var ctx=c.getContext("2d");
     ctx.clearRect(0,0,ClearWidth,150);
     DrawPicture("UI", yourHero.ppic);
-                    
-      ctx.beginPath();
-      ctx.moveTo(window.innerWidth/2, 0);
-      ctx.lineTo(window.innerWidth/2, 150);
-      ctx.lineWidth = 2;
-      ctx.strokeStyle = 'grey';
-      ctx.stroke();
     
 };
 
@@ -56,5 +49,41 @@ function HPMPbars() { if (yourHero === undefined) { return }
 
 };
 
+var command;
+var counter = 5;
+
+function PaceCoolDown() {   
+                                
+                         
+    
+    function DrawCoolDown() {
+        
+        var c=document.getElementById("UI");
+        var ctx=c.getContext("2d");
+                
+        
+    ClearUI();
+    HPMPbars();
+    
+    ctx.beginPath();
+    ctx.fillStyle="white";
+    ctx.font = "30px Arial";
+    ctx.fillText(counter,window.innerWidth / 2 + 10,25);
+    ctx.fillText(command,window.innerWidth / 2 + 10,85);
+
+        
+    counter--;
+
+    if (counter == -1) { counter = 5 };
+
+     };
+                         
+
+    
+    ShowCoolDown=window.setInterval(function(){DrawCoolDown()},1000); 
+
+    
+    
+   }; 
 
 
