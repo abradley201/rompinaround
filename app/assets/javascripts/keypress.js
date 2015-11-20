@@ -3,8 +3,7 @@
 var command = "nothing";
 var target = "none";
 
-//change to do requests immediately at key press. also detect if nothing is done
-//then update once every second
+//game updates only when both players have inputted a move, which is stored in database under action
 
 function google(evt){ 
                      
@@ -57,6 +56,7 @@ function SendCommand() { PaceCoolDown();
 
     	var YouMoving = false;
     	var EnemyMoving = false;
+        var theparse;
    
 
     var xmlhttp = new XMLHttpRequest();
@@ -64,37 +64,37 @@ function SendCommand() { PaceCoolDown();
 
   {
   if (xmlhttp.readyState==4 && xmlhttp.status==200)
-    {
+    { theparse = JSON.parse(xmlhttp.responseText);
 
-    if (yourHero.pos != JSON.parse(xmlhttp.responseText).yourPos) { YouMoving = true; TurnCanvasOn(yourHero.pos) };
-    if (enemyHero.pos != JSON.parse(xmlhttp.responseText).enemyPos) { EnemyMoving = true; TurnCanvasOn(enemyHero.pos) };
+    if (yourHero.pos != theparse.yourPos) { YouMoving = true; TurnCanvasOn(yourHero.pos) };
+    if (enemyHero.pos != theparse.enemyPos) { EnemyMoving = true; TurnCanvasOn(enemyHero.pos) };
 
      
-        yourHero['hp'] = Number(JSON.parse(xmlhttp.responseText).yourHp);
-        yourHero['maxhp'] = Number(JSON.parse(xmlhttp.responseText).yourMaxhp);
-        yourHero['shield'] = Number(JSON.parse(xmlhttp.responseText).yourShield);
-        yourHero['mp'] = Number(JSON.parse(xmlhttp.responseText).yourMp);
-        yourHero['maxmp'] = Number(JSON.parse(xmlhttp.responseText).yourMaxmp);
-        yourHero['pos'] = Number(JSON.parse(xmlhttp.responseText).yourPos);
-        yourHero['kills'] = Number(JSON.parse(xmlhttp.responseText).yourKills);
-        yourHero['deaths'] = Number(JSON.parse(xmlhttp.responseText).yourDeaths);
-        yourHero['status'] = JSON.parse(xmlhttp.responseText).yourStatus;
-        yourHero['exp'] = Number(JSON.parse(xmlhttp.responseText).yourExp);
-        yourHero['allies'] = JSON.parse(xmlhttp.responseText).yourAllies;
-        yourHero['action'] = JSON.parse(xmlhttp.responseText).yourAction;
+        yourHero['hp'] = Number(theparse.yourHp);
+        yourHero['maxhp'] = Number(theparse.yourMaxhp);
+        yourHero['shield'] = Number(theparse.yourShield);
+        yourHero['mp'] = Number(theparse.yourMp);
+        yourHero['maxmp'] = Number(theparse.yourMaxmp);
+        yourHero['pos'] = Number(theparse.yourPos);
+        yourHero['kills'] = Number(theparse.yourKills);
+        yourHero['deaths'] = Number(theparse.yourDeaths);
+        yourHero['status'] = theparse.yourStatus;
+        yourHero['exp'] = Number(theparse.yourExp);
+        yourHero['allies'] = theparse.yourAllies;
+        yourHero['action'] = theparse.yourAction;
 
-        enemyHero['hp'] = Number(JSON.parse(xmlhttp.responseText).enemyHp);
-        enemyHero['maxhp'] = Number(JSON.parse(xmlhttp.responseText).enemyMaxhp);
-        enemyHero['shield'] = Number(JSON.parse(xmlhttp.responseText).enemyShield);
-        enemyHero['mp'] = Number(JSON.parse(xmlhttp.responseText).enemyMp);
-        enemyHero['maxmp'] = Number(JSON.parse(xmlhttp.responseText).enemyMaxmp);
-        enemyHero['pos'] = Number(JSON.parse(xmlhttp.responseText).enemyPos);
-        enemyHero['kills'] = Number(JSON.parse(xmlhttp.responseText).enemyKills);
-        enemyHero['deaths'] = Number(JSON.parse(xmlhttp.responseText).enemyDeaths);
-        enemyHero['status'] = JSON.parse(xmlhttp.responseText).enemyStatus;
-        enemyHero['exp'] = Number(JSON.parse(xmlhttp.responseText).enemyExp);
-        enemyHero['allies'] = JSON.parse(xmlhttp.responseText).enemyAllies;
-        enemyHero['action'] = JSON.parse(xmlhttp.responseText).enemyAction;
+        enemyHero['hp'] = Number(theparse.enemyHp);
+        enemyHero['maxhp'] = Number(theparse.enemyMaxhp);
+        enemyHero['shield'] = Number(theparse.enemyShield);
+        enemyHero['mp'] = Number(theparse.enemyMp);
+        enemyHero['maxmp'] = Number(theparse.enemyMaxmp);
+        enemyHero['pos'] = Number(theparse.enemyPos);
+        enemyHero['kills'] = Number(theparse.enemyKills);
+        enemyHero['deaths'] = Number(theparse.enemyDeaths);
+        enemyHero['status'] = theparse.enemyStatus;
+        enemyHero['exp'] = Number(theparse.enemyExp);
+        enemyHero['allies'] = theparse.enemyAllies;
+        enemyHero['action'] = theparse.enemyAction;
 
     if ( YouMoving == true ) { place(yourHero.pos, yourHero) }
     if ( EnemyMoving == true ) { place(enemyHero.pos, enemyHero) }
