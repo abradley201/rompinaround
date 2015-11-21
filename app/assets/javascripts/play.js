@@ -52,6 +52,132 @@ function ClearBoard(x, y) {
 
 };
 
+function TargetCanvas(x, color) {
+    
+       var c=document.getElementById(x);
+       var ctx=c.getContext("2d");
+
+        
+       if ( color == "a" ) { 
+    
+       ctx.globalAlpha = 0.3;
+       ctx.fillStyle="#DF013A";
+       ctx.fillRect(0, 0, 50, 50)  }
+    
+    
+    
+    
+    document.getElementById(x).className = 'target' 
+  
+};
+
+
+var ValidTargetSquares = ['on','occupied'];
+
+
+function attack() {
+        
+    
+    function AC(x) {
+
+    var AttackSquares = [yourHero.pos + 1, yourHero.pos - 1, yourHero.pos + e, yourHero.pos - e]
+    return AttackSquares[x];
+    
+    }; 
+    
+    var z = 0;
+    
+    while ( z < 4 ) {
+        
+        
+    if (ValidTargetSquares.indexOf(document.getElementById(AC(z)).className) > -1) { TargetCanvas(AC(z),"a") } 
+        
+
+    z++ }
+    
+
+    
+};
+
+function sheath() {
+
+    var turnstile = [yourHero.id, enemyHero.id];
+
+    function StringTransform(x) { //edit this function to find other things on board too, like pawns.
+                    
+                    if ( x == "Joan" ) { return Joan }; 
+                    
+                    if ( x == "Ima" ) { return Ima }; 
+                                        
+                    if ( x == "Steph" ) { return Steph }; };
+
+    function findpiece(x) { for (t = 0; t < turnstile.length; t++) { if (StringTransform(turnstile[t]).pos == x) { return StringTransform(turnstile[t]) } } }; 
+
+
+var PieceinQ;
+     
+    if ( document.getElementsByClassName("target").length > 0 ) {
+    
+   for (z = 0; z < 4; z++) {    
+
+    for (y = 0; y < 4; y++) {
+
+      for (x = 0; x < 4; x++) {
+
+        for (n = 0; n < document.getElementsByClassName("target").length; n++) {
+            
+          if (findpiece(Number(document.getElementsByClassName("target")[n].id)) !== undefined) {
+              
+              
+              
+              //check and draw for any statuses here
+              
+              
+              
+              
+              PieceinQ = findpiece(Number(document.getElementsByClassName("target")[n].id));
+
+    
+              
+                var c=document.getElementById(PieceinQ.pos);
+                var ctx=c.getContext("2d");
+                var img=document.getElementById(PieceinQ.bpic);
+                ctx.globalAlpha = 1.0;
+                ctx.drawImage(img,0,0);
+                ctx.beginPath();
+                ctx.strokeStyle="#FF0000";
+                ctx.lineWidth=2;
+                ctx.moveTo(1,50);
+                ctx.lineTo(1,50 - (50 * (PieceinQ.hp / PieceinQ.maxhp)));
+                ctx.stroke();
+                                      
+                ctx.beginPath();
+                ctx.strokeStyle="#3366FF";
+                ctx.lineWidth=2;
+                ctx.moveTo(49,50);
+                ctx.lineTo(49,50 - (50 * (PieceinQ.mp / PieceinQ.maxmp)));
+                ctx.stroke();
+              
+              
+              OccupyCanvas(PieceinQ.pos);
+              
+              
+              
+          } else {
+        
+          TurnCanvasOn(Number(document.getElementsByClassName("target")[n].id));
+
+        }       }      }      }   };
+    
+        
+        
+        
+        
+    
+    
+} };
+
+
 
 function OccupyCanvas(x) {
       document.getElementById(x).className = 'occupied';

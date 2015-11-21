@@ -22,7 +22,9 @@ Rails.application.routes.draw do
 
   post 'makematch' => 'duelmatcher#makematch'
 
-  post 'pacemaker' => 'board1#pacemaker'
+  get 'pacemaker' => 'board1#pacemaker'
+
+  post 'command' => 'board1#command'
 
   get 'cancelsearch' => 'duelmatcher#cancelsearch'
 
