@@ -141,7 +141,7 @@ class Board1Controller < ApplicationController
 
 					GameStat.update(@yourHero.id, :pos => @yourHero.pos - e)
 
-					GameStat.update(@yourHero.id, :status => @yourHero.status + "move " + Time.now.to_i.to_s + " ")
+					GameStat.update(@yourHero.id, :status => @yourHero.status.to_s + "move " + Time.now.to_i.to_s + " ")
 					
 					render :json => { :yourHp => @yourHero.hp, :yourMaxhp => @yourHero.maxhp, :yourShield => @yourHero.shield, :yourMp => @yourHero.mp, :yourMaxmp => @yourHero.maxmp, :yourPos => @yourHero.pos, :yourKills => @yourHero.kills, :yourDeaths => @yourHero.deaths, :yourStatus => @yourHero.status, :yourExp => @yourHero.exp, :yourAllies => @yourHero.allies, :enemyHp => @enemyHero.hp, :enemyMaxhp => @enemyHero.maxhp, :enemyShield => @enemyHero.shield, :enemyMp => @enemyHero.mp, :enemyMaxmp => @enemyHero.maxmp, :enemyPos => @enemyHero.pos, :enemyKills => @enemyHero.kills, :enemyDeaths => @enemyHero.deaths, :enemyStatus => @enemyHero.status, :enemyExp => @enemyHero.exp, :enemyAllies => @enemyHero.allies }
 
@@ -167,7 +167,7 @@ class Board1Controller < ApplicationController
 
 					GameStat.update(@yourHero.id, :pos => @yourHero.pos - 1)
 
-					GameStat.update(@yourHero.id, :status => @yourHero.status + "move " + Time.now.to_i.to_s + " ")
+					GameStat.update(@yourHero.id, :status => @yourHero.status.to_s + "move " + Time.now.to_i.to_s + " ")
 
 					render :json => { :yourHp => @yourHero.hp, :yourMaxhp => @yourHero.maxhp, :yourShield => @yourHero.shield, :yourMp => @yourHero.mp, :yourMaxmp => @yourHero.maxmp, :yourPos => @yourHero.pos, :yourKills => @yourHero.kills, :yourDeaths => @yourHero.deaths, :yourStatus => @yourHero.status, :yourExp => @yourHero.exp, :yourAllies => @yourHero.allies, :enemyHp => @enemyHero.hp, :enemyMaxhp => @enemyHero.maxhp, :enemyShield => @enemyHero.shield, :enemyMp => @enemyHero.mp, :enemyMaxmp => @enemyHero.maxmp, :enemyPos => @enemyHero.pos, :enemyKills => @enemyHero.kills, :enemyDeaths => @enemyHero.deaths, :enemyStatus => @enemyHero.status, :enemyExp => @enemyHero.exp, :enemyAllies => @enemyHero.allies }
 
@@ -193,7 +193,7 @@ class Board1Controller < ApplicationController
 
 					GameStat.update(@yourHero.id, :pos => @yourHero.pos + e)
 
-					GameStat.update(@yourHero.id, :status => @yourHero.status + "move " + Time.now.to_i.to_s + " ")
+					GameStat.update(@yourHero.id, :status => @yourHero.status.to_s + "move " + Time.now.to_i.to_s + " ")
 
 					render :json => { :yourHp => @yourHero.hp, :yourMaxhp => @yourHero.maxhp, :yourShield => @yourHero.shield, :yourMp => @yourHero.mp, :yourMaxmp => @yourHero.maxmp, :yourPos => @yourHero.pos, :yourKills => @yourHero.kills, :yourDeaths => @yourHero.deaths, :yourStatus => @yourHero.status, :yourExp => @yourHero.exp, :yourAllies => @yourHero.allies, :enemyHp => @enemyHero.hp, :enemyMaxhp => @enemyHero.maxhp, :enemyShield => @enemyHero.shield, :enemyMp => @enemyHero.mp, :enemyMaxmp => @enemyHero.maxmp, :enemyPos => @enemyHero.pos, :enemyKills => @enemyHero.kills, :enemyDeaths => @enemyHero.deaths, :enemyStatus => @enemyHero.status, :enemyExp => @enemyHero.exp, :enemyAllies => @enemyHero.allies }
 
@@ -219,7 +219,7 @@ class Board1Controller < ApplicationController
 
 					GameStat.update(@yourHero.id, :pos => @yourHero.pos + 1)
 
-					GameStat.update(@yourHero.id, :status => @yourHero.status + "move " + Time.now.to_i.to_s + " ")
+					GameStat.update(@yourHero.id, :status => @yourHero.status.to_s + "move " + Time.now.to_i.to_s + " ")
 
 					render :json => { :yourHp => @yourHero.hp, :yourMaxhp => @yourHero.maxhp, :yourShield => @yourHero.shield, :yourMp => @yourHero.mp, :yourMaxmp => @yourHero.maxmp, :yourPos => @yourHero.pos, :yourKills => @yourHero.kills, :yourDeaths => @yourHero.deaths, :yourStatus => @yourHero.status, :yourExp => @yourHero.exp, :yourAllies => @yourHero.allies, :enemyHp => @enemyHero.hp, :enemyMaxhp => @enemyHero.maxhp, :enemyShield => @enemyHero.shield, :enemyMp => @enemyHero.mp, :enemyMaxmp => @enemyHero.maxmp, :enemyPos => @enemyHero.pos, :enemyKills => @enemyHero.kills, :enemyDeaths => @enemyHero.deaths, :enemyStatus => @enemyHero.status, :enemyExp => @enemyHero.exp, :enemyAllies => @enemyHero.allies }
 
@@ -237,7 +237,7 @@ class Board1Controller < ApplicationController
 
 				GameStat.update(@enemyHero.id, :hp => @enemyHero.hp - 5)
 
-				GameStat.update(@yourHero.id, :status => @yourHero.status + "attack " + Time.now.to_i.to_s + " ")
+				GameStat.update(@yourHero.id, :status => @yourHero.status.to_s + "attack " + Time.now.to_i.to_s + " ")
 
 				end
 
