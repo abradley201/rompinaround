@@ -102,7 +102,6 @@ function SendCommand() {
         yourHero['status'] = theparse.yourStatus;
         yourHero['exp'] = Number(theparse.yourExp);
         yourHero['allies'] = theparse.yourAllies;
-        yourHero['action'] = theparse.yourAction;
 
         enemyHero['hp'] = Number(theparse.enemyHp);
         enemyHero['maxhp'] = Number(theparse.enemyMaxhp);
@@ -115,7 +114,6 @@ function SendCommand() {
         enemyHero['status'] = theparse.enemyStatus;
         enemyHero['exp'] = Number(theparse.enemyExp);
         enemyHero['allies'] = theparse.enemyAllies;
-        enemyHero['action'] = theparse.enemyAction;
 
     place(yourHero.pos, yourHero);  
     if (document.getElementById(enemyHero.pos).className !== "target") { place(enemyHero.pos, enemyHero) }; 
@@ -183,7 +181,6 @@ function commander(x) {
         yourHero['status'] = theparse.yourStatus;
         yourHero['exp'] = Number(theparse.yourExp);
         yourHero['allies'] = theparse.yourAllies;
-        yourHero['action'] = theparse.yourAction;
 
         enemyHero['hp'] = Number(theparse.enemyHp);
         enemyHero['maxhp'] = Number(theparse.enemyMaxhp);
@@ -196,7 +193,6 @@ function commander(x) {
         enemyHero['status'] = theparse.enemyStatus;
         enemyHero['exp'] = Number(theparse.enemyExp);
         enemyHero['allies'] = theparse.enemyAllies;
-        enemyHero['action'] = theparse.enemyAction;
 
     place(yourHero.pos, yourHero);  
     place(enemyHero.pos, enemyHero); 
