@@ -245,7 +245,7 @@ class Board1Controller < ApplicationController
 	
 		end
 
-		if @canAttack == true
+		if @canAttack == true #make this more dynamic, so it can hit things other than 1 enemy
 
 				if @enemyHero.pos == params[:command].slice(2,100).to_i
 
@@ -270,7 +270,7 @@ class Board1Controller < ApplicationController
 
 	end
 
-	#need to do revives + core + game ending next
+	#need to do death/revives + core + game ending next
 
 	def pacemaker
 

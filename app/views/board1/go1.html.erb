@@ -67,7 +67,6 @@
         var yourStatus = '<%= h @yourStatus -%>';
         var yourExp = '<%= h @yourExp -%>';
         var yourAllies = '<%= h @yourAllies -%>';
-        var yourAction = '<%= h @yourAction -%>';
 
         var enemyHp = '<%= h @enemyHp -%>';
         var enemyMaxhp = '<%= h @enemyMaxhp -%>';
@@ -80,7 +79,7 @@
         var enemyStatus = '<%= h @enemyStatus -%>';
         var enemyExp = '<%= h @enemyExp -%>';
         var enemyAllies = '<%= h @enemyAllies -%>';
-        var enemyAction = '<%= h @enemyAction -%>';
+
 
 
         yourHero['hp'] = Number(yourHp);
@@ -94,7 +93,6 @@
         yourHero['status'] = yourStatus;
         yourHero['exp'] = Number(yourExp);
         yourHero['allies'] = yourAllies;
-        yourHero['action'] = yourAction;
 
         enemyHero['hp'] = Number(enemyHp);
         enemyHero['maxhp'] = Number(enemyMaxhp);
@@ -107,7 +105,6 @@
         enemyHero['status'] = enemyStatus;
         enemyHero['exp'] = Number(enemyExp);
         enemyHero['allies'] = enemyAllies;
-        enemyHero['action'] = enemyAction;
 
         place(yourHero.pos,yourHero);
         place(enemyHero.pos,enemyHero);

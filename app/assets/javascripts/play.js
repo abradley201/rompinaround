@@ -28,7 +28,6 @@ var piece = function(id, ppic, bpic, hp, maxhp, shield, mp, maxmp, pos, kills, d
     this.exp = exp;
 
     this.allies = allies;
-
  
 };
 
@@ -38,6 +37,10 @@ var piece = function(id, ppic, bpic, hp, maxhp, shield, mp, maxmp, pos, kills, d
     Ima = new piece("Ima", "ImaP1", "ImaB1", 20, 20, 0, 10, 10, 0, 0, 0, null, 0, null);
 
     Steph = new piece("Steph", "StephP1", "StephB1", 20, 20, 0, 10, 10, 0, 0, 0, null, 0, null);
+
+
+//make core a a piece
+
 
 
     var yourHero;
@@ -99,11 +102,11 @@ function attack() {
     
 };
 
-function sheath() {
+function sheath() { //make white and black core as pieces, then add them to turnstile
 
     var turnstile = [yourHero.id, enemyHero.id];
 
-    function StringTransform(x) { //edit this function to find other things on board too, like pawns.
+    function StringTransform(x) { //edit this function to find other things on board too, like cores.
                     
                     if ( x == "Joan" ) { return Joan }; 
                     
