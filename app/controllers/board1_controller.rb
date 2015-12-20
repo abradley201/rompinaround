@@ -123,6 +123,7 @@ class Board1Controller < ApplicationController
 
 		@canMove = false
 		@canAttack = false
+		@canCast = false
 
 		if Time.now.to_f.round(3) - @yourHero.moved >= 1 && ["w","a","s","d"].include?(params[:command]) == true
 			@canMove = true
@@ -259,7 +260,7 @@ class Board1Controller < ApplicationController
 
 		end
 
-
+		#how to include @canCast here?
 		if @canMove == false && @canAttack == false
 
 			render :json => { :yourHp => @yourHero.hp, :yourMaxhp => @yourHero.maxhp, :yourShield => @yourHero.shield, :yourMp => @yourHero.mp, :yourMaxmp => @yourHero.maxmp, :yourPos => @yourHero.pos, :yourKills => @yourHero.kills, :yourDeaths => @yourHero.deaths, :yourStatus => @yourHero.status, :yourExp => @yourHero.exp, :yourAllies => @yourHero.allies, :enemyHp => @enemyHero.hp, :enemyMaxhp => @enemyHero.maxhp, :enemyShield => @enemyHero.shield, :enemyMp => @enemyHero.mp, :enemyMaxmp => @enemyHero.maxmp, :enemyPos => @enemyHero.pos, :enemyKills => @enemyHero.kills, :enemyDeaths => @enemyHero.deaths, :enemyStatus => @enemyHero.status, :enemyExp => @enemyHero.exp, :enemyAllies => @enemyHero.allies }
@@ -268,6 +269,8 @@ class Board1Controller < ApplicationController
 
 
 	end
+
+	#need to do revives + core + game ending next
 
 	def pacemaker
 
