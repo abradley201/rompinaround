@@ -7,7 +7,7 @@ var highestSquare;
 var atoms = []; 
 
 
-function CreateContent(x, y, z) {
+function CreateContent(x, y, z, c) {
     
     contentwidth = x;
     contentheight = y;
@@ -15,7 +15,8 @@ function CreateContent(x, y, z) {
     if ( document.getElementById("content") !== null ) { return };
  
     
-    
+    document.getElementById('container').style.height = c
+
     
     var div = document.createElement('div');
     div.id = "content";
