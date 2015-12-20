@@ -54,7 +54,7 @@ class Board1Controller < ApplicationController
 
 		if MapStat.find_by_game(@gameNumber) == nil
 
-		MapStat.create(:game => @gameNumber, :creation => Time.now.to_i, :map => "f n n n n n n o n n n f f n n n n n n n n n n f f n n n n n n n n n n f f n n n n n n n n n n f f n n n n n n n n n n f f n n n n n n n n n n f f n n n n n n n n n n f f n n n n n n n n n n f f n n n n n n n n n n f f n n n o n n n n n n f f")
+		MapStat.create(:game => @gameNumber, :creation => Time.now.to_i, :map => "f n n n n n n o n n n f f n n n n n n n n n n f f n n n n n n n n n n f f n n n n n n n n n n f f n n n n n n n n n n f f n n n n n n n n n n f f n n n n n n n n n n f f n n n n n n n n n n f f n n n n n n n n n n f f n n n o n n n n n n f f", :WhiteCoreHP => 300, :BlackCoreHP => 300)
 
 		end
 
@@ -245,7 +245,17 @@ class Board1Controller < ApplicationController
 	
 		end
 
-		if @canAttack == true #make this more dynamic, so it can hit things other than 1 enemy
+		if @canAttack == true 
+
+
+
+		#make this more dynamic, so it can hit things other than 1 enemy
+
+
+
+		#there is NO CHECK to see if hero can actually attack the params[:command ]square
+
+
 
 				if @enemyHero.pos == params[:command].slice(2,100).to_i
 
