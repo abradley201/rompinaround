@@ -259,9 +259,47 @@ class Board1Controller < ApplicationController
 
 				if @enemyHero.pos == params[:command].slice(2,100).to_i
 
-				GameStat.update(@enemyHero.id, :hp => @enemyHero.hp - 5)
+					@newHP = @enemyHero.hp - 5
+
+					if @newHP < 0
+
+						@newHP = 0
+
+					end
+
+				GameStat.update(@enemyHero.id, :hp => @newHP)
 
 				GameStat.update(@yourHero.id, :attacked => Time.now.to_f.round(3))
+
+				end
+
+				if params[:command].slice(2,100).to_i == 10 && @yourHero.allies == "black"
+
+					@whiteCoreHP = MapStat.find_by_game(@gameNumber).WhiteCoreHP - 50
+
+					if @whiteCoreHP < 0
+
+						@whiteCoreHP = 0
+
+					end
+
+					MapStat.update(MapStat.find_by_game(@gameNumber).id, :WhiteCoreHP => @whiteCoreHP)
+
+
+				end
+
+				if params[:command].slice(2,100).to_i == 109 && @yourHero.allies == "white"
+
+					@blackCoreHP = MapStat.find_by_game(@gameNumber).BlackCoreHP - 50
+
+					if @blackCoreHP < 0
+
+						@blackCoreHP = 0
+
+					end
+
+					MapStat.update(MapStat.find_by_game(@gameNumber).id, :BlackCoreHP => @blackCoreHP)
+
 
 				end
 

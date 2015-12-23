@@ -44,7 +44,7 @@ var piece = function(id, ppic, bpic, hp, maxhp, shield, mp, maxmp, pos, kills, d
 var whiteCore;
 var blackCore;
 
-function GeneratePiece(x) {
+function GeneratePiece(x, y) {
 
     if ( x == "whiteCore" ) { 
 
@@ -66,7 +66,7 @@ function GeneratePiece(x) {
 
                                         whiteCoreHP = theparse.whiteCoreHP;
 
-                                        whiteCore = new piece("whiteCore", "whiteCore", "whiteCore", whiteCoreHP, whiteCoreHP, 0, 0, 1, 10, 0, 0, null, 0, null);
+                                        whiteCore = new piece("whiteCore", "whiteCore", "whiteCore", whiteCoreHP, 300, 0, 0, 1, y, 0, 0, null, 0, null);
 
 
                                         place(whiteCore.pos, whiteCore);
@@ -109,7 +109,7 @@ function GeneratePiece(x) {
 
                                         blackCoreHP = theparse.blackCoreHP;
 
-                                        blackCore = new piece("blackCore", "blackCore", "blackCore", blackCoreHP, blackCoreHP, 0, 0, 1, 109, 0, 0, null, 0, null);
+                                        blackCore = new piece("blackCore", "blackCore", "blackCore", blackCoreHP, 300, 0, 0, 1, y, 0, 0, null, 0, null);
 
 
                                         place(blackCore.pos, blackCore);
@@ -198,7 +198,7 @@ function attack() {
 
 function sheath() { //make white and black core as pieces, then add them to turnstile
 
-    var turnstile = [yourHero.id, enemyHero.id];
+    var turnstile = [yourHero.id, enemyHero.id, whiteCore.id, blackCore.id];
 
     function StringTransform(x) { //edit this function to find other things on board too, like cores.
                     
@@ -206,7 +206,15 @@ function sheath() { //make white and black core as pieces, then add them to turn
                     
                     if ( x == "Ima" ) { return Ima }; 
                                         
-                    if ( x == "Steph" ) { return Steph }; };
+                    if ( x == "Steph" ) { return Steph }; 
+
+                    if ( x == "whiteCore" ) { return whiteCore }; 
+                                        
+                    if ( x == "blackCore" ) { return blackCore };
+
+
+
+                };
 
     function findpiece(x) { for (t = 0; t < turnstile.length; t++) { if (StringTransform(turnstile[t]).pos == x) { return StringTransform(turnstile[t]) } } }; 
 
@@ -234,12 +242,14 @@ var PieceinQ;
               
               PieceinQ = findpiece(Number(document.getElementsByClassName("target")[n].id));
 
+
     
               
                 var c=document.getElementById(PieceinQ.pos);
                 var ctx=c.getContext("2d");
                 var img=document.getElementById(PieceinQ.bpic);
                 ctx.globalAlpha = 1.0;
+                if ( PieceinQ.id == "whiteCore" || PieceinQ.id == "blackCore" ) { ctx.clearRect(0,0,50,50); }
                 ctx.drawImage(img,0,0);
                 ctx.beginPath();
                 ctx.strokeStyle="#FF0000";
@@ -298,6 +308,7 @@ function place(x, person) {
     var c=document.getElementById(x);
     var ctx=c.getContext("2d");
     var img=document.getElementById(person.bpic);
+    if (person.id == "whiteCore" || person.id == "blackCore") { ctx.clearRect(0,0,50,50); }
     ctx.globalAlpha = 1.0;
     ctx.drawImage(img,0,0);
     ctx.beginPath();
