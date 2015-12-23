@@ -64,6 +64,64 @@ function google(evt){
 }
 
 
+function ShouldRedrawCore(x) {
+
+    if ( x == "white" ) {  var whiteCoreHP;
+
+
+                                var xmlhttp = new XMLHttpRequest();
+                                    xmlhttp.onreadystatechange=function()
+
+                                        {
+                                if (xmlhttp.readyState==4 && xmlhttp.status==200)
+                                        {
+
+                                        var theparse;
+
+                                        theparse = JSON.parse(xmlhttp.responseText);
+
+                                        whiteCoreHP = theparse.whiteCoreHP;
+
+                                        if ( whiteCore.hp !== whiteCoreHP && whiteCore !== undefined ) { whiteCore['hp'] = whiteCoreHP; place(whiteCore.pos,whiteCore) } 
+
+
+                                        }
+                                    }
+                                    xmlhttp.open("GET","/whiteCore",true);
+                                    xmlhttp.send();
+
+
+
+    } else { var blackCoreHP;
+
+
+                                var xmlhttp = new XMLHttpRequest();
+                                    xmlhttp.onreadystatechange=function()
+
+                                        {
+                                if (xmlhttp.readyState==4 && xmlhttp.status==200)
+                                        {
+
+                                        var theparse;
+
+                                        theparse = JSON.parse(xmlhttp.responseText);
+
+                                        blackCoreHP = theparse.blackCoreHP;
+
+                                        if ( blackCore.hp !== blackCoreHP && blackCore !== undefined ) { blackCore['hp'] = blackCoreHP; place(blackCore.pos,blackCore) } 
+
+
+                                        }
+                                    }
+                                    xmlhttp.open("GET","/blackCore",true);
+                                    xmlhttp.send();
+
+
+     }
+
+
+};
+
 
 function Pulsate() { 
 
@@ -118,7 +176,10 @@ function Pulsate() {
     place(yourHero.pos, yourHero);  
     if (document.getElementById(enemyHero.pos).className !== "target") { place(enemyHero.pos, enemyHero) }; 
 
-    
+    if (document.getElementById(whiteCore.pos).className !== "target") { ShouldRedrawCore("white") }
+    if (document.getElementById(blackCore.pos).className !== "target") { ShouldRedrawCore("black") }
+
+
 	        ClearUI();
             HPMPbars();
 
