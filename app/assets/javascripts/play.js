@@ -41,6 +41,100 @@ var piece = function(id, ppic, bpic, hp, maxhp, shield, mp, maxmp, pos, kills, d
 
 //make core a a piece
 
+var whiteCore;
+var blackCore;
+
+function GeneratePiece(x) {
+
+    if ( x == "whiteCore" ) { 
+
+                              var whiteCoreHP;
+
+
+
+
+                                var xmlhttp = new XMLHttpRequest();
+                                    xmlhttp.onreadystatechange=function()
+
+                                        {
+                                if (xmlhttp.readyState==4 && xmlhttp.status==200)
+                                        {
+
+                                        var theparse;
+
+                                        theparse = JSON.parse(xmlhttp.responseText);
+
+                                        whiteCoreHP = theparse.whiteCoreHP;
+
+                                        whiteCore = new piece("whiteCore", "whiteCore", "whiteCore", whiteCoreHP, whiteCoreHP, 0, 0, 1, 10, 0, 0, null, 0, null);
+
+
+                                        place(whiteCore.pos, whiteCore);
+
+
+                                        }
+                                    }
+                                    xmlhttp.open("GET","/whiteCore",true);
+                                    xmlhttp.send();
+
+
+
+
+
+                        }
+
+
+    if ( x == "blackCore" ) { 
+
+
+
+
+
+
+                              var blackCoreHP;
+
+
+
+
+                                var xmlhttp = new XMLHttpRequest();
+                                    xmlhttp.onreadystatechange=function()
+
+                                        {
+                                if (xmlhttp.readyState==4 && xmlhttp.status==200)
+                                        {
+
+                                        var theparse;
+
+                                        theparse = JSON.parse(xmlhttp.responseText);
+
+                                        blackCoreHP = theparse.blackCoreHP;
+
+                                        blackCore = new piece("blackCore", "blackCore", "blackCore", blackCoreHP, blackCoreHP, 0, 0, 1, 109, 0, 0, null, 0, null);
+
+
+                                        place(blackCore.pos, blackCore);
+
+
+                                        }
+                                    }
+                                    xmlhttp.open("GET","/blackCore",true);
+                                    xmlhttp.send();
+
+
+
+
+
+
+
+
+
+
+
+    }
+
+
+};
+
 
 
     var yourHero;

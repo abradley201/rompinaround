@@ -28,6 +28,10 @@ Rails.application.routes.draw do
 
   get 'cancelsearch' => 'duelmatcher#cancelsearch'
 
+  get 'whiteCore' => 'universal#whiteCore'
+
+  get 'blackCore' => 'universal#blackCore'
+
 
   resources :info_stats
 
