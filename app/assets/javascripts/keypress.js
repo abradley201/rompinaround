@@ -266,7 +266,8 @@ function commander(x) {
         var ctx=c.getContext("2d");
         ctx.clearRect(0,0,50,50); 
 
-        GeneratePiece("whiteCore", whiteCore.pos); GeneratePiece("blackCore", blackCore.pos); }
+            place(whiteCore.pos,whiteCore); place(blackCore.pos,blackCore); }
+
     
             ClearUI();
             HPMPbars();
