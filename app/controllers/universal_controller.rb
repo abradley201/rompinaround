@@ -48,6 +48,8 @@ class UniversalController < ApplicationController
 		@canCast = false
 
 
+		#also need to find_by_room:
+		
 		e = MapStat.find_by_game(@gameNumber).e
 
 
