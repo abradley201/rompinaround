@@ -1,27 +1,5 @@
 class UniversalController < ApplicationController
 
-	def whiteCore
-
-		@gameNumber = GameStat.find_by_account(session[:account]).game
-		
-		@whiteCoreHP = MapStat.find_by_game(@gameNumber).WhiteCoreHP
-
-
-		render :json => { :whiteCoreHP => @whiteCoreHP }
-		
-	end
-
-
-	def blackCore
-
-		@gameNumber = GameStat.find_by_account(session[:account]).game
-		
-		@blackCoreHP = MapStat.find_by_game(@gameNumber).BlackCoreHP
-
-
-		render :json => { :blackCoreHP => @blackCoreHP }
-		
-	end
 
 
 	def command
@@ -48,7 +26,10 @@ class UniversalController < ApplicationController
 		@canCast = false
 
 
+		#@room = GameStat.find_by_account(session[:account]).room
+
 		#also need to find_by_room:
+		
 		
 		e = MapStat.find_by_game(@gameNumber).e
 
@@ -180,9 +161,9 @@ class UniversalController < ApplicationController
 
 		#make this more dynamic, so it can hit things other than 1 enemy
 
-
-
 		#there is NO CHECK to see if hero can actually attack the params[:command ]square
+
+		#slice(2,100) needs to be changed so that 100 is dynamic
 
 
 
@@ -271,7 +252,12 @@ class UniversalController < ApplicationController
 
 		end
 
-		render :json => { :yourHp => @yourHero.hp, :yourMaxhp => @yourHero.maxhp, :yourShield => @yourHero.shield, :yourMp => @yourHero.mp, :yourMaxmp => @yourHero.maxmp, :yourPos => @yourHero.pos, :yourKills => @yourHero.kills, :yourDeaths => @yourHero.deaths, :yourStatus => @yourHero.status, :yourExp => @yourHero.exp, :yourAllies => @yourHero.allies, :enemyHp => @enemyHero.hp, :enemyMaxhp => @enemyHero.maxhp, :enemyShield => @enemyHero.shield, :enemyMp => @enemyHero.mp, :enemyMaxmp => @enemyHero.maxmp, :enemyPos => @enemyHero.pos, :enemyKills => @enemyHero.kills, :enemyDeaths => @enemyHero.deaths, :enemyStatus => @enemyHero.status, :enemyExp => @enemyHero.exp, :enemyAllies => @enemyHero.allies }
+		@whiteCoreHP = MapStat.find_by_game(@gameNumber).WhiteCoreHP
+
+		@blackCoreHP = MapStat.find_by_game(@gameNumber).BlackCoreHP
+
+
+		render :json => { :whiteCoreHP => @whiteCoreHP, :blackCoreHP => @blackCoreHP, :yourHp => @yourHero.hp, :yourMaxhp => @yourHero.maxhp, :yourShield => @yourHero.shield, :yourMp => @yourHero.mp, :yourMaxmp => @yourHero.maxmp, :yourPos => @yourHero.pos, :yourKills => @yourHero.kills, :yourDeaths => @yourHero.deaths, :yourStatus => @yourHero.status, :yourExp => @yourHero.exp, :yourAllies => @yourHero.allies, :enemyHp => @enemyHero.hp, :enemyMaxhp => @enemyHero.maxhp, :enemyShield => @enemyHero.shield, :enemyMp => @enemyHero.mp, :enemyMaxmp => @enemyHero.maxmp, :enemyPos => @enemyHero.pos, :enemyKills => @enemyHero.kills, :enemyDeaths => @enemyHero.deaths, :enemyStatus => @enemyHero.status, :enemyExp => @enemyHero.exp, :enemyAllies => @enemyHero.allies }
 
 
 	end

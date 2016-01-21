@@ -74,7 +74,7 @@ function GeneratePiece(x, y) {
 
                                         }
                                     }
-                                    xmlhttp.open("GET","/whiteCore",true);
+                                    xmlhttp.open("GET","/pacemaker",true);
                                     xmlhttp.send();
 
 
@@ -117,7 +117,7 @@ function GeneratePiece(x, y) {
 
                                         }
                                     }
-                                    xmlhttp.open("GET","/blackCore",true);
+                                    xmlhttp.open("GET","/pacemaker",true);
                                     xmlhttp.send();
 
 
