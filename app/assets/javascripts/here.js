@@ -87,11 +87,21 @@ function here(x) {   console.log(x);
 		commander(x);
 
 
-	} else { blankClick(x) }
+	} else {
+
+
+
+		if ( document.getElementById(x).className == "occupied" ) { 
+
+				command = "1"; commander(x); 
+
+
+						} else { 
+
+
+					blankClick(x) } }
                   
                   
-          
-    
  
  };  
 
