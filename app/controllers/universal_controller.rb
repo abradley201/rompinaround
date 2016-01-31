@@ -220,6 +220,7 @@ class UniversalController < ApplicationController
 		end
 
 		#how to include @canCast here?
+		
 		if @canMove == false && @canAttack == false
 
 			render :json => { :yourHp => @yourHero.hp, :yourMaxhp => @yourHero.maxhp, :yourShield => @yourHero.shield, :yourMp => @yourHero.mp, :yourMaxmp => @yourHero.maxmp, :yourPos => @yourHero.pos, :yourKills => @yourHero.kills, :yourDeaths => @yourHero.deaths, :yourStatus => @yourHero.status, :yourExp => @yourHero.exp, :yourAllies => @yourHero.allies, :enemyHp => @enemyHero.hp, :enemyMaxhp => @enemyHero.maxhp, :enemyShield => @enemyHero.shield, :enemyMp => @enemyHero.mp, :enemyMaxmp => @enemyHero.maxmp, :enemyPos => @enemyHero.pos, :enemyKills => @enemyHero.kills, :enemyDeaths => @enemyHero.deaths, :enemyStatus => @enemyHero.status, :enemyExp => @enemyHero.exp, :enemyAllies => @enemyHero.allies }
@@ -230,9 +231,11 @@ class UniversalController < ApplicationController
 	end
 
 
+	#beginning of game can sometimes crash due to other player not loading the gameboard and thus creating his hero in GameStats
 
+	#need to do death/revives + game ending next
 
-	#need to do death/revives + core + game ending next
+	#add buttons for skills and movement on UI for ipad/iphone use
 
 	def pacemaker
 
