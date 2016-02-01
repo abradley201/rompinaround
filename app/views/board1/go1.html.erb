@@ -113,6 +113,19 @@
     
             setTimeout(function(){ Pulsate() }, 1000);
 
+
+
+
+    var elm = document.body; 
+
+    var catcher = function(evt) {
+    if (evt.touches.length < 2)
+        evt.preventDefault();
+                            };
+
+    elm.addEventListener('touchstart', catcher, true);
+
+
     </script>
 
 
