@@ -241,6 +241,47 @@ label {
 
 <body>
 
+  <script>
+
+
+
+  var isiOS = false;
+  var agent = navigator.userAgent.toLowerCase();
+  if(agent.indexOf('iphone') >= 0 || agent.indexOf('ipad') >= 0){
+       isiOS = true; }
+
+  var ua = navigator.userAgent.toLowerCase();
+  var isAndroid = ua.indexOf("android") > -1;
+
+
+       if (isiOS == true || isAndroid == true) {
+
+    var elm = document.body; 
+
+    var clickArray = [];
+
+    setInterval(function(){ clickArray = []; }, 300);
+
+
+    var catcher = function(evt) {
+
+    if (evt.touches.length == 1) {
+
+      clickArray.push("x"); 
+
+      if ( clickArray.length >= 2 ) {
+
+        evt.preventDefault(); clickArray = []; }
+
+                            } };
+
+    elm.addEventListener('touchstart', catcher, true);
+
+          };
+
+
+  </script>
+
 	<!-- things here go on every single page of the web application -->
 
 
