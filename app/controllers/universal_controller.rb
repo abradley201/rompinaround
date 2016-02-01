@@ -161,15 +161,17 @@ class UniversalController < ApplicationController
 
 		#make this more dynamic, so it can hit things other than 1 enemy
 
-		#there is NO CHECK to see if hero can actually attack the params[:command ]square
-
 		#slice(2,100) needs to be changed so that 100 is dynamic
+
+
+
+			if (params[:command].slice(2,100).to_i - @yourHero.pos).abs == 1 || (params[:command].slice(2,100).to_i - @yourHero.pos).abs == e
 
 
 
 				if @enemyHero.pos == params[:command].slice(2,100).to_i
 
-					@newHP = @enemyHero.hp - 5
+					@newHP = @enemyHero.hp - 25
 
 					if @newHP < 0
 
@@ -183,7 +185,7 @@ class UniversalController < ApplicationController
 
 				if params[:command].slice(2,100).to_i == MapStat.find_by_game(@gameNumber).WhiteCorePOS && @yourHero.allies == "black"
 
-					@whiteCoreHP = MapStat.find_by_game(@gameNumber).WhiteCoreHP - 50
+					@whiteCoreHP = MapStat.find_by_game(@gameNumber).WhiteCoreHP - 25
 
 					if @whiteCoreHP < 0
 
@@ -198,7 +200,7 @@ class UniversalController < ApplicationController
 
 				if params[:command].slice(2,100).to_i == MapStat.find_by_game(@gameNumber).BlackCorePOS && @yourHero.allies == "white"
 
-					@blackCoreHP = MapStat.find_by_game(@gameNumber).BlackCoreHP - 50
+					@blackCoreHP = MapStat.find_by_game(@gameNumber).BlackCoreHP - 25
 
 					if @blackCoreHP < 0
 
@@ -213,6 +215,7 @@ class UniversalController < ApplicationController
 
 				GameStat.update(@yourHero.id, :attacked => Time.now.to_f.round(3))
 
+			end
 
 				render :json => { :yourHp => @yourHero.hp, :yourMaxhp => @yourHero.maxhp, :yourShield => @yourHero.shield, :yourMp => @yourHero.mp, :yourMaxmp => @yourHero.maxmp, :yourPos => @yourHero.pos, :yourKills => @yourHero.kills, :yourDeaths => @yourHero.deaths, :yourStatus => @yourHero.status, :yourExp => @yourHero.exp, :yourAllies => @yourHero.allies, :enemyHp => @enemyHero.hp, :enemyMaxhp => @enemyHero.maxhp, :enemyShield => @enemyHero.shield, :enemyMp => @enemyHero.mp, :enemyMaxmp => @enemyHero.maxmp, :enemyPos => @enemyHero.pos, :enemyKills => @enemyHero.kills, :enemyDeaths => @enemyHero.deaths, :enemyStatus => @enemyHero.status, :enemyExp => @enemyHero.exp, :enemyAllies => @enemyHero.allies }
 
