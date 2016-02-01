@@ -118,10 +118,20 @@
 
     var elm = document.body; 
 
+    var clickArray = [];
+
+
     var catcher = function(evt) {
-    if (evt.touches.length == 2)
-        evt.preventDefault();
-                            };
+
+    if (evt.touches.length == 1) {
+
+      clickArray.push("x"); setTimeout(function(){ clickArray = []; }, 500);
+
+      if ( clickArray.length >= 2 ) {
+
+        evt.preventDefault(); }
+
+                            } };
 
     elm.addEventListener('touchstart', catcher, true);
 
