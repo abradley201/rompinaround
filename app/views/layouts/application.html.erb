@@ -243,6 +243,19 @@ label {
 
 	<!-- things here go on every single page of the web application -->
 
+<script> 
+
+var elm = document.body; 
+
+var catcher = function(evt) {
+    if (evt.touches.length < 2)
+        evt.preventDefault();
+};
+
+elm.addEventListener('touchstart', catcher, true);
+
+</script>
+
 
 
 

@@ -222,8 +222,8 @@ function commander(x) {
     if ( document.getElementsByClassName("target").length > 0 ) { sheath() };
 
 
-    if ( enemyHero.hp == 0 ) { alert("VICTORY!") };
-    if ( yourHero.hp == 0 ) { alert("DEFEAT") };
+    //if ( enemyHero.hp == 0 ) { alert("VICTORY!") };
+    //if ( yourHero.hp == 0 ) { alert("DEFEAT") };
 
 
 
