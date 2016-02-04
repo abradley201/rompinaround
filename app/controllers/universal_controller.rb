@@ -43,13 +43,15 @@ class UniversalController < ApplicationController
 			@canAttack = true
 		end
 
+		if @yourHero.status != nil
 
-		if @yourHero.status.include? "†"
-			@canMove = false
-			@canAttack = false
-			@canCast = false
+			if @yourHero.status.include? "†"
+				@canMove = false
+				@canAttack = false
+				@canCast = false
+			end
+
 		end
-
 
 		if @canMove == true
 
@@ -271,7 +273,7 @@ class UniversalController < ApplicationController
 			end
 
 		end
-		
+
 
 		@gameNumber = GameStat.find_by_account(session[:account]).game
 
