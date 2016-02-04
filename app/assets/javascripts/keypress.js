@@ -52,7 +52,7 @@ function google(evt){
 
     									 }
 
-    if (String.fromCharCode(key)==" "){ 
+    if (String.fromCharCode(key)=="q"){ 
 
                                         command = "1";
 
