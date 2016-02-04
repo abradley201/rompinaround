@@ -218,8 +218,10 @@ function commander(x) {
         enemyHero['exp'] = Number(theparse.enemyExp);
         enemyHero['allies'] = theparse.enemyAllies;
 
-    place(yourHero.pos, yourHero);  
-    place(enemyHero.pos, enemyHero); 
+        
+
+      if (yourHero.status.indexOf('†') === -1) { place(yourHero.pos, yourHero) };
+      if (enemyHero.status.indexOf('†') === -1) { place(enemyHero.pos, enemyHero) };
 
 
     if ( whiteCore.pos == x || blackCore.pos == x ) { 
