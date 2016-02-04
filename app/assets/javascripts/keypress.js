@@ -1,5 +1,6 @@
 
 
+
 var command = "nothing";
 var message;
 

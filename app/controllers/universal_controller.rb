@@ -44,6 +44,13 @@ class UniversalController < ApplicationController
 		end
 
 
+		if @yourHero.status.include? "†"
+			@canMove = false
+			@canAttack = false
+			@canCast = false
+		end
+
+
 		if @canMove == true
 
 			@mapInfo = MapStat.find_by_game(@gameNumber).map.split
@@ -173,9 +180,11 @@ class UniversalController < ApplicationController
 
 					@newHP = @enemyHero.hp - 25
 
-					if @newHP < 0
+					if @newHP <= 0
 
 						@newHP = 0
+
+						GameStat.update(@enemyHero.id, :status => "dead†#{Time.now.to_f.round(3)}†")
 
 					end
 
@@ -187,7 +196,7 @@ class UniversalController < ApplicationController
 
 					@whiteCoreHP = MapStat.find_by_game(@gameNumber).WhiteCoreHP - 25
 
-					if @whiteCoreHP < 0
+					if @whiteCoreHP <= 0
 
 						@whiteCoreHP = 0
 
@@ -202,7 +211,7 @@ class UniversalController < ApplicationController
 
 					@blackCoreHP = MapStat.find_by_game(@gameNumber).BlackCoreHP - 25
 
-					if @blackCoreHP < 0
+					if @blackCoreHP <= 0
 
 						@blackCoreHP = 0
 
@@ -238,11 +247,27 @@ class UniversalController < ApplicationController
 
 	#need to do death/revives + game ending next
 
-	#add buttons for skills and movement on UI for ipad/iphone use
+	#add buttons for skills on UI
 
 	def pacemaker
 
 		@yourHero = GameStat.find_by_account(session[:account])
+
+
+			if @yourHero.status.include? "†"
+
+				@whenDied = @yourHero.status.split("†")[1].to_f
+
+				if (Time.now.to_f.round(3) - @whenDied) >= 5 
+
+					GameStat.update(@yourHero.id, :hp => @yourHero.maxhp)
+
+					GameStat.update(@yourHero.id, :status => nil)
+
+				end
+
+			end
+
 
 		@gameNumber = GameStat.find_by_account(session[:account]).game
 
@@ -270,6 +295,7 @@ class UniversalController < ApplicationController
 
 
 
+				
 
 
 	
