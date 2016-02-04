@@ -254,7 +254,7 @@ class UniversalController < ApplicationController
 		@yourHero = GameStat.find_by_account(session[:account])
 
 
-			if @yourHero.status.include? "†"
+			if @yourHero.status.include?("†") == true
 
 				@whenDied = @yourHero.status.split("†")[1].to_f
 
