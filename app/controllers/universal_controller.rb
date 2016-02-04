@@ -43,15 +43,13 @@ class UniversalController < ApplicationController
 			@canAttack = true
 		end
 
-		if @yourHero.status != nil
 
-			if @yourHero.status.include? "†"
-				@canMove = false
-				@canAttack = false
-				@canCast = false
-			end
-
+		if @yourHero.status.include?("†") == true
+			@canMove = false
+			@canAttack = false
+			@canCast = false
 		end
+
 
 		if @canMove == true
 
