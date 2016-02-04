@@ -131,8 +131,22 @@ function Pulsate() {
             HPMPbars();
 
 
-            if ( enemyHero.hp == 0 ) { };
-            if ( yourHero.hp == 0 ) { };
+            if ( enemyHero.hp == 0 ) {
+
+                var c=document.getElementById(enemyHero.pos);
+                var ctx=c.getContext("2d");
+                var img=document.getElementById("cross");
+                ctx.drawImage(img,10,10);
+
+             };
+            if ( yourHero.hp == 0 ) {
+
+                var c=document.getElementById(yourHero.pos);
+                var ctx=c.getContext("2d");
+                var img=document.getElementById("cross");
+                ctx.drawImage(img,10,10);
+
+             };
 
     }
   }
@@ -221,11 +235,6 @@ function commander(x) {
             HPMPbars();
 
     if ( document.getElementsByClassName("target").length > 0 ) { sheath() };
-
-
-    //if ( enemyHero.hp == 0 ) { alert("VICTORY!") };
-    //if ( yourHero.hp == 0 ) { alert("DEFEAT") };
-
 
 
 
