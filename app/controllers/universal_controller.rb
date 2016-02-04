@@ -254,6 +254,8 @@ class UniversalController < ApplicationController
 		@yourHero = GameStat.find_by_account(session[:account])
 
 
+		if @yourHero.status != nil
+
 			if @yourHero.status.include?("†") == true
 
 				@whenDied = @yourHero.status.split("†")[1].to_f
@@ -268,6 +270,8 @@ class UniversalController < ApplicationController
 
 			end
 
+		end
+		
 
 		@gameNumber = GameStat.find_by_account(session[:account]).game
 
