@@ -178,6 +178,8 @@ class UniversalController < ApplicationController
 
 				if @enemyHero.pos == params[:command].slice(2,100).to_i
 
+				  if @enemyHero.hp != 0
+
 					@newHP = @enemyHero.hp - 25
 
 					if @newHP <= 0
@@ -188,7 +190,9 @@ class UniversalController < ApplicationController
 
 					end
 
-				GameStat.update(@enemyHero.id, :hp => @newHP)
+				    GameStat.update(@enemyHero.id, :hp => @newHP)
+
+				  end
 
 				end
 
