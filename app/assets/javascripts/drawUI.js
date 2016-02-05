@@ -14,7 +14,7 @@ function ClearUI() { if (yourHero === undefined) { return }
         DrawPicture("UI", "cross");
         ctx.fillStyle = "red";
         ctx.font = "30px Arial";
-        ctx.fillText("Reviving...",10,50);
+        ctx.fillText("Reviving...",5,50);
 
     };
     
