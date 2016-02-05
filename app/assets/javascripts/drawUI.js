@@ -9,6 +9,14 @@ function ClearUI() { if (yourHero === undefined) { return }
     var ctx=c.getContext("2d");
     ctx.clearRect(0,0,ClearWidth,150);
     DrawPicture("UI", yourHero.ppic);
+    if (yourHero.hp == 0) { 
+
+        DrawPicture("UI", "cross");
+        ctx.strokeStyle = "red";
+        ctx.font = "20px Arial";
+        ctx.strokeText("Reviving...",50,50);
+
+    };
     
 };
 
