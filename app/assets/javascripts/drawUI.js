@@ -12,9 +12,9 @@ function ClearUI() { if (yourHero === undefined) { return }
     if (yourHero.hp == 0) { 
 
         DrawPicture("UI", "cross");
-        ctx.strokeStyle = "red";
+        ctx.fillStyle = "red";
         ctx.font = "30px Arial";
-        ctx.strokeText("Reviving...",20,50);
+        ctx.fillText("Reviving...",10,50);
 
     };
     
