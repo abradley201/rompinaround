@@ -355,7 +355,7 @@ class UniversalController < ApplicationController
 
 	#beginning of game can sometimes crash due to other player not loading the gameboard and thus creating his hero in GameStats
 
-	#need to do death/revives + game ending next
+	#game ending next
 
 	#add buttons for skills on UI
 

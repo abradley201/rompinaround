@@ -107,7 +107,7 @@
         enemyHero['allies'] = enemyAllies;
 
         place(yourHero.pos,yourHero);
-        place(enemyHero.pos,enemyHero);
+        if (enemyHero != undefined) { place(enemyHero.pos,enemyHero) };
 
     }
     
