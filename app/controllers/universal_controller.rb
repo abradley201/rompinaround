@@ -255,7 +255,6 @@ class UniversalController < ApplicationController
 			if (params[:command].slice(2,100).to_i - @yourHero.pos).abs == 1 || (params[:command].slice(2,100).to_i - @yourHero.pos).abs == e
 
 
-
 				if @enemyHero.pos == params[:command].slice(2,100).to_i
 
 				  if @enemyHero.hp != 0
@@ -267,6 +266,33 @@ class UniversalController < ApplicationController
 						@newHP = 0
 
 						GameStat.update(@enemyHero.id, :status => "dead†#{Time.now.to_f.round(3)}†")
+
+						@mapInfo = MapStat.find_by_game(@gameNumber).map.split
+
+						@WRS = MapStat.find_by_game(@gameNumber).WhiteRespawnSquare
+
+						@BRS = MapStat.find_by_game(@gameNumber).BlackRespawnSquare
+
+
+						@mapInfo[@enemyHero.pos] = "n"
+
+							if @enemyHero.allies == "black"
+
+								@mapInfo[@BRS] = "o"
+
+								GameStat.update(@enemyHero.id, :pos => @BRS)
+
+							else 
+
+								@mapInfo[@WRS] = "o"
+
+								GameStat.update(@enemyHero.id, :pos => @WRS)
+
+							end
+
+						@mapInfo = @mapInfo.reject(&:empty?).join(' ')
+
+						MapStat.update(MapStat.find_by_game(@gameNumber).id, :map => @mapInfo)
 
 					end
 
