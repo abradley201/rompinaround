@@ -78,7 +78,7 @@ function Pulsate() {
 
 
     	
-        var theparse; var whiteCoreHP; var blackCoreHP;
+        var theparse; var whiteCoreHP; var blackCoreHP; var whiteRespawnSquare; var blackRespawnSquare;
    
 
     var xmlhttp = new XMLHttpRequest();
@@ -121,7 +121,30 @@ function Pulsate() {
     if (document.getElementById(enemyHero.pos).className !== "target") { place(enemyHero.pos, enemyHero) };
 
     whiteCoreHP = theparse.whiteCoreHP;
-    blackCoreHP = theparse.blackCoreHP; 
+    blackCoreHP = theparse.blackCoreHP;
+
+    whiteRespawnSquare = theparse.whiteRespawnSquare;
+    blackRespawnSquare = theparse.blackRespawnSquare;
+
+    if ( whiteRespawnSquare != 0 && document.getElementById(whiteRespawnSquare).className == "on" ) {
+
+        var c=document.getElementById(whiteRespawnSquare);
+        var ctx=c.getContext("2d");
+        ctx.globalAlpha=0.2;
+        ctx.fillStyle="white";
+        ctx.fillRect(0,0,50,50);
+
+     };
+
+    if ( blackRespawnSquare != 0 && document.getElementById(blackRespawnSquare).className == "on" ) {
+
+        var c=document.getElementById(blackRespawnSquare);
+        var ctx=c.getContext("2d");
+        ctx.globalAlpha=0.2;
+        ctx.fillStyle="black";
+        ctx.fillRect(0,0,50,50);
+
+     };
 
     if (document.getElementById(whiteCore.pos).className !== "target") { if ( whiteCore.hp !== whiteCoreHP && whiteCore !== undefined ) { whiteCore['hp'] = whiteCoreHP; place(whiteCore.pos,whiteCore) } }
     if (document.getElementById(blackCore.pos).className !== "target") { if ( blackCore.hp !== blackCoreHP && blackCore !== undefined ) { blackCore['hp'] = blackCoreHP; place(blackCore.pos,blackCore) } }
