@@ -130,7 +130,6 @@ function Pulsate() {
 
         var c=document.getElementById(whiteRespawnSquare);
         var ctx=c.getContext("2d");
-        ctx.globalAlpha=0.2;
         ctx.fillStyle="white";
         ctx.fillRect(0,0,50,50);
 
@@ -140,7 +139,6 @@ function Pulsate() {
 
         var c=document.getElementById(blackRespawnSquare);
         var ctx=c.getContext("2d");
-        ctx.globalAlpha=0.2;
         ctx.fillStyle="black";
         ctx.fillRect(0,0,50,50);
 

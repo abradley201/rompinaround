@@ -53,11 +53,37 @@ class UniversalController < ApplicationController
 
 		if @canMove == true
 
+			@firstValidation = false
+
+			@secondValidation = false
+
 			@mapInfo = MapStat.find_by_game(@gameNumber).map.split
+
+			@WRS = MapStat.find_by_game(@gameNumber).WhiteRespawnSquare
+
+			@BRS = MapStat.find_by_game(@gameNumber).BlackRespawnSquare
 
 			if params[:command] == "w"
 
 				if @yourHero.pos - e > 0 && @mapInfo[@yourHero.pos - e] == "n"
+
+					@firstValidation = true
+
+				end
+
+				if @yourHero.allies == "white" && @yourHero.pos - e != @BRS
+
+					@secondValidation = true
+
+				end
+
+				if @yourHero.allies == "black" && @yourHero.pos - e != @WRS
+
+					@secondValidation = true
+
+				end
+
+				if @firstValidation == true && @secondValidation == true
 
 					@mapInfo[@yourHero.pos] = "n"
 
@@ -85,6 +111,24 @@ class UniversalController < ApplicationController
 
 				if @yourHero.pos - 1 > 0 && @mapInfo[@yourHero.pos - 1] == "n"
 
+					@firstValidation = true
+
+				end
+
+				if @yourHero.allies == "white" && @yourHero.pos - 1 != @BRS
+
+					@secondValidation = true
+
+				end
+
+				if @yourHero.allies == "black" && @yourHero.pos - 1 != @WRS
+
+					@secondValidation = true
+
+				end
+
+				if @firstValidation == true && @secondValidation == true
+
 					@mapInfo[@yourHero.pos] = "n"
 
 					@mapInfo[@yourHero.pos - 1] = "o"
@@ -111,6 +155,24 @@ class UniversalController < ApplicationController
 
 				if @yourHero.pos + e < 119 && @mapInfo[@yourHero.pos + e] == "n"
 
+					@firstValidation = true
+
+				end
+
+				if @yourHero.allies == "white" && @yourHero.pos + e != @BRS
+
+					@secondValidation = true
+
+				end
+
+				if @yourHero.allies == "black" && @yourHero.pos + e != @WRS
+
+					@secondValidation = true
+
+				end
+
+				if @firstValidation == true && @secondValidation == true
+
 					@mapInfo[@yourHero.pos] = "n"
 
 					@mapInfo[@yourHero.pos + e] = "o"
@@ -136,6 +198,24 @@ class UniversalController < ApplicationController
 			if params[:command] == "d"
 
 				if @yourHero.pos + 1 < 119 && @mapInfo[@yourHero.pos + 1] == "n"
+
+					@firstValidation = true
+
+				end
+
+				if @yourHero.allies == "white" && @yourHero.pos + 1 != @BRS
+
+					@secondValidation = true
+
+				end
+
+				if @yourHero.allies == "black" && @yourHero.pos + 1 != @WRS
+
+					@secondValidation = true
+
+				end
+
+				if @firstValidation == true && @secondValidation == true
 
 					@mapInfo[@yourHero.pos] = "n"
 
@@ -235,7 +315,7 @@ class UniversalController < ApplicationController
 
 		end
 
-		#how to include @canCast here?
+		#how to include @canCast here? use @firstValidation && @secondValidation
 		
 		if @canMove == false && @canAttack == false
 
