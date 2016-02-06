@@ -326,10 +326,6 @@ class UniversalController < ApplicationController
 
 						InfoStat.update(@losingAccountRow.first.id, :losses => @CL + 1)
 
-						MapStat.where(game:@gameNumber).delete_all
-
-						GameStat.where(game:@gameNumber).delete_all
-
 
 					end
 
@@ -362,9 +358,6 @@ class UniversalController < ApplicationController
 
 						InfoStat.update(@losingAccountRow.first.id, :losses => @CL + 1)
 
-						MapStat.where(game:@gameNumber).delete_all
-
-						GameStat.where(game:@gameNumber).delete_all
 
 					end
 
@@ -377,15 +370,9 @@ class UniversalController < ApplicationController
 
 			end
 
-				if MapStat.find_by_game(@gameNumber) != nil 
-
 				render :json => { :yourHp => @yourHero.hp, :yourMaxhp => @yourHero.maxhp, :yourShield => @yourHero.shield, :yourMp => @yourHero.mp, :yourMaxmp => @yourHero.maxmp, :yourPos => @yourHero.pos, :yourKills => @yourHero.kills, :yourDeaths => @yourHero.deaths, :yourStatus => @yourHero.status, :yourExp => @yourHero.exp, :yourAllies => @yourHero.allies, :enemyHp => @enemyHero.hp, :enemyMaxhp => @enemyHero.maxhp, :enemyShield => @enemyHero.shield, :enemyMp => @enemyHero.mp, :enemyMaxmp => @enemyHero.maxmp, :enemyPos => @enemyHero.pos, :enemyKills => @enemyHero.kills, :enemyDeaths => @enemyHero.deaths, :enemyStatus => @enemyHero.status, :enemyExp => @enemyHero.exp, :enemyAllies => @enemyHero.allies }
 
-				else
 
-				redirect_to "/"
-
-				end
 		end
 
 		#how to include @canCast here? use @firstValidation && @secondValidation
@@ -449,8 +436,19 @@ class UniversalController < ApplicationController
 		@blackRespawnSquare = MapStat.find_by_game(@gameNumber).BlackRespawnSquare
 
 
-		render :json => { :whiteCoreHP => @whiteCoreHP, :blackCoreHP => @blackCoreHP, :whiteRespawnSquare => @whiteRespawnSquare, :blackRespawnSquare => @blackRespawnSquare, :yourHp => @yourHero.hp, :yourMaxhp => @yourHero.maxhp, :yourShield => @yourHero.shield, :yourMp => @yourHero.mp, :yourMaxmp => @yourHero.maxmp, :yourPos => @yourHero.pos, :yourKills => @yourHero.kills, :yourDeaths => @yourHero.deaths, :yourStatus => @yourHero.status, :yourExp => @yourHero.exp, :yourAllies => @yourHero.allies, :enemyHp => @enemyHero.hp, :enemyMaxhp => @enemyHero.maxhp, :enemyShield => @enemyHero.shield, :enemyMp => @enemyHero.mp, :enemyMaxmp => @enemyHero.maxmp, :enemyPos => @enemyHero.pos, :enemyKills => @enemyHero.kills, :enemyDeaths => @enemyHero.deaths, :enemyStatus => @enemyHero.status, :enemyExp => @enemyHero.exp, :enemyAllies => @enemyHero.allies }
+		if @whiteCoreHP == 0 || @blackCoreHP == 0
 
+			MapStat.where(game:@gameNumber).delete_all
+
+			GameStat.where(game:@gameNumber).delete_all
+
+			redirect_to "/"
+
+		else
+
+			render :json => { :whiteCoreHP => @whiteCoreHP, :blackCoreHP => @blackCoreHP, :whiteRespawnSquare => @whiteRespawnSquare, :blackRespawnSquare => @blackRespawnSquare, :yourHp => @yourHero.hp, :yourMaxhp => @yourHero.maxhp, :yourShield => @yourHero.shield, :yourMp => @yourHero.mp, :yourMaxmp => @yourHero.maxmp, :yourPos => @yourHero.pos, :yourKills => @yourHero.kills, :yourDeaths => @yourHero.deaths, :yourStatus => @yourHero.status, :yourExp => @yourHero.exp, :yourAllies => @yourHero.allies, :enemyHp => @enemyHero.hp, :enemyMaxhp => @enemyHero.maxhp, :enemyShield => @enemyHero.shield, :enemyMp => @enemyHero.mp, :enemyMaxmp => @enemyHero.maxmp, :enemyPos => @enemyHero.pos, :enemyKills => @enemyHero.kills, :enemyDeaths => @enemyHero.deaths, :enemyStatus => @enemyHero.status, :enemyExp => @enemyHero.exp, :enemyAllies => @enemyHero.allies }
+
+		end
 
 	end
 
