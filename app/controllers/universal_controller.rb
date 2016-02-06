@@ -454,9 +454,11 @@ class UniversalController < ApplicationController
 
 		if @whiteCoreHP == 0 || @blackCoreHP == 0
 
-			MapStat.where(game:@gameNumber).destroy_all
+			sleep(1)
 
-			GameStat.where(game:@gameNumber).destroy_all
+			MapStat.where(game:@gameNumber).delete_all
+
+			GameStat.where(game:@gameNumber).delete_all
 
 		end
 
