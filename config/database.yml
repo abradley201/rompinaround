@@ -11,27 +11,20 @@ default: &default
 
 development:
   <<: *default
-  database: rompindatabase
-  username: rompinadmin
+  database: <%= ENV['DATABASE_NAME'] %>
+  username: <%= ENV['DATABASE_USER'] %>
   password: <%= ENV['DATABASE_PASSWORD'] %>
-  host: db.rompinaround.com
+  host: <%= ENV['DATABASE_HOST'] %>
 
 production:
   <<: *default
-  database: rompindatabase
-  username: rompinadmin
+  database: <%= ENV['DATABASE_NAME'] %>
+  username: <%= ENV['DATABASE_USER'] %>
   password: <%= ENV['DATABASE_PASSWORD'] %>
-  host: db.rompinaround.com
+  host: <%= ENV['DATABASE_HOST'] %>
 
 
-#development:
-#   <<: *default
-#   database: db/development.sqlite3
 
-# $db_host = "db.rompinaround.com";
-# $db_username = "rompinadmin";
-# $db_pass = "jammers597";
-# $db_name = "rompindatabase";
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
