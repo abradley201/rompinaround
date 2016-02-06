@@ -13,14 +13,14 @@ function ClearUI() { if (yourHero === undefined) { return }
     if (yourHero.allies == "white") { 
 
         ctx.fillStyle = "white";
-        ctx.fillRect(10, 120, 20, 20);
+        ctx.fillRect(5, 125, 20, 20);
 
     };
 
     if (yourHero.allies == "black") { 
 
         ctx.fillStyle = "black";
-        ctx.fillRect(10, 120, 20, 20);
+        ctx.fillRect(5, 125, 20, 20);
 
     };
 
