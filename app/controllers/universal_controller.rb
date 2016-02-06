@@ -326,9 +326,9 @@ class UniversalController < ApplicationController
 
 						@CL = InfoStat.find_by_account(@losingAccount).losses
 
-						InfoStat.update(@winningAccountRow.first.id, :wins => @CW + 1)
+						InfoStat.update(InfoStat.find_by_account(@winningAccount).id, :wins => @CW + 1)
 
-						InfoStat.update(@losingAccountRow.first.id, :losses => @CL + 1)
+						InfoStat.update(InfoStat.find_by_account(@losingAccount).id, :losses => @CL + 1)
 
 
 					end
@@ -358,9 +358,9 @@ class UniversalController < ApplicationController
 
 						@CL = InfoStat.find_by_account(@losingAccount).losses
 
-						InfoStat.update(@winningAccountRow.first.id, :wins => @CW + 1)
+						InfoStat.update(InfoStat.find_by_account(@winningAccount).id, :wins => @CW + 1)
 
-						InfoStat.update(@losingAccountRow.first.id, :losses => @CL + 1)
+						InfoStat.update(InfoStat.find_by_account(@losingAccount).id, :losses => @CL + 1)
 
 
 					end
@@ -389,7 +389,7 @@ class UniversalController < ApplicationController
 
 	  else
 
-	  redirect_to "/"
+	  redirect_to "/login"
 
 	  end
 
@@ -454,15 +454,15 @@ class UniversalController < ApplicationController
 
 		if @whiteCoreHP == 0 || @blackCoreHP == 0
 
-			MapStat.where(game:@gameNumber).delete_all
+			MapStat.where(game:@gameNumber).destroy_all
 
-			GameStat.where(game:@gameNumber).delete_all
+			GameStat.where(game:@gameNumber).destroy_all
 
 		end
 
 	  else
 
-	  redirect_to "/"
+	  redirect_to "/login"
 
 	  end
 
