@@ -572,8 +572,12 @@ function blankClick(x) {
 
           };
 
-  
 
+    if ( w - y < 0 ) { command = "w"; commander(); }
+
+    if ( w - y > 0 ) { command = "s"; commander(); }
+
+  
 };
 
 
