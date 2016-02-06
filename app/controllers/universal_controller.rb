@@ -389,7 +389,9 @@ class UniversalController < ApplicationController
 
 	  else
 
-	  redirect_to "/login"
+	  	redirect_to "/"
+
+	  	return
 
 	  end
 
@@ -464,7 +466,9 @@ class UniversalController < ApplicationController
 
 	  else
 
-	  redirect_to "/login"
+	  	redirect_to "/"
+
+	  	return
 
 	  end
 
