@@ -89,7 +89,7 @@ function Pulsate() {
   if (xmlhttp.readyState==4 && xmlhttp.status==200)
     { theparse = JSON.parse(xmlhttp.responseText);
 
-
+            if ( theparse.gaveOver != "true" ) {
 
     if (yourHero.pos != theparse.yourPos) { TurnCanvasOn(yourHero.pos) };
     if (enemyHero.pos != theparse.enemyPos) { TurnCanvasOn(enemyHero.pos) };
@@ -170,6 +170,8 @@ function Pulsate() {
                 ctx.drawImage(img,10,10);
 
              };
+
+         };
 
 
         if ( theparse.gameOver == "whiteWins" ) {
