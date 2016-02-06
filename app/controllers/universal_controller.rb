@@ -310,17 +310,21 @@ class UniversalController < ApplicationController
 
 						@whiteCoreHP = 0
 
-						@winningAccount = GameStat.where(:game => @gameNumber).where(:allies => "black").account
+						@winningAccountRow = GameStat.where(:game => @gameNumber).where(:allies => "black")
+
+						@winningAccount = @winningAccountRow.first.account
 
 						@CW = InfoStat.find_by_account(@winningAccount).wins
 
-						@losingAccount = GameStat.where(:game => @gameNumber).where(:allies => "white").account
+						@losingAccountRow = GameStat.where(:game => @gameNumber).where(:allies => "white")
+
+						@losingAccount = @losingAccountRow.first.account
 
 						@CL = InfoStat.find_by_account(@losingAccount).losses
 
-						InfoStat.update(@winningAccount.id, :wins => @CW + 1)
+						InfoStat.update(@winningAccountRow.id, :wins => @CW + 1)
 
-						InfoStat.update(@losingAccount.id, :losses => @CL + 1)
+						InfoStat.update(@losingAccountRow.id, :losses => @CL + 1)
 
 						MapStat.where(game:@gameNumber).delete_all
 
@@ -342,17 +346,21 @@ class UniversalController < ApplicationController
 
 						@blackCoreHP = 0
 
-						@winningAccount = GameStat.where(:game => @gameNumber).where(:allies => "white").account
+						@winningAccountRow = GameStat.where(:game => @gameNumber).where(:allies => "white")
+
+						@winningAccount = @winningAccountRow.first.account
 
 						@CW = InfoStat.find_by_account(@winningAccount).wins
 
-						@losingAccount = GameStat.where(:game => @gameNumber).where(:allies => "black").account
+						@losingAccountRow = GameStat.where(:game => @gameNumber).where(:allies => "black")
+
+						@losingAccount = @losingAccountRow.first.account
 
 						@CL = InfoStat.find_by_account(@losingAccount).losses
 
-						InfoStat.update(@winningAccount.id, :wins => @CW + 1)
+						InfoStat.update(@winningAccountRow.id, :wins => @CW + 1)
 
-						InfoStat.update(@losingAccount.id, :losses => @CL + 1)
+						InfoStat.update(@losingAccountRow.id, :losses => @CL + 1)
 
 						MapStat.where(game:@gameNumber).delete_all
 
