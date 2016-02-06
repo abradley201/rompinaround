@@ -399,6 +399,8 @@ class UniversalController < ApplicationController
 
 	  redirect_to :back
 
+	  return
+
 	  end
 
 
@@ -473,6 +475,8 @@ class UniversalController < ApplicationController
 
 	  redirect_to :back
 
+	  return
+
 	  end
 
 
@@ -484,23 +488,32 @@ class UniversalController < ApplicationController
 
 	def endgame
 
-		@gameNumber = GameStat.find_by_account(session[:account]).game
+		@game = GameStat.find_by_account(session[:account])
+
+		if @game != nil
+
+			@gameNumber = @game.game
 
 
-		@whiteCoreHP = MapStat.find_by_game(@gameNumber).WhiteCoreHP
+			@whiteCoreHP = MapStat.find_by_game(@gameNumber).WhiteCoreHP
 
-		@blackCoreHP = MapStat.find_by_game(@gameNumber).BlackCoreHP
+			@blackCoreHP = MapStat.find_by_game(@gameNumber).BlackCoreHP
 
 
-		if @whiteCoreHP == 0 || @blackCoreHP == 0
 
-		MapStat.where(game:@gameNumber).delete_all
+			if @whiteCoreHP == 0 || @blackCoreHP == 0
 
-		GameStat.where(game:@gameNumber).delete_all
+			MapStat.where(game:@gameNumber).delete_all
+
+			GameStat.where(game:@gameNumber).delete_all
+
+			end
 
 		end
 
 		redirect_to :back
+
+		return
 
 	end
 
