@@ -67,7 +67,7 @@ function google(evt){
 var IsGameOver = false;
 
 
-function Pulsate() { 
+function Pulsate() { if (IsGameOver == true) { return }
 
 
     var RepeatCommands;
@@ -75,7 +75,7 @@ function Pulsate() {
     RepeatCommands=window.setInterval(function(){Timer()},1000); 
 
 
-    function Timer() { if (IsGameOver == true) { clearInterval(RepeatCommands); return };        
+    function Timer() { if (IsGameOver == true) { clearInterval(RepeatCommands) };        
 
 
 
@@ -174,7 +174,7 @@ function Pulsate() {
              };
 
 
-        if ( theparse.gameOver == "whiteWins" && IsGameOver == false ) {
+        if ( theparse.gameOver == "whiteWins" ) {
 
             IsGameOver = true; 
 
@@ -198,7 +198,7 @@ function Pulsate() {
 
         };
 
-        if ( theparse.gameOver == "blackWins" && IsGameOver == false ) {
+        if ( theparse.gameOver == "blackWins" ) {
 
             IsGameOver = true; 
 
@@ -313,7 +313,7 @@ function commander(x) { if (IsGameOver == true) { return };
     if ( document.getElementsByClassName("target").length > 0 ) { sheath() };
 
 
-    if ( theparse.gameOver == "whiteWins" ) {
+    if ( theparse.gameOver == "whiteWins" && IsGameOver == false ) {
 
             IsGameOver = true; 
 
@@ -336,7 +336,7 @@ function commander(x) { if (IsGameOver == true) { return };
 
      };
 
-    if ( theparse.gameOver == "blackWins" ) {
+    if ( theparse.gameOver == "blackWins" && IsGameOver == false ) {
 
             IsGameOver = true; 
 
@@ -368,7 +368,7 @@ function commander(x) { if (IsGameOver == true) { return };
     xmlhttp.open("POST","/command",true);
     xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
     xmlhttp.send("command=" + command);
-    
+
 }
 
 
