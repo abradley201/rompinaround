@@ -322,9 +322,9 @@ class UniversalController < ApplicationController
 
 						@CL = InfoStat.find_by_account(@losingAccount).losses
 
-						InfoStat.update(@winningAccountRow.id, :wins => @CW + 1)
+						InfoStat.update(@winningAccountRow.first.id, :wins => @CW + 1)
 
-						InfoStat.update(@losingAccountRow.id, :losses => @CL + 1)
+						InfoStat.update(@losingAccountRow.first.id, :losses => @CL + 1)
 
 						MapStat.where(game:@gameNumber).delete_all
 
@@ -358,9 +358,9 @@ class UniversalController < ApplicationController
 
 						@CL = InfoStat.find_by_account(@losingAccount).losses
 
-						InfoStat.update(@winningAccountRow.id, :wins => @CW + 1)
+						InfoStat.update(@winningAccountRow.first.id, :wins => @CW + 1)
 
-						InfoStat.update(@losingAccountRow.id, :losses => @CL + 1)
+						InfoStat.update(@losingAccountRow.first.id, :losses => @CL + 1)
 
 						MapStat.where(game:@gameNumber).delete_all
 
