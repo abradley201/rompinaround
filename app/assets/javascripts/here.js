@@ -548,7 +548,7 @@ function blankClick(x) {
 
 
 
-  var w = Distancetx(y,x)[0];
+  var w = Distancetx(y,x)[1];
 
 
 
