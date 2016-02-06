@@ -178,13 +178,13 @@ function Pulsate() {
 
             clearInterval(RepeatCommands);
 
-            if ( yourHero.allies == "white" ) { alert("Victory!! YES!"); } else { alert("Oh...defeat."); }
+            if ( yourHero.allies == "white" ) { setTimeout(function(){ alert("Victory!! YES!"); }, 1000); } else { setTimeout(function(){ alert("Oh...defeat."); }, 1000); }
 
             var xmlhttpo = new XMLHttpRequest();
             xmlhttpo.onreadystatechange=function() {
             if (xmlhttpo.readyState==4 && xmlhttpo.status==200)
             { theparse = JSON.parse(xmlhttpo.responseText);
-            if ( theparse.gameOver == "true" ) { location.reload() }
+            if ( theparse.gameOver == "true" ) { setTimeout(function(){ location.reload(); }, 2000) }
             } };
 
             xmlhttpo.open("GET","/endgame",true);
@@ -200,13 +200,13 @@ function Pulsate() {
 
             clearInterval(RepeatCommands);
 
-            if ( yourHero.allies == "black" ) { alert("Victory!! YES!"); } else { alert("Oh...defeat."); }
+            if ( yourHero.allies == "black" ) { setTimeout(function(){ alert("Victory!! YES!"); }, 1000); } else { setTimeout(function(){ alert("Oh...defeat."); }, 1000); }
 
             var xmlhttpo = new XMLHttpRequest();
             xmlhttpo.onreadystatechange=function() {
             if (xmlhttpo.readyState==4 && xmlhttpo.status==200)
             { theparse = JSON.parse(xmlhttpo.responseText);
-            if ( theparse.gameOver == "true" ) { location.reload() }
+            if ( theparse.gameOver == "true" ) { setTimeout(function(){ location.reload(); }, 2000) }
             } };
 
             xmlhttpo.open("GET","/endgame",true);
