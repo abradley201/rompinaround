@@ -2,7 +2,7 @@
 	 var command = "nothing";
 
 
-	 var optionsEU = [];
+	   var optionsEU = [];
      var optionsED = [];
      var options1R = []; 
      var options1L = [];
@@ -519,16 +519,6 @@ function Distancetx(a, b) {
 
 
 
-
-
-
-
-
-
-
-
-
-
 function blankClick(x) {
 
 	var y = yourHero.pos;
@@ -544,24 +534,52 @@ function blankClick(x) {
 
     	return;
 
-	}
+	       };
 
-	if ( ClmNumber(x) == ClmNumber(y) ) { 
+	   if ( ClmNumber(x) == ClmNumber(y) ) { 
 
-		var z = x - y;
+		  var z = x - y;
 
     	if ( z > 0 ) { command = "s"; commander(); } else { command = "w"; commander(); }
 
     	return;
 
-	}
+	       };
+
+
+
+  var w = Distancetx(y,x)[0];
+
+
+
+    if ( RowNumber(w) == RowNumber(y) ) { 
+
+      var z = w - y;
+
+      if ( z > 0 ) { command = "d"; commander(); } else { command = "a"; commander(); }
+
+      return;
+
+          };
+
+    if ( ClmNumber(w) == ClmNumber(y) ) { 
+
+      var z = w - y;
+
+      if ( z > 0 ) { command = "s"; commander(); } else { command = "w"; commander(); }
+
+      return;
+
+          };
+
+  
 
 };
 
 
+
+
 //here(x) is a function that is called when a square is clicked.
-
-
 function here(x) {   console.log(x); 
 
 	if ( document.getElementById(x).className == "target" ) {
