@@ -52,11 +52,11 @@ function google(evt){
 
     									 }
 
-    if (String.fromCharCode(key)=="q"){ 
+    if (String.fromCharCode(key)=="q"){ if ( yourHero.hp > 0 ) {
 
                                         command = "1";
 
-                                        attack();
+                                        attack(); }
 
                                          }
                      
@@ -189,7 +189,7 @@ function Pulsate() {
             xmlhttpo.onreadystatechange=function() {
             if (xmlhttpo.readyState==4 && xmlhttpo.status==200)
             { theparse = JSON.parse(xmlhttpo.responseText);
-            if ( theparse.gameOver == "true" ) { setTimeout(function(){ location.reload(); }, 2000) }
+            if ( theparse.gameOver == "true" ) { setTimeout(function(){ location.reload(); }, 1500) }
             } };
 
             xmlhttpo.open("GET","/endgame",true);
@@ -213,7 +213,7 @@ function Pulsate() {
             xmlhttpo.onreadystatechange=function() {
             if (xmlhttpo.readyState==4 && xmlhttpo.status==200)
             { theparse = JSON.parse(xmlhttpo.responseText);
-            if ( theparse.gameOver == "true" ) { setTimeout(function(){ location.reload(); }, 2000) }
+            if ( theparse.gameOver == "true" ) { setTimeout(function(){ location.reload(); }, 1500) }
             } };
 
             xmlhttpo.open("GET","/endgame",true);
