@@ -9,6 +9,21 @@ function ClearUI() { if (yourHero === undefined) { return }
     var ctx=c.getContext("2d");
     ctx.clearRect(0,0,ClearWidth,150);
     DrawPicture("UI", yourHero.ppic);
+
+    if (yourHero.allies == "white") { 
+
+        ctx.fillStyle = "white";
+        ctx.fillRect(20, 130, 20, 20);
+
+    };
+
+    if (yourHero.allies == "black") { 
+
+        ctx.fillStyle = "black";
+        ctx.fillRect(20, 130, 20, 20);
+
+    };
+
     if (yourHero.hp == 0) { 
 
         DrawPicture("UI", "cross");
