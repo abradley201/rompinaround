@@ -88,8 +88,6 @@ function Pulsate() { if (IsGameOver == true) { return }
   if (xmlhttp.readyState==4 && xmlhttp.status==200)
     { theparse = JSON.parse(xmlhttp.responseText);
 
-        //if ( theparse.gameOver == "true" ) { location.reload() };
-
 
     if (yourHero.pos != theparse.yourPos) { TurnCanvasOn(yourHero.pos) };
     if (enemyHero.pos != theparse.enemyPos) { TurnCanvasOn(enemyHero.pos) };
@@ -262,7 +260,6 @@ function commander(x) { if (IsGameOver == true) { return };
   if (xmlhttp.readyState==4 && xmlhttp.status==200)
     { theparse = JSON.parse(xmlhttp.responseText);
 
-        if ( theparse.gameOver == "true" ) { location.reload() };
 
     if (yourHero.pos != theparse.yourPos) { TurnCanvasOn(yourHero.pos) };
     if (enemyHero.pos != theparse.enemyPos) { TurnCanvasOn(enemyHero.pos) };
