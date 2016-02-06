@@ -312,7 +312,7 @@ function commander(x) { if (IsGameOver == true) { return };
     if ( document.getElementsByClassName("target").length > 0 ) { sheath() };
 
 
-    if ( theparse.gameOver == "whiteWins" && IsGameOver == false ) {
+    if ( theparse.gameOver == "whiteWins" ) {
 
             IsGameOver = true; 
 
@@ -337,7 +337,7 @@ function commander(x) { if (IsGameOver == true) { return };
 
      };
 
-    if ( theparse.gameOver == "blackWins" && IsGameOver == false ) {
+    if ( theparse.gameOver == "blackWins" ) {
 
             IsGameOver = true; 
 
