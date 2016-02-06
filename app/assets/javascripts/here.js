@@ -2,7 +2,7 @@
 	 var command = "nothing";
 
 
-	   var optionsEU = [];
+	 var optionsEU = [];
      var optionsED = [];
      var options1R = []; 
      var options1L = [];
@@ -588,31 +588,30 @@ function here(x) {   console.log(x);
 
 	if ( document.getElementById(x).className == "target" ) {
 
-
 		commander(x);
-
 
 	} else {
 
-
-
 		if ( document.getElementById(x).className == "occupied" ) {
 
+        if ( yourHero.pos == x ) { 
 
-        if ( yourHero.pos == x ) { return } 
 
+
+
+
+
+
+        return }; 
+
+        if ( Math.abs(yourHero.pos - x) == 1 || Math.abs(yourHero.pos - x) == e ) { 
           
-
-				command = "1"; commander(x); 
-
+				command = "1"; commander(x); } else { blankClick(x) }
 
 						} else { 
 
-
 					blankClick(x) } }
                   
-                  
- 
  };  
 
 
