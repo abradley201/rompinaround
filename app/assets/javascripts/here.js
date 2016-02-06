@@ -596,7 +596,12 @@ function here(x) {   console.log(x);
 
 
 
-		if ( document.getElementById(x).className == "occupied" ) { 
+		if ( document.getElementById(x).className == "occupied" ) {
+
+
+        if ( yourHero.pos == x ) { return } 
+
+          
 
 				command = "1"; commander(x); 
 
