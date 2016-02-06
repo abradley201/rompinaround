@@ -190,7 +190,7 @@ function Pulsate() { if (IsGameOver == true) { return }
             xmlhttpo.onreadystatechange=function() {
             if (xmlhttpo.readyState==4 && xmlhttpo.status==200)
             { theparse = JSON.parse(xmlhttpo.responseText);
-            if ( theparse.gameOver == "true" ) { setTimeout(function(){ location.reload(); }, 1500) }
+            if ( theparse.gameOver == "true" ) { location.reload() }
             } };
 
             xmlhttpo.open("GET","/endgame",true);
@@ -214,7 +214,7 @@ function Pulsate() { if (IsGameOver == true) { return }
             xmlhttpo.onreadystatechange=function() {
             if (xmlhttpo.readyState==4 && xmlhttpo.status==200)
             { theparse = JSON.parse(xmlhttpo.responseText);
-            if ( theparse.gameOver == "true" ) { setTimeout(function(){ location.reload(); }, 1500) }
+            if ( theparse.gameOver == "true" ) { location.reload() }
             } };
 
             xmlhttpo.open("GET","/endgame",true);
@@ -311,54 +311,6 @@ function commander(x) { if (IsGameOver == true) { return };
             HPMPbars();
 
     if ( document.getElementsByClassName("target").length > 0 ) { sheath() };
-
-
-    if ( theparse.gameOver == "whiteWins" && IsGameOver == false ) {
-
-            IsGameOver = true; 
-
-            blackCore['hp'] = 0;
-
-            place(blackCore.pos,blackCore);
-
-            if ( yourHero.allies == "white" ) { setTimeout(function(){ alert("Victory!! YES!"); }, 1000); } else { setTimeout(function(){ alert("Oh...defeat."); }, 1000); }
-
-            var xmlhttpo = new XMLHttpRequest();
-            xmlhttpo.onreadystatechange=function() {
-            if (xmlhttpo.readyState==4 && xmlhttpo.status==200)
-            { theparse = JSON.parse(xmlhttpo.responseText);
-            if ( theparse.gameOver == "true" ) { setTimeout(function(){ location.reload(); }, 1500) }
-            } };
-
-            xmlhttpo.open("GET","/endgame",true);
-            xmlhttpo.send();
-
-
-     };
-
-    if ( theparse.gameOver == "blackWins" && IsGameOver == false ) {
-
-            IsGameOver = true; 
-
-            whiteCore['hp'] = 0;
-
-            place(whiteCore.pos,whiteCore); 
-
-            if ( yourHero.allies == "black" ) { setTimeout(function(){ alert("Victory!! YES!"); }, 1000); } else { setTimeout(function(){ alert("Oh...defeat."); }, 1000); }
-
-            var xmlhttpo = new XMLHttpRequest();
-            xmlhttpo.onreadystatechange=function() {
-            if (xmlhttpo.readyState==4 && xmlhttpo.status==200)
-            { theparse = JSON.parse(xmlhttpo.responseText);
-            if ( theparse.gameOver == "true" ) { setTimeout(function(){ location.reload(); }, 1500) }
-            } };
-
-            xmlhttpo.open("GET","/endgame",true);
-            xmlhttpo.send();
-
-     };
-
-
 
     }
   }
