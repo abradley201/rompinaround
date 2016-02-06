@@ -216,8 +216,8 @@ function Pulsate() { if (IsGameOver == true) { return }
             if ( theparse.gameOver == "true" ) { location.reload() }
             } };
 
-            xmlhttpo.open("GET","/endgame",true);
-            xmlhttpo.send();
+            xmlhttpoy.open("GET","/endgame",true);
+            xmlhttpoy.send();
 
         };
 
