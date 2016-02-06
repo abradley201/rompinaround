@@ -67,7 +67,7 @@ function google(evt){
 var IsGameOver = false;
 
 
-function Pulsate() { 
+function Pulsate() { if (IsGameOver == true) { return };
 
 
     var RepeatCommands;
