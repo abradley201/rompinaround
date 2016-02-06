@@ -67,7 +67,7 @@ function google(evt){
 var IsGameOver = false;
 
 
-function Pulsate() { if (IsGameOver == true) { return };
+function Pulsate() { 
 
 
     var RepeatCommands;
@@ -75,7 +75,8 @@ function Pulsate() { if (IsGameOver == true) { return };
     RepeatCommands=window.setInterval(function(){Timer()},1000); 
 
 
-    function Timer() { 
+    function Timer() { if (IsGameOver == true) { clearInterval(RepeatCommands); return };        
+
 
 
     	
@@ -320,8 +321,6 @@ function commander(x) { if (IsGameOver == true) { return };
 
             place(blackCore.pos,blackCore);
 
-            clearInterval(RepeatCommands);
-
             if ( yourHero.allies == "white" ) { setTimeout(function(){ alert("Victory!! YES!"); }, 1000); } else { setTimeout(function(){ alert("Oh...defeat."); }, 1000); }
 
             var xmlhttpo = new XMLHttpRequest();
@@ -344,8 +343,6 @@ function commander(x) { if (IsGameOver == true) { return };
             whiteCore['hp'] = 0;
 
             place(whiteCore.pos,whiteCore); 
-
-            clearInterval(RepeatCommands);
 
             if ( yourHero.allies == "black" ) { setTimeout(function(){ alert("Victory!! YES!"); }, 1000); } else { setTimeout(function(){ alert("Oh...defeat."); }, 1000); }
 
@@ -371,6 +368,7 @@ function commander(x) { if (IsGameOver == true) { return };
     xmlhttp.open("POST","/command",true);
     xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
     xmlhttp.send("command=" + command);
+    
 }
 
 
