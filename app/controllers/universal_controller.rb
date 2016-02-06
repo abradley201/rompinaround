@@ -7,6 +7,8 @@ class UniversalController < ApplicationController
 
 	  @yourHero = GameStat.find_by_account(session[:account])
 
+	  if @yourHero != nil
+
 
 
 		@gameNumber = GameStat.find_by_account(session[:account]).game
@@ -393,18 +395,25 @@ class UniversalController < ApplicationController
 
 		end
 
+	  else
+
+	  redirect_to :back
+
+	  end
+
 
 	end
 
 
 
-	#game ending next
 
 	#add buttons for skills on UI
 
 	def pacemaker
 
 	  @yourHero = GameStat.find_by_account(session[:account])
+
+	  if @yourHero != nil
 
 
 			if @yourHero.status.include?("†") == true
@@ -460,6 +469,12 @@ class UniversalController < ApplicationController
 
 		end
 
+	  else
+
+	  redirect_to :back
+
+	  end
+
 
 
 	end
@@ -485,7 +500,7 @@ class UniversalController < ApplicationController
 
 		end
 
-		redirect_to "/"
+		redirect_to :back
 
 	end
 
