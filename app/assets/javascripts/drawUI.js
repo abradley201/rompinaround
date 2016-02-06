@@ -6,7 +6,7 @@ function ShowRecord() {
             if (xmlhttpo.readyState==4 && xmlhttpo.status==200)
             { theparse = JSON.parse(xmlhttpo.responseText);
             
-                document.getElementById("frontText").innerHTML = "wins: " + theparse.wins + "<br>" + "losses: " + theparse.losses
+                document.getElementById("frontText").innerHTML = "wins: " + theparse.wins + "<br><br>" + "losses: " + theparse.losses
 
             } };
 
