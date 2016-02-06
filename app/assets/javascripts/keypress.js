@@ -169,6 +169,29 @@ function Pulsate() {
 
              };
 
+
+        if ( theparse.gameOver == "whiteWins" ) { 
+
+            clearInterval(RepeatCommands);
+
+            if ( yourHero.allies == "white" ) { alert("Victory!! YES!"); } else { alert("Oh...defeat."); }
+
+            xmlhttp.open("GET","/endgame",true);
+            xmlhttp.send();
+
+        };
+
+        if ( theparse.gameOver == "blackWins" ) { 
+
+            clearInterval(RepeatCommands);
+
+            if ( yourHero.allies == "black" ) { alert("Victory!! YES!"); } else { alert("Oh...defeat."); }
+
+            xmlhttp.open("GET","/endgame",true);
+            xmlhttp.send();
+
+        };
+
     }
   }
 

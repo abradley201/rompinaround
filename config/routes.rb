@@ -28,6 +28,8 @@ Rails.application.routes.draw do
 
   get 'cancelsearch' => 'duelmatcher#cancelsearch'
 
+  get 'endgame' => 'universal#endgame'
+
 
   resources :info_stats
 

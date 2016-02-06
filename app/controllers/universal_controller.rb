@@ -469,15 +469,25 @@ class UniversalController < ApplicationController
 
 	def endgame
 
-			@gameNumber = GameStat.find_by_account(session[:account]).game
+		@gameNumber = GameStat.find_by_account(session[:account]).game
 
-			MapStat.where(game:@gameNumber).delete_all
 
-			GameStat.where(game:@gameNumber).delete_all
+		@whiteCoreHP = MapStat.find_by_game(@gameNumber).WhiteCoreHP
 
-			sleep(3)
+		@blackCoreHP = MapStat.find_by_game(@gameNumber).BlackCoreHP
 
-			redirect_to "/"
+
+		if @whiteCoreHP == 0 || @blackCoreHP == 0
+
+		MapStat.where(game:@gameNumber).delete_all
+
+		GameStat.where(game:@gameNumber).delete_all
+
+		sleep(3)
+
+		end
+
+		redirect_to "/"
 
 	end
 
