@@ -86,9 +86,7 @@ function Pulsate() {
 
   {
   if (xmlhttp.readyState==4 && xmlhttp.status==200)
-    { if ( xmlhttp.responseText === undefined ) { return }
-
-        theparse = JSON.parse(xmlhttp.responseText);
+    { theparse = JSON.parse(xmlhttp.responseText);
 
     if (yourHero.pos != theparse.yourPos) { TurnCanvasOn(yourHero.pos) };
     if (enemyHero.pos != theparse.enemyPos) { TurnCanvasOn(enemyHero.pos) };
@@ -211,9 +209,7 @@ function commander(x) {
 
   {
   if (xmlhttp.readyState==4 && xmlhttp.status==200)
-    {   if ( xmlhttp.responseText === undefined ) { return }
-
-        theparse = JSON.parse(xmlhttp.responseText);
+    { theparse = JSON.parse(xmlhttp.responseText);
 
 
     if (yourHero.pos != theparse.yourPos) { TurnCanvasOn(yourHero.pos) };

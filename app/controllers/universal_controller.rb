@@ -7,8 +7,6 @@ class UniversalController < ApplicationController
 
 	  @yourHero = GameStat.find_by_account(session[:account])
 
-	  if @yourHero != nil
-
 
 
 		@gameNumber = GameStat.find_by_account(session[:account]).game
@@ -308,7 +306,11 @@ class UniversalController < ApplicationController
 
 				if params[:command].slice(2,100).to_i == MapStat.find_by_game(@gameNumber).WhiteCorePOS && @yourHero.allies == "black"
 
+					if MapStat.find_by_game(@gameNumber).BlackCoreHP > 0
+
 					@whiteCoreHP = MapStat.find_by_game(@gameNumber).WhiteCoreHP - 25
+
+					end
 
 					if @whiteCoreHP <= 0
 
@@ -340,7 +342,11 @@ class UniversalController < ApplicationController
 
 				if params[:command].slice(2,100).to_i == MapStat.find_by_game(@gameNumber).BlackCorePOS && @yourHero.allies == "white"
 
+					if MapStat.find_by_game(@gameNumber).WhiteCoreHP > 0
+
 					@blackCoreHP = MapStat.find_by_game(@gameNumber).BlackCoreHP - 25
+
+					end
 
 					if @blackCoreHP <= 0
 
@@ -387,19 +393,10 @@ class UniversalController < ApplicationController
 
 		end
 
-	  else
-
-	  	redirect_to "/"
-
-	  	return
-
-	  end
-
 
 	end
 
 
-	#beginning of game can sometimes crash due to other player not loading the gameboard and thus creating his hero in GameStats
 
 	#game ending next
 
@@ -408,8 +405,6 @@ class UniversalController < ApplicationController
 	def pacemaker
 
 	  @yourHero = GameStat.find_by_account(session[:account])
-
-	  if @yourHero != nil
 
 
 			if @yourHero.status.include?("†") == true
@@ -450,29 +445,39 @@ class UniversalController < ApplicationController
 		@blackRespawnSquare = MapStat.find_by_game(@gameNumber).BlackRespawnSquare
 
 
-		
 
-		render :json => { :whiteCoreHP => @whiteCoreHP, :blackCoreHP => @blackCoreHP, :whiteRespawnSquare => @whiteRespawnSquare, :blackRespawnSquare => @blackRespawnSquare, :yourHp => @yourHero.hp, :yourMaxhp => @yourHero.maxhp, :yourShield => @yourHero.shield, :yourMp => @yourHero.mp, :yourMaxmp => @yourHero.maxmp, :yourPos => @yourHero.pos, :yourKills => @yourHero.kills, :yourDeaths => @yourHero.deaths, :yourStatus => @yourHero.status, :yourExp => @yourHero.exp, :yourAllies => @yourHero.allies, :enemyHp => @enemyHero.hp, :enemyMaxhp => @enemyHero.maxhp, :enemyShield => @enemyHero.shield, :enemyMp => @enemyHero.mp, :enemyMaxmp => @enemyHero.maxmp, :enemyPos => @enemyHero.pos, :enemyKills => @enemyHero.kills, :enemyDeaths => @enemyHero.deaths, :enemyStatus => @enemyHero.status, :enemyExp => @enemyHero.exp, :enemyAllies => @enemyHero.allies }
+		if @whiteCoreHP == 0 
 
-		if @whiteCoreHP == 0 || @blackCoreHP == 0
+		render :json => { :gameOver => "blackWins", :whiteCoreHP => @whiteCoreHP, :blackCoreHP => @blackCoreHP, :whiteRespawnSquare => @whiteRespawnSquare, :blackRespawnSquare => @blackRespawnSquare, :yourHp => @yourHero.hp, :yourMaxhp => @yourHero.maxhp, :yourShield => @yourHero.shield, :yourMp => @yourHero.mp, :yourMaxmp => @yourHero.maxmp, :yourPos => @yourHero.pos, :yourKills => @yourHero.kills, :yourDeaths => @yourHero.deaths, :yourStatus => @yourHero.status, :yourExp => @yourHero.exp, :yourAllies => @yourHero.allies, :enemyHp => @enemyHero.hp, :enemyMaxhp => @enemyHero.maxhp, :enemyShield => @enemyHero.shield, :enemyMp => @enemyHero.mp, :enemyMaxmp => @enemyHero.maxmp, :enemyPos => @enemyHero.pos, :enemyKills => @enemyHero.kills, :enemyDeaths => @enemyHero.deaths, :enemyStatus => @enemyHero.status, :enemyExp => @enemyHero.exp, :enemyAllies => @enemyHero.allies }
 
-			sleep(1)
+		elsif @blackCoreHP == 0
+
+		render :json => { :gameOver => "whiteWins", :whiteCoreHP => @whiteCoreHP, :blackCoreHP => @blackCoreHP, :whiteRespawnSquare => @whiteRespawnSquare, :blackRespawnSquare => @blackRespawnSquare, :yourHp => @yourHero.hp, :yourMaxhp => @yourHero.maxhp, :yourShield => @yourHero.shield, :yourMp => @yourHero.mp, :yourMaxmp => @yourHero.maxmp, :yourPos => @yourHero.pos, :yourKills => @yourHero.kills, :yourDeaths => @yourHero.deaths, :yourStatus => @yourHero.status, :yourExp => @yourHero.exp, :yourAllies => @yourHero.allies, :enemyHp => @enemyHero.hp, :enemyMaxhp => @enemyHero.maxhp, :enemyShield => @enemyHero.shield, :enemyMp => @enemyHero.mp, :enemyMaxmp => @enemyHero.maxmp, :enemyPos => @enemyHero.pos, :enemyKills => @enemyHero.kills, :enemyDeaths => @enemyHero.deaths, :enemyStatus => @enemyHero.status, :enemyExp => @enemyHero.exp, :enemyAllies => @enemyHero.allies }
+
+		else
+
+		render :json => { :gameOver => "false", :whiteCoreHP => @whiteCoreHP, :blackCoreHP => @blackCoreHP, :whiteRespawnSquare => @whiteRespawnSquare, :blackRespawnSquare => @blackRespawnSquare, :yourHp => @yourHero.hp, :yourMaxhp => @yourHero.maxhp, :yourShield => @yourHero.shield, :yourMp => @yourHero.mp, :yourMaxmp => @yourHero.maxmp, :yourPos => @yourHero.pos, :yourKills => @yourHero.kills, :yourDeaths => @yourHero.deaths, :yourStatus => @yourHero.status, :yourExp => @yourHero.exp, :yourAllies => @yourHero.allies, :enemyHp => @enemyHero.hp, :enemyMaxhp => @enemyHero.maxhp, :enemyShield => @enemyHero.shield, :enemyMp => @enemyHero.mp, :enemyMaxmp => @enemyHero.maxmp, :enemyPos => @enemyHero.pos, :enemyKills => @enemyHero.kills, :enemyDeaths => @enemyHero.deaths, :enemyStatus => @enemyHero.status, :enemyExp => @enemyHero.exp, :enemyAllies => @enemyHero.allies }
+
+		end
+
+
+
+	end
+
+
+
+
+	def endgame
+
+			@gameNumber = GameStat.find_by_account(session[:account]).game
 
 			MapStat.where(game:@gameNumber).delete_all
 
 			GameStat.where(game:@gameNumber).delete_all
 
-		end
+			sleep(3)
 
-	  else
-
-	  	redirect_to "/"
-
-	  	return
-
-	  end
-
-
+			redirect_to "/"
 
 	end
 
