@@ -170,7 +170,11 @@ function Pulsate() {
              };
 
 
-        if ( theparse.gameOver == "whiteWins" ) { 
+        if ( theparse.gameOver == "whiteWins" ) {
+
+            blackCore['hp'] = 0;
+
+            place(blackCore.pos,blackCore);
 
             clearInterval(RepeatCommands);
 
@@ -188,7 +192,11 @@ function Pulsate() {
 
         };
 
-        if ( theparse.gameOver == "blackWins" ) { 
+        if ( theparse.gameOver == "blackWins" ) {
+
+            whiteCore['hp'] = 0;
+
+            place(whiteCore.pos,whiteCore); 
 
             clearInterval(RepeatCommands);
 
