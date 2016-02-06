@@ -310,11 +310,11 @@ class UniversalController < ApplicationController
 
 						@whiteCoreHP = 0
 
-						@winningAccount = GameStat.where(:game => @gameNumber, :allies => "black")
+						@winningAccount = GameStat.where(:game => @gameNumber, :allies => "black").account
 
 						@CW = InfoStat.find_by_account(@winningAccount).wins
 
-						@losingAccount = GameStat.where(:game => @gameNumber, :allies => "white")
+						@losingAccount = GameStat.where(:game => @gameNumber, :allies => "white").account
 
 						@CL = InfoStat.find_by_account(@losingAccount).losses
 
@@ -342,11 +342,11 @@ class UniversalController < ApplicationController
 
 						@blackCoreHP = 0
 
-						@winningAccount = GameStat.where(:game => @gameNumber, :allies => "white")
+						@winningAccount = GameStat.where(:game => @gameNumber, :allies => "white").account
 
 						@CW = InfoStat.find_by_account(@winningAccount).wins
 
-						@losingAccount = GameStat.where(:game => @gameNumber, :allies => "black")
+						@losingAccount = GameStat.where(:game => @gameNumber, :allies => "black").account
 
 						@CL = InfoStat.find_by_account(@losingAccount).losses
 
