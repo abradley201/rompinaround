@@ -310,6 +310,23 @@ class UniversalController < ApplicationController
 
 						@whiteCoreHP = 0
 
+						@winningAccount = GameStat.where(game:@gameNumber,allies:"black")
+
+						@CW = InfoStat.find_by_account(@winningAccount).wins
+
+						@losingAccount = GameStat.where(game:@gameNumber,allies:"white")
+
+						@CL = InfoStat.find_by_account(@losingAccount).losses
+
+						InfoStat.update(@winningAccount.id, :wins => @CW + 1)
+
+						InfoStat.update(@losingAccount.id, :losses => @CL + 1)
+
+						MapStat.where(game:@gameNumber).delete_all
+
+						GameStat.where(game:@gameNumber).delete_all
+
+
 					end
 
 					MapStat.update(MapStat.find_by_game(@gameNumber).id, :WhiteCoreHP => @whiteCoreHP)
@@ -325,6 +342,22 @@ class UniversalController < ApplicationController
 
 						@blackCoreHP = 0
 
+						@winningAccount = GameStat.where(game:@gameNumber,allies:"white")
+
+						@CW = InfoStat.find_by_account(@winningAccount).wins
+
+						@losingAccount = GameStat.where(game:@gameNumber,allies:"black")
+
+						@CL = InfoStat.find_by_account(@losingAccount).losses
+
+						InfoStat.update(@winningAccount.id, :wins => @CW + 1)
+
+						InfoStat.update(@losingAccount.id, :losses => @CL + 1)
+
+						MapStat.where(game:@gameNumber).delete_all
+
+						GameStat.where(game:@gameNumber).delete_all
+
 					end
 
 					MapStat.update(MapStat.find_by_game(@gameNumber).id, :BlackCoreHP => @blackCoreHP)
@@ -336,9 +369,15 @@ class UniversalController < ApplicationController
 
 			end
 
+				if MapStat.find_by_game(@gameNumber) != nil 
+
 				render :json => { :yourHp => @yourHero.hp, :yourMaxhp => @yourHero.maxhp, :yourShield => @yourHero.shield, :yourMp => @yourHero.mp, :yourMaxmp => @yourHero.maxmp, :yourPos => @yourHero.pos, :yourKills => @yourHero.kills, :yourDeaths => @yourHero.deaths, :yourStatus => @yourHero.status, :yourExp => @yourHero.exp, :yourAllies => @yourHero.allies, :enemyHp => @enemyHero.hp, :enemyMaxhp => @enemyHero.maxhp, :enemyShield => @enemyHero.shield, :enemyMp => @enemyHero.mp, :enemyMaxmp => @enemyHero.maxmp, :enemyPos => @enemyHero.pos, :enemyKills => @enemyHero.kills, :enemyDeaths => @enemyHero.deaths, :enemyStatus => @enemyHero.status, :enemyExp => @enemyHero.exp, :enemyAllies => @enemyHero.allies }
 
+				else
 
+				redirect_to "/"
+
+				end
 		end
 
 		#how to include @canCast here? use @firstValidation && @secondValidation
