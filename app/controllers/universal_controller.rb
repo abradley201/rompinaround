@@ -397,9 +397,7 @@ class UniversalController < ApplicationController
 
 	  else
 
-	  redirect_to :back
-
-	  return
+	  render "ANF"
 
 	  end
 
@@ -473,9 +471,7 @@ class UniversalController < ApplicationController
 
 	  else
 
-	  redirect_to :back
-
-	  return
+	  render "ANF"
 
 	  end
 
@@ -511,9 +507,7 @@ class UniversalController < ApplicationController
 
 		end
 
-		redirect_to :back
-
-		return
+		render "ANF"
 
 	end
 
