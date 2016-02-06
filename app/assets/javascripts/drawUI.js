@@ -1,4 +1,19 @@
 
+function ShowRecord() {
+
+            var xmlhttpo = new XMLHttpRequest();
+            xmlhttpo.onreadystatechange=function() {
+            if (xmlhttpo.readyState==4 && xmlhttpo.status==200)
+            { theparse = JSON.parse(xmlhttpo.responseText);
+            
+                document.getElementById("frontText").innerHTML = "wins: " + theparse.wins + "<br>" + "losses: " + theparse.losses
+
+            } };
+
+            xmlhttpo.open("GET","/record",true);
+            xmlhttpo.send();
+
+};
 
 
 function ClearUI() { if (yourHero === undefined) { return }

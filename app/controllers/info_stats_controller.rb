@@ -121,6 +121,27 @@ class InfoStatsController < ApplicationController
 
             end
 
-    	end  	
+    	end  
+
+
+        def record
+
+            if session[:account] != nil
+
+            @wins = InfoStat.find_by_account(session[:account]).wins
+
+            @losses = InfoStat.find_by_account(session[:account]).losses
+
+            else
+
+            @wins = 0
+
+            @losses = 0
+
+            end
+
+            render :json => { :wins => @wins, :losses => @losses }
+
+        end	
 
 end

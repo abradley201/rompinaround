@@ -3,7 +3,7 @@
 <head>
 
 	</head>
-<body color="white" onload="DrawPicture('SelectPic1','JoanP1');DrawPicture('SelectPic2','ImaP1');DrawPicture('SelectPic3','StephP1')">
+<body color="white" onload="DrawPicture('SelectPic1','JoanP1');DrawPicture('SelectPic2','ImaP1');DrawPicture('SelectPic3','StephP1');ShowRecord();">
 
   <div class="container" id="container">
                     
@@ -31,7 +31,7 @@
 
       		<center>
           <canvas id="SelectPic1" onclick="SelectSquare(1)" width="150px" height="150px"></canvas><span>  </span><canvas id="SelectPic2" onclick="SelectSquare(2)" width="150px" height="150px"></canvas><span>  </span><canvas id="SelectPic3" onclick="SelectSquare(3)" width="150px" height="150px"></canvas><span>  </span><br><br>
-          <br><br>
+          <br><br><br>
 
           	<button onclick="DuelMatchMaker('<%= session[:account]%>')">Duel Search</button>
           	</center>

@@ -20,6 +20,8 @@ Rails.application.routes.draw do
 
   post 'login' => 'info_stats#login'
 
+  get 'record' => 'info_stats#record'
+
   post 'makematch' => 'duelmatcher#makematch'
 
   get 'pacemaker' => 'universal#pacemaker'
