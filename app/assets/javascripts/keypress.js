@@ -75,8 +75,7 @@ function Pulsate() { if (IsGameOver == true) { return }
     RepeatCommands=window.setInterval(function(){Timer()},1000); 
 
 
-    function Timer() { if (IsGameOver == true) { clearInterval(RepeatCommands) };        
-
+    function Timer() {         
 
 
     	
@@ -210,10 +209,10 @@ function Pulsate() { if (IsGameOver == true) { return }
 
             if ( yourHero.allies == "black" ) { setTimeout(function(){ alert("Victory!! YES!"); }, 1000); } else { setTimeout(function(){ alert("Oh...defeat."); }, 1000); }
 
-            var xmlhttpo = new XMLHttpRequest();
-            xmlhttpo.onreadystatechange=function() {
-            if (xmlhttpo.readyState==4 && xmlhttpo.status==200)
-            { theparse = JSON.parse(xmlhttpo.responseText);
+            var xmlhttpoy = new XMLHttpRequest();
+            xmlhttpoy.onreadystatechange=function() {
+            if (xmlhttpoy.readyState==4 && xmlhttpoy.status==200)
+            { theparse = JSON.parse(xmlhttpoy.responseText);
             if ( theparse.gameOver == "true" ) { location.reload() }
             } };
 
