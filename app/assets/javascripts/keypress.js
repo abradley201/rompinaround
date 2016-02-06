@@ -77,7 +77,6 @@ function Pulsate() { if (IsGameOver == true) { return }
 
     function Timer() {         
 
-
     	
         var theparse; var whiteCoreHP; var blackCoreHP; var whiteRespawnSquare; var blackRespawnSquare;
    
@@ -89,7 +88,7 @@ function Pulsate() { if (IsGameOver == true) { return }
   if (xmlhttp.readyState==4 && xmlhttp.status==200)
     { theparse = JSON.parse(xmlhttp.responseText);
 
-        if ( theparse.gameOver == "true" ) { return };
+        if ( theparse.gameOver == "true" ) { location.reload() };
 
 
     if (yourHero.pos != theparse.yourPos) { TurnCanvasOn(yourHero.pos) };
@@ -263,7 +262,7 @@ function commander(x) { if (IsGameOver == true) { return };
   if (xmlhttp.readyState==4 && xmlhttp.status==200)
     { theparse = JSON.parse(xmlhttp.responseText);
 
-        if ( theparse.gameOver == "true" ) { return };
+        if ( theparse.gameOver == "true" ) { location.reload() };
 
     if (yourHero.pos != theparse.yourPos) { TurnCanvasOn(yourHero.pos) };
     if (enemyHero.pos != theparse.enemyPos) { TurnCanvasOn(enemyHero.pos) };
