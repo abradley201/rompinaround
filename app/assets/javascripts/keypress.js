@@ -176,6 +176,13 @@ function Pulsate() {
 
             if ( yourHero.allies == "white" ) { alert("Victory!! YES!"); } else { alert("Oh...defeat."); }
 
+            var xmlhttp = new XMLHttpRequest();
+            xmlhttp.onreadystatechange=function() {
+            if (xmlhttp.readyState==4 && xmlhttp.status==200)
+            { theparse = JSON.parse(xmlhttp.responseText);
+            if ( theparse.gameOver == "true" ) { location.reload() }
+            } };
+
             xmlhttp.open("GET","/endgame",true);
             xmlhttp.send();
 
@@ -186,6 +193,13 @@ function Pulsate() {
             clearInterval(RepeatCommands);
 
             if ( yourHero.allies == "black" ) { alert("Victory!! YES!"); } else { alert("Oh...defeat."); }
+
+            var xmlhttp = new XMLHttpRequest();
+            xmlhttp.onreadystatechange=function() {
+            if (xmlhttp.readyState==4 && xmlhttp.status==200)
+            { theparse = JSON.parse(xmlhttp.responseText);
+            if ( theparse.gameOver == "true" ) { location.reload() }
+            } };
 
             xmlhttp.open("GET","/endgame",true);
             xmlhttp.send();
@@ -234,6 +248,7 @@ function commander(x) {
   if (xmlhttp.readyState==4 && xmlhttp.status==200)
     { theparse = JSON.parse(xmlhttp.responseText);
 
+        if (theparse.gameOver == "true") { location.reload(); return };
 
     if (yourHero.pos != theparse.yourPos) { TurnCanvasOn(yourHero.pos) };
     if (enemyHero.pos != theparse.enemyPos) { TurnCanvasOn(enemyHero.pos) };

@@ -397,7 +397,7 @@ class UniversalController < ApplicationController
 
 	  else
 
-	  render "ANF"
+	  render :json => { :gameOver => "true" }
 
 	  end
 
@@ -471,7 +471,7 @@ class UniversalController < ApplicationController
 
 	  else
 
-	  render "ANF"
+	  render :json => { :gameOver => "true" }
 
 	  end
 
@@ -503,11 +503,19 @@ class UniversalController < ApplicationController
 
 			GameStat.where(game:@gameNumber).delete_all
 
+			render :json => { :gameOver => "true" }
+
+			else
+
+		    render :json => { :gameOver => "false" }
+
 			end
 
-		end
+		else
 
-		render "ANF"
+	  	render :json => { :gameOver => "true" }
+
+	  	end
 
 	end
 
