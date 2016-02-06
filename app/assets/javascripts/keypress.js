@@ -64,6 +64,7 @@ function google(evt){
                      
 }
 
+var IsGameOver = false;
 
 
 function Pulsate() { 
@@ -88,11 +89,13 @@ function Pulsate() {
   if (xmlhttp.readyState==4 && xmlhttp.status==200)
     { theparse = JSON.parse(xmlhttp.responseText);
 
+        if ( theparse.gameOver == "true" ) { return };
+
+
     if (yourHero.pos != theparse.yourPos) { TurnCanvasOn(yourHero.pos) };
     if (enemyHero.pos != theparse.enemyPos) { TurnCanvasOn(enemyHero.pos) };
 
 
-     
         yourHero['hp'] = Number(theparse.yourHp);
         yourHero['maxhp'] = Number(theparse.yourMaxhp);
         yourHero['shield'] = Number(theparse.yourShield);
@@ -172,6 +175,8 @@ function Pulsate() {
 
         if ( theparse.gameOver == "whiteWins" ) {
 
+            IsGameOver = true; 
+
             blackCore['hp'] = 0;
 
             place(blackCore.pos,blackCore);
@@ -193,6 +198,8 @@ function Pulsate() {
         };
 
         if ( theparse.gameOver == "blackWins" ) {
+
+            IsGameOver = true; 
 
             whiteCore['hp'] = 0;
 
@@ -226,7 +233,7 @@ xmlhttp.send();
 
 
 
-function commander(x) { 
+function commander(x) { if (IsGameOver == true) { return }; 
 
         if (command == "w") {message = "↑"};
         if (command == "s") {message = "↓"};
@@ -256,7 +263,7 @@ function commander(x) {
   if (xmlhttp.readyState==4 && xmlhttp.status==200)
     { theparse = JSON.parse(xmlhttp.responseText);
 
-        if (theparse.gameOver == "true") { return };
+        if ( theparse.gameOver == "true" ) { return };
 
     if (yourHero.pos != theparse.yourPos) { TurnCanvasOn(yourHero.pos) };
     if (enemyHero.pos != theparse.enemyPos) { TurnCanvasOn(enemyHero.pos) };
