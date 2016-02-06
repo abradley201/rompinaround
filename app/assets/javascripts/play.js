@@ -464,7 +464,11 @@ function CancelDuelSearch() {
 
         IsSearching = false;
     
-        document.getElementById("frontText").innerHTML = "Search canceled."; }
+        document.getElementById("frontText").innerHTML = "Search canceled.";
+
+        setTimeout(function(){ ShowRecord() }, 2000);
+
+         }
 
         else 
 
