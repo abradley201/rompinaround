@@ -483,8 +483,6 @@ class UniversalController < ApplicationController
 
 		GameStat.where(game:@gameNumber).delete_all
 
-		sleep(3)
-
 		end
 
 		redirect_to "/"
