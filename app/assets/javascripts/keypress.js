@@ -189,10 +189,10 @@ function Pulsate() {
             xmlhttpo.onreadystatechange=function() {
             if (xmlhttpo.readyState==4 && xmlhttpo.status==200)
             { theparse = JSON.parse(xmlhttpo.responseText);
-            //if ( theparse.gameOver == "true" ) { setTimeout(function(){ location.reload(); }, 1500) }
+            if ( theparse.gameOver == "true" ) { document.getElementById("UI").innerHTML = "<center><button type='button' onclick='LeaveGame()'>Leave</button></center>"; }
             } };
 
-            xmlhttpo.open("GET","/endgame",true);
+            xmlhttpo.open("GET","/endgameButton",true);
             xmlhttpo.send();
 
         };
@@ -213,10 +213,10 @@ function Pulsate() {
             xmlhttpo.onreadystatechange=function() {
             if (xmlhttpo.readyState==4 && xmlhttpo.status==200)
             { theparse = JSON.parse(xmlhttpo.responseText);
-            //if ( theparse.gameOver == "true" ) { setTimeout(function(){ location.reload(); }, 1500) }
+            if ( theparse.gameOver == "true" ) { document.getElementById("UI").innerHTML = "<center><button type='button' onclick='LeaveGame()'>Leave</button></center>"; }
             } };
 
-            xmlhttpo.open("GET","/endgame",true);
+            xmlhttpo.open("GET","/endgameButton",true);
             xmlhttpo.send();
 
         };

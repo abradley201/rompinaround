@@ -482,6 +482,40 @@ class UniversalController < ApplicationController
 
 
 
+	def endgameButton
+
+		@game = GameStat.find_by_account(session[:account])
+
+		if @game != nil
+
+			@gameNumber = @game.game
+
+
+			@whiteCoreHP = MapStat.find_by_game(@gameNumber).WhiteCoreHP
+
+			@blackCoreHP = MapStat.find_by_game(@gameNumber).BlackCoreHP
+
+
+
+			if @whiteCoreHP == 0 || @blackCoreHP == 0
+
+			render :json => { :gameOver => "true" }
+
+			else
+
+		    render :json => { :gameOver => "false" }
+
+			end
+
+		else
+
+	  	render :json => { :gameOver => "nogame" }
+
+	  	end
+
+	end
+
+
 	def endgame
 
 		@game = GameStat.find_by_account(session[:account])
@@ -499,27 +533,26 @@ class UniversalController < ApplicationController
 
 			if @whiteCoreHP == 0 || @blackCoreHP == 0
 
-			#MapStat.where(game:@gameNumber).delete_all
+				MapStat.where(game:@gameNumber).delete_all
 
-			#GameStat.where(game:@gameNumber).delete_all
+				GameStat.where(game:@gameNumber).delete_all
 
-			render :json => { :gameOver => "true" }
+				render :json => { :gameOver => "true" }
 
 			else
 
-		    render :json => { :gameOver => "false" }
+		    	render :json => { :gameOver => "false" }
 
 			end
 
 		else
 
-	  	render :json => { :gameOver => "true" }
+	  	render :json => { :gameOver => "nogame" }
 
 	  	end
 
+	
 	end
-
-
 
 				
 

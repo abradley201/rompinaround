@@ -30,6 +30,8 @@ Rails.application.routes.draw do
 
   get 'cancelsearch' => 'duelmatcher#cancelsearch'
 
+  get 'endgameButton' => 'universal#endgameButton'
+
   get 'endgame' => 'universal#endgame'
 
 
