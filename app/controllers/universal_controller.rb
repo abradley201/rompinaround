@@ -461,6 +461,16 @@ class UniversalController < ApplicationController
 
 	  if @yourHero != nil
 
+	  		if @yourHero.status.include?("⚕") == true
+
+
+
+	  			
+
+
+
+
+	  		end
 
 			if @yourHero.status.include?("†") == true
 
@@ -470,7 +480,7 @@ class UniversalController < ApplicationController
 
 					GameStat.update(@yourHero.id, :hp => @yourHero.maxhp)
 
-					GameStat.update(@yourHero.id, :status => "fine")
+					GameStat.update(@yourHero.id, :status => "regen⚕#{Time.now.to_f.round(3)}⚕")
 
 				end
 

@@ -39,12 +39,16 @@ function ClearUI() { if (yourHero === undefined) { return }
 
     };
 
-    if (yourHero.hp == 0) { 
+    if (yourHero.hp == 0) {
+
+        var DeathTimer = 2 + yourHero.deaths * 3; 
 
         DrawPicture("UI", "cross");
         ctx.fillStyle = "red";
         ctx.font = "30px Arial";
-        ctx.fillText("Reviving...",5,50);
+        ctx.fillText("Reviving in",5,50);
+        ctx.fillText(DeathTimer + "sec",5,100);
+
 
     };
     
