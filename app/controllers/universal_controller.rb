@@ -1,5 +1,69 @@
 class UniversalController < ApplicationController
 
+		
+		def regen(x,y)
+
+				@yourHero = x
+
+			if @yourHero.hp == @yourHero.maxhp && @yourHero.mp == @yourHero.maxmp
+
+			return
+
+			end
+
+				@gameNumber = y
+
+				@WhiteRegenSquare = MapStat.find_by_game(@gameNumber).WhiteRespawnSquare
+
+	  			@BlackRegenSquare = MapStat.find_by_game(@gameNumber).BlackRespawnSquare
+
+	    		@statusArray = @yourHero.status.split("⚕")
+
+	    		@lastRegen = @statusArray[1].to_f
+
+			if (Time.now.to_f.round(3) - @lastRegen) >= 1
+
+				if @yourHero.pos == @WhiteRegenSquare || @yourHero.pos == @BlackRegenSquare
+
+					@newHP = @yourHero.hp + 30
+
+					@newMP = @yourHero.mp + 30
+
+				else
+
+					@newHP = @yourHero.hp + 2
+
+					@newMP = @yourHero.mp + 5
+
+				end
+
+				if @newHP > @yourHero.maxhp
+
+					@newHP = @yourHero.maxhp
+
+				end
+
+				if @newMP > @yourHero.maxmp
+
+					@newMP = @yourHero.maxmp
+
+				end
+
+				GameStat.update(@yourHero.id, :hp => @newHP)
+
+				GameStat.update(@yourHero.id, :mp => @newMP)
+
+				@statusArray[1] = "⚕#{Time.now.to_f.round(3)}⚕"
+
+				@status = @statusArray.join
+
+				GameStat.update(@yourHero.id, :status => @status)
+
+	    	end
+
+
+		end
+
 
 
 	def command
@@ -55,7 +119,113 @@ class UniversalController < ApplicationController
 		end
 
 
+		def EnemyHeroDeath()
+
+			GameStat.update(@enemyHero.id, :deaths => @enemyHero.deaths + 1)
+
+			GameStat.update(@yourHero.id, :kills => @yourHero.kills + 1)
+
+			GameStat.update(@enemyHero.id, :status => "dead†#{Time.now.to_f.round(3)}†")
+
+			@mapInfo = MapStat.find_by_game(@gameNumber).map.split
+
+			@WRS = MapStat.find_by_game(@gameNumber).WhiteRespawnSquare
+
+			@BRS = MapStat.find_by_game(@gameNumber).BlackRespawnSquare
+
+
+				@mapInfo[@enemyHero.pos] = "n"
+
+				if @enemyHero.allies == "black"
+
+					@mapInfo[@BRS] = "o"
+
+					GameStat.update(@enemyHero.id, :pos => @BRS)
+
+				else 
+
+					@mapInfo[@WRS] = "o"
+
+					GameStat.update(@enemyHero.id, :pos => @WRS)
+
+				end
+
+				@mapInfo = @mapInfo.reject(&:empty?).join(' ')
+
+				MapStat.update(MapStat.find_by_game(@gameNumber).id, :map => @mapInfo)
+
+		end
+
+		def CoreDeath(x)
+
+			if x == "white"
+
+				@winningAccountRow = GameStat.where(:game => @gameNumber).where(:allies => "black")
+
+				@winningAccount = @winningAccountRow.first.account
+
+				@CW = InfoStat.find_by_account(@winningAccount).wins
+
+				@losingAccountRow = GameStat.where(:game => @gameNumber).where(:allies => "white")
+
+				@losingAccount = @losingAccountRow.first.account
+
+				@CL = InfoStat.find_by_account(@losingAccount).losses
+
+				InfoStat.update(InfoStat.find_by_account(@winningAccount).id, :wins => @CW + 1)
+
+				InfoStat.update(InfoStat.find_by_account(@losingAccount).id, :losses => @CL + 1)
+
+			end
+
+			if x == "black"
+
+				@winningAccountRow = GameStat.where(:game => @gameNumber).where(:allies => "white")
+
+				@winningAccount = @winningAccountRow.first.account
+
+				@CW = InfoStat.find_by_account(@winningAccount).wins
+
+				@losingAccountRow = GameStat.where(:game => @gameNumber).where(:allies => "black")
+
+				@losingAccount = @losingAccountRow.first.account
+
+				@CL = InfoStat.find_by_account(@losingAccount).losses
+
+				InfoStat.update(InfoStat.find_by_account(@winningAccount).id, :wins => @CW + 1)
+
+				InfoStat.update(InfoStat.find_by_account(@losingAccount).id, :losses => @CL + 1)
+
+			end
+
+		end
+
+		def AttackDamage(x)
+
+			if x == "Joan"
+
+				return 55
+
+			end
+
+			if x == "Ima"
+
+				return 65
+
+			end
+
+			if x == "Steph"
+
+				return 45
+
+			end
+
+		end
+
+
 		if @canMove == true
+
+			regen(@yourHero,@gameNumber)
 
 			@firstValidation = false
 
@@ -246,112 +416,10 @@ class UniversalController < ApplicationController
 	
 		end
 
-		def EnemyHeroDeath()
-
-			GameStat.update(@enemyHero.id, :deaths => @enemyHero.deaths + 1)
-
-			GameStat.update(@yourHero.id, :kills => @yourHero.kills + 1)
-
-			GameStat.update(@enemyHero.id, :status => "dead†#{Time.now.to_f.round(3)}†")
-
-			@mapInfo = MapStat.find_by_game(@gameNumber).map.split
-
-			@WRS = MapStat.find_by_game(@gameNumber).WhiteRespawnSquare
-
-			@BRS = MapStat.find_by_game(@gameNumber).BlackRespawnSquare
-
-
-				@mapInfo[@enemyHero.pos] = "n"
-
-				if @enemyHero.allies == "black"
-
-					@mapInfo[@BRS] = "o"
-
-					GameStat.update(@enemyHero.id, :pos => @BRS)
-
-				else 
-
-					@mapInfo[@WRS] = "o"
-
-					GameStat.update(@enemyHero.id, :pos => @WRS)
-
-				end
-
-				@mapInfo = @mapInfo.reject(&:empty?).join(' ')
-
-				MapStat.update(MapStat.find_by_game(@gameNumber).id, :map => @mapInfo)
-
-		end
-
-		def CoreDeath(x)
-
-			if x == "white"
-
-				@winningAccountRow = GameStat.where(:game => @gameNumber).where(:allies => "black")
-
-				@winningAccount = @winningAccountRow.first.account
-
-				@CW = InfoStat.find_by_account(@winningAccount).wins
-
-				@losingAccountRow = GameStat.where(:game => @gameNumber).where(:allies => "white")
-
-				@losingAccount = @losingAccountRow.first.account
-
-				@CL = InfoStat.find_by_account(@losingAccount).losses
-
-				InfoStat.update(InfoStat.find_by_account(@winningAccount).id, :wins => @CW + 1)
-
-				InfoStat.update(InfoStat.find_by_account(@losingAccount).id, :losses => @CL + 1)
-
-			end
-
-			if x == "black"
-
-				@winningAccountRow = GameStat.where(:game => @gameNumber).where(:allies => "white")
-
-				@winningAccount = @winningAccountRow.first.account
-
-				@CW = InfoStat.find_by_account(@winningAccount).wins
-
-				@losingAccountRow = GameStat.where(:game => @gameNumber).where(:allies => "black")
-
-				@losingAccount = @losingAccountRow.first.account
-
-				@CL = InfoStat.find_by_account(@losingAccount).losses
-
-				InfoStat.update(InfoStat.find_by_account(@winningAccount).id, :wins => @CW + 1)
-
-				InfoStat.update(InfoStat.find_by_account(@losingAccount).id, :losses => @CL + 1)
-
-			end
-
-		end
-
-		def AttackDamage(x)
-
-			if x == "Joan"
-
-				return 55
-
-			end
-
-			if x == "Ima"
-
-				return 65
-
-			end
-
-			if x == "Steph"
-
-				return 45
-
-			end
-
-		end
 
 		if @canAttack == true 
 
-
+			regen(@yourHero,@gameNumber)
 
 		#make this more dynamic, so it can hit things other than 1 enemy
 
@@ -452,23 +520,19 @@ class UniversalController < ApplicationController
 
 
 
-
 	#add buttons for skills on UI
 
 	def pacemaker
 
 	  @yourHero = GameStat.find_by_account(session[:account])
 
+	  @gameNumber = GameStat.find_by_account(session[:account]).game
+
 	  if @yourHero != nil
 
 	  		if @yourHero.status.include?("⚕") == true
 
-
-
-	  			
-
-
-
+	  			regen(@yourHero,@gameNumber)
 
 	  		end
 
@@ -486,8 +550,6 @@ class UniversalController < ApplicationController
 
 			end
 
-
-		@gameNumber = GameStat.find_by_account(session[:account]).game
 
 		@gameArray = GameStat.where(game:@gameNumber)
 
