@@ -64,6 +64,8 @@ function google(evt){
                      
 }
 
+var IsGameOver = false;
+
 
 function Pulsate() { 
 
@@ -73,7 +75,8 @@ function Pulsate() {
     RepeatCommands=window.setInterval(function(){Timer()},1000); 
 
 
-    function Timer() {         
+    function Timer() { 
+
 
     	
         var theparse; var whiteCoreHP; var blackCoreHP; var whiteRespawnSquare; var blackRespawnSquare;
@@ -85,6 +88,8 @@ function Pulsate() {
   {
   if (xmlhttp.readyState==4 && xmlhttp.status==200)
     { theparse = JSON.parse(xmlhttp.responseText);
+
+        if ( theparse.gameOver == "true" ) { return };
 
 
     if (yourHero.pos != theparse.yourPos) { TurnCanvasOn(yourHero.pos) };
@@ -170,6 +175,8 @@ function Pulsate() {
 
         if ( theparse.gameOver == "whiteWins" ) {
 
+            IsGameOver = true; 
+
             blackCore['hp'] = 0;
 
             place(blackCore.pos,blackCore);
@@ -182,7 +189,7 @@ function Pulsate() {
             xmlhttpo.onreadystatechange=function() {
             if (xmlhttpo.readyState==4 && xmlhttpo.status==200)
             { theparse = JSON.parse(xmlhttpo.responseText);
-            if ( theparse.gameOver == "true" ) { location.reload() }
+            if ( theparse.gameOver == "true" ) { setTimeout(function(){ location.reload(); }, 1500) }
             } };
 
             xmlhttpo.open("GET","/endgame",true);
@@ -192,6 +199,8 @@ function Pulsate() {
 
         if ( theparse.gameOver == "blackWins" ) {
 
+            IsGameOver = true; 
+
             whiteCore['hp'] = 0;
 
             place(whiteCore.pos,whiteCore); 
@@ -200,15 +209,15 @@ function Pulsate() {
 
             if ( yourHero.allies == "black" ) { setTimeout(function(){ alert("Victory!! YES!"); }, 1000); } else { setTimeout(function(){ alert("Oh...defeat."); }, 1000); }
 
-            var xmlhttpoy = new XMLHttpRequest();
-            xmlhttpoy.onreadystatechange=function() {
-            if (xmlhttpoy.readyState==4 && xmlhttpoy.status==200)
-            { theparse = JSON.parse(xmlhttpoy.responseText);
-            if ( theparse.gameOver == "true" ) { location.reload() }
+            var xmlhttpo = new XMLHttpRequest();
+            xmlhttpo.onreadystatechange=function() {
+            if (xmlhttpo.readyState==4 && xmlhttpo.status==200)
+            { theparse = JSON.parse(xmlhttpo.responseText);
+            if ( theparse.gameOver == "true" ) { setTimeout(function(){ location.reload(); }, 1500) }
             } };
 
-            xmlhttpoy.open("GET","/endgame",true);
-            xmlhttpoy.send();
+            xmlhttpo.open("GET","/endgame",true);
+            xmlhttpo.send();
 
         };
 
@@ -224,7 +233,7 @@ xmlhttp.send();
 
 
 
-function commander(x) {  
+function commander(x) { if (IsGameOver == true) { return }; 
 
         if (command == "w") {message = "↑"};
         if (command == "s") {message = "↓"};
@@ -254,6 +263,7 @@ function commander(x) {
   if (xmlhttp.readyState==4 && xmlhttp.status==200)
     { theparse = JSON.parse(xmlhttp.responseText);
 
+        if ( theparse.gameOver == "true" ) { return };
 
     if (yourHero.pos != theparse.yourPos) { TurnCanvasOn(yourHero.pos) };
     if (enemyHero.pos != theparse.enemyPos) { TurnCanvasOn(enemyHero.pos) };
@@ -301,6 +311,8 @@ function commander(x) {
 
     if ( document.getElementsByClassName("target").length > 0 ) { sheath() };
 
+
+
     }
   }
 
@@ -309,7 +321,6 @@ function commander(x) {
     xmlhttp.open("POST","/command",true);
     xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
     xmlhttp.send("command=" + command);
-
 }
 
 
