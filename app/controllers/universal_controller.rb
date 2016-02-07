@@ -499,9 +499,9 @@ class UniversalController < ApplicationController
 
 			if @whiteCoreHP == 0 || @blackCoreHP == 0
 
-			MapStat.where(game:@gameNumber).delete_all
+			#MapStat.where(game:@gameNumber).delete_all
 
-			GameStat.where(game:@gameNumber).delete_all
+			#GameStat.where(game:@gameNumber).delete_all
 
 			render :json => { :gameOver => "true" }
 

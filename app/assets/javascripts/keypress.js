@@ -189,7 +189,7 @@ function Pulsate() {
             xmlhttpo.onreadystatechange=function() {
             if (xmlhttpo.readyState==4 && xmlhttpo.status==200)
             { theparse = JSON.parse(xmlhttpo.responseText);
-            if ( theparse.gameOver == "true" ) { setTimeout(function(){ location.reload(); }, 1500) }
+            //if ( theparse.gameOver == "true" ) { setTimeout(function(){ location.reload(); }, 1500) }
             } };
 
             xmlhttpo.open("GET","/endgame",true);
@@ -213,7 +213,7 @@ function Pulsate() {
             xmlhttpo.onreadystatechange=function() {
             if (xmlhttpo.readyState==4 && xmlhttpo.status==200)
             { theparse = JSON.parse(xmlhttpo.responseText);
-            if ( theparse.gameOver == "true" ) { setTimeout(function(){ location.reload(); }, 1500) }
+            //if ( theparse.gameOver == "true" ) { setTimeout(function(){ location.reload(); }, 1500) }
             } };
 
             xmlhttpo.open("GET","/endgame",true);
