@@ -17,7 +17,7 @@
       
 </head>   
 
-<body onKeyPress="google(event)" onload="CreateContent(600,600,'#b0c4de','817px');CreateBoard(40,40,10,10);assign();ClearUI();HPMPbars();GeneratePiece('whiteCore',10);GeneratePiece('blackCore',109);">
+<body onKeyPress="google(event)" onload="CreateContent(600,600,'#b0c4de','817px');CreateBoard(40,40,10,10);assign();ClearUI();HPMPbars();GeneratePiece('whiteCore',10);GeneratePiece('blackCore',109);CheckForEnemy();">
 
     <div class="container" id="container">
 
@@ -37,7 +37,7 @@
     var enemyHero;
 
 
-    function assign() {
+    function assign() { 
 
       yourHero = '<%= h @yourHero -%>';  
 
@@ -107,13 +107,64 @@
         enemyHero['allies'] = enemyAllies;
 
         place(yourHero.pos,yourHero);
-        if (enemyHero != undefined) { place(enemyHero.pos,enemyHero) };
+        if (enemyHero.id != yourHero.id) { 
+        place(enemyHero.pos, enemyHero) };
 
-    }
+
+       };
+
+
+    function CheckForEnemy() {
     
+        if (enemyHero.id == yourHero.id) {
+
+
+          var FindEnemy;
+
+          FindEnemy=window.setInterval(function(){EnemySearch()},1000); 
+
+
+          function EnemySearch() { var theparse;
+
+            if (enemyHero.id != yourHero.id) { clearInterval(FindEnemy); return }
+
+                var xmlhttp = new XMLHttpRequest();
+                xmlhttp.onreadystatechange=function() {
+                if (xmlhttp.readyState==4 && xmlhttp.status==200) { 
+
+                      theparse = JSON.parse(xmlhttp.responseText);
+
+                      if ( theparse.enemyFound == "true" ) {
+
+                          if (theparse.enemyHero == "Joan") { enemyHero = Joan }
+
+                          if (theparse.enemyHero == "Ima") { enemyHero = Ima }
+
+                          if (theparse.enemyHero == "Steph") { enemyHero = Steph }
+
+                          enemyHero['hp'] = Number(theparse.enemyHp);
+                          enemyHero['maxhp'] = Number(theparse.enemyMaxhp);
+                          enemyHero['shield'] = Number(theparse.enemyShield);
+                          enemyHero['mp'] = Number(theparse.enemyMp);
+                          enemyHero['maxmp'] = Number(theparse.enemyMaxmp);
+                          enemyHero['pos'] = Number(theparse.enemyPos);
+                          enemyHero['kills'] = Number(theparse.enemyKills);
+                          enemyHero['deaths'] = Number(theparse.enemyDeaths);
+                          enemyHero['status'] = theparse.enemyStatus;
+                          enemyHero['exp'] = Number(theparse.enemyExp);
+                          enemyHero['allies'] = theparse.enemyAllies;
+
+                      } } }
+
+            xmlhttp.open("GET","/locateEnemy",true);
+            xmlhttp.send();
+
+        } } };
+
+
+
+
             setTimeout(function(){ Pulsate() }, 1000);
-
-
 
 
     </script>

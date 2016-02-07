@@ -120,8 +120,9 @@ function Pulsate() {
         enemyHero['exp'] = Number(theparse.enemyExp);
         enemyHero['allies'] = theparse.enemyAllies;
 
-    place(yourHero.pos, yourHero);  
-    if (document.getElementById(enemyHero.pos).className !== "target") { place(enemyHero.pos, enemyHero) };
+    place(yourHero.pos, yourHero);
+    if (yourHero.id != enemyHero.id){  
+    if (document.getElementById(enemyHero.pos).className !== "target") { place(enemyHero.pos, enemyHero) } };
 
     whiteCoreHP = theparse.whiteCoreHP;
     blackCoreHP = theparse.blackCoreHP;
@@ -155,7 +156,7 @@ function Pulsate() {
             HPMPbars();
 
 
-            if ( enemyHero.hp == 0 ) {
+            if ( enemyHero.hp == 0 && enemyHero.id != yourHero.id ) {
 
                 var c=document.getElementById(enemyHero.pos);
                 var ctx=c.getContext("2d");
@@ -294,7 +295,7 @@ function commander(x) { if (IsGameOver == true) { return };
 
 
       if (yourHero.status.indexOf('†') === -1) { place(yourHero.pos, yourHero) };
-      if (enemyHero.status.indexOf('†') === -1 && enemyHero != undefined) { place(enemyHero.pos, enemyHero) };
+      if (enemyHero.status.indexOf('†') === -1 && enemyHero.id != yourHero.id) { place(enemyHero.pos, enemyHero) };
 
 
     if ( whiteCore.pos == x || blackCore.pos == x ) { 

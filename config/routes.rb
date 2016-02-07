@@ -6,6 +6,8 @@ Rails.application.routes.draw do
 
   get "go1" => "board1#go1"
 
+  get "locateEnemy" => "board1#locateEnemy"
+
   get 'login' => 'info_stats#login'
 
   get 'logout' => 'info_stats#logout'

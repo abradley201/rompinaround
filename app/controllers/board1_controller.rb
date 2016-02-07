@@ -11,14 +11,6 @@ class Board1Controller < ApplicationController
 		@gameArray = GameStat.where(game:@gameNumber)
 		
 
-		if @gameArray.length == 1
-
-			sleep(3)
-
-			@gameArray = GameStat.where(game:@gameNumber)
-
-		end
-
 
 		if @gameArray.first.account != session[:account]
 
@@ -39,15 +31,18 @@ class Board1Controller < ApplicationController
 
 				GameStat.update(GameStat.find_by_account(session[:account]).id, :pos => 7)
 
+
 			else
 
 				GameStat.update(GameStat.find_by_account(session[:account]).id, :pos => 112)
 
 			end
 
+			GameStat.update(GameStat.find_by_account(session[:account]).id, :status => "regen⚕#{Time.now.to_f.round(3)}⚕")
+
 		end
 
-		if GameStat.find_by_account(@enemyAccount).pos == 0
+		if GameStat.find_by_account(@enemyAccount).pos == 0 
 
 			if GameStat.find_by_account(@enemyAccount).allies == "white"
 
@@ -107,6 +102,60 @@ class Board1Controller < ApplicationController
                   end
 
     
+	end
+
+	def locateEnemy
+
+
+		@yourHero = GameStat.find_by_account(session[:account]).character
+
+		@gameNumber = GameStat.find_by_account(session[:account]).game
+
+		@gameArray = GameStat.where(game:@gameNumber)
+		
+
+
+		if @gameArray.first.account != session[:account]
+
+			@enemyHero = @gameArray.first.character
+			@enemyAccount = @gameArray.first.account
+
+		else
+
+			@enemyHero = @gameArray.last.character
+			@enemyAccount = @gameArray.last.account
+
+		end
+
+			@enemyStats = GameStat.find_by(game:@gameNumber, character:@enemyHero)
+
+
+			@enemyHp = @enemyStats.hp
+			@enemyMaxhp = @enemyStats.maxhp
+			@enemyShield = @enemyStats.shield
+			@enemyMp = @enemyStats.mp
+			@enemyMaxmp = @enemyStats.maxmp
+			@enemyPos = @enemyStats.pos
+			@enemyKills = @enemyStats.kills
+			@enemyDeaths = @enemyStats.deaths
+			@enemyStatus = @enemyStats.status
+			@enemyExp = @enemyStats.exp
+			@enemyAllies = @enemyStats.allies
+
+
+
+			if @enemyHero == @yourHero
+
+				render :json => { :enemyFound => "false" } 
+
+			else
+
+				render :json => { :enemyFound => "true", :enemyHero => @enemyHero, :enemyHp => @enemyHp, :enemyMaxhp => @enemyMaxhp, :enemyShield => @enemyShield, :enemyMp => @enemyMp, :enemyMaxmp => @enemyMaxmp, :enemyPos => @enemyPos, :enemyKills => @enemyKills, :enemyDeaths => @enemyDeaths, :enemyStatus => @enemyStatus, :enemyExp => @enemyExp, :enemyAllies => @enemyAllies }
+
+			end
+
+
+
 	end
 
 

@@ -39,7 +39,6 @@ var piece = function(id, ppic, bpic, hp, maxhp, shield, mp, maxmp, pos, kills, d
     Steph = new piece("Steph", "StephP1", "StephB1", 20, 20, 0, 10, 10, 0, 0, 0, null, 0, null);
 
 
-//make core a a piece
 
 var whiteCore;
 var blackCore;
@@ -66,7 +65,7 @@ function GeneratePiece(x, y) {
 
                                         whiteCoreHP = theparse.whiteCoreHP;
 
-                                        whiteCore = new piece("whiteCore", "whiteCore", "whiteCore", whiteCoreHP, 300, 0, 0, 1, y, 0, 0, null, 0, null);
+                                        whiteCore = new piece("whiteCore", "whiteCore", "whiteCore", whiteCoreHP, 500, 0, 0, 1, y, 0, 0, null, 0, null);
 
 
                                         place(whiteCore.pos, whiteCore);
@@ -86,11 +85,6 @@ function GeneratePiece(x, y) {
 
     if ( x == "blackCore" ) { 
 
-
-
-
-
-
                               var blackCoreHP;
 
 
@@ -109,7 +103,7 @@ function GeneratePiece(x, y) {
 
                                         blackCoreHP = theparse.blackCoreHP;
 
-                                        blackCore = new piece("blackCore", "blackCore", "blackCore", blackCoreHP, 300, 0, 0, 1, y, 0, 0, null, 0, null);
+                                        blackCore = new piece("blackCore", "blackCore", "blackCore", blackCoreHP, 500, 0, 0, 1, y, 0, 0, null, 0, null);
 
 
                                         place(blackCore.pos, blackCore);
