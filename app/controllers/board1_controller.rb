@@ -54,6 +54,8 @@ class Board1Controller < ApplicationController
 
 			end
 
+			GameStat.update(GameStat.find_by_account(@enemyAccount).id, :status => "regen⚕#{Time.now.to_f.round(3)}⚕")
+
 		end
 
 

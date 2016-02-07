@@ -47,7 +47,7 @@ function ClearUI() { if (yourHero === undefined) { return }
         ctx.fillStyle = "red";
         ctx.font = "30px Arial";
         ctx.fillText("Reviving in",5,50);
-        ctx.fillText(DeathTimer + "sec",5,100);
+        ctx.fillText(DeathTimer + " sec",5,100);
 
 
     };
