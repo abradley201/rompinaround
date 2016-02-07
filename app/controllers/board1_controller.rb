@@ -11,9 +11,9 @@ class Board1Controller < ApplicationController
 		@gameArray = GameStat.where(game:@gameNumber)
 		
 
-		while @gameArray.length == 1
+		if @gameArray.length == 1
 
-			sleep(2)
+			sleep(3)
 
 			@gameArray = GameStat.where(game:@gameNumber)
 
