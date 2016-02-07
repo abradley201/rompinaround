@@ -310,7 +310,7 @@ class UniversalController < ApplicationController
 
 					if MapStat.find_by_game(@gameNumber).BlackCoreHP > 0
 
-					@whiteCoreHP = MapStat.find_by_game(@gameNumber).WhiteCoreHP - 25
+					@whiteCoreHP = MapStat.find_by_game(@gameNumber).WhiteCoreHP - 100
 
 					end
 
@@ -346,7 +346,7 @@ class UniversalController < ApplicationController
 
 					if MapStat.find_by_game(@gameNumber).WhiteCoreHP > 0
 
-					@blackCoreHP = MapStat.find_by_game(@gameNumber).BlackCoreHP - 25
+					@blackCoreHP = MapStat.find_by_game(@gameNumber).BlackCoreHP - 100
 
 					end
 

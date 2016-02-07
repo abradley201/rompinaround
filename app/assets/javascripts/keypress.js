@@ -64,10 +64,8 @@ function google(evt){
                      
 }
 
-var IsGameOver = false;
 
-
-function Pulsate() { if (IsGameOver == true) { return }
+function Pulsate() { 
 
 
     var RepeatCommands;
@@ -172,8 +170,6 @@ function Pulsate() { if (IsGameOver == true) { return }
 
         if ( theparse.gameOver == "whiteWins" ) {
 
-            IsGameOver = true; 
-
             blackCore['hp'] = 0;
 
             place(blackCore.pos,blackCore);
@@ -195,8 +191,6 @@ function Pulsate() { if (IsGameOver == true) { return }
         };
 
         if ( theparse.gameOver == "blackWins" ) {
-
-            IsGameOver = true; 
 
             whiteCore['hp'] = 0;
 
@@ -230,7 +224,7 @@ xmlhttp.send();
 
 
 
-function commander(x) { if (IsGameOver == true) { return }; 
+function commander(x) {  
 
         if (command == "w") {message = "↑"};
         if (command == "s") {message = "↓"};
