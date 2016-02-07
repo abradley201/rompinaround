@@ -25,9 +25,9 @@ class UniversalController < ApplicationController
 
 				if @yourHero.pos == @WhiteRegenSquare || @yourHero.pos == @BlackRegenSquare
 
-					@newHP = @yourHero.hp + 30
+					@newHP = @yourHero.hp + 100
 
-					@newMP = @yourHero.mp + 30
+					@newMP = @yourHero.mp + 50
 
 				else
 

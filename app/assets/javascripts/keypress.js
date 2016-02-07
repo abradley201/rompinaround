@@ -122,7 +122,7 @@ function Pulsate() {
 
     place(yourHero.pos, yourHero);
     if (yourHero.id != enemyHero.id){  
-    if (document.getElementById(enemyHero.pos).className !== "target") { place(enemyHero.pos, enemyHero) } };
+    if (document.getElementById(enemyHero.pos).className == "target") { place(enemyHero.pos, enemyHero); TargetCanvas(enemyHero.pos,TargetColor) } else { place(enemyHero.pos, enemyHero) } };
 
     whiteCoreHP = theparse.whiteCoreHP;
     blackCoreHP = theparse.blackCoreHP;
@@ -148,8 +148,8 @@ function Pulsate() {
 
      };
 
-    if (document.getElementById(whiteCore.pos).className !== "target") { if ( whiteCore.hp !== whiteCoreHP && whiteCore !== undefined ) { whiteCore['hp'] = whiteCoreHP; place(whiteCore.pos,whiteCore) } }
-    if (document.getElementById(blackCore.pos).className !== "target") { if ( blackCore.hp !== blackCoreHP && blackCore !== undefined ) { blackCore['hp'] = blackCoreHP; place(blackCore.pos,blackCore) } }
+    if (document.getElementById(whiteCore.pos).className == "target") { if ( whiteCore.hp !== whiteCoreHP && whiteCore !== undefined ) { whiteCore['hp'] = whiteCoreHP; place(whiteCore.pos,whiteCore); TargetCanvas(whiteCore.pos,TargetColor) } } else { if ( whiteCore.hp !== whiteCoreHP && whiteCore !== undefined ) { whiteCore['hp'] = whiteCoreHP; place(whiteCore.pos,whiteCore) } }
+    if (document.getElementById(blackCore.pos).className == "target") { if ( blackCore.hp !== blackCoreHP && blackCore !== undefined ) { blackCore['hp'] = blackCoreHP; place(blackCore.pos,blackCore); TargetCanvas(blackCore.pos,TargetColor) } } else { if ( blackCore.hp !== blackCoreHP && blackCore !== undefined ) { blackCore['hp'] = blackCoreHP; place(blackCore.pos,blackCore) } }
 
 
 	        ClearUI();

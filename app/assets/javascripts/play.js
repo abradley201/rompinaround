@@ -143,13 +143,17 @@ function ClearBoard(x, y) {
 
 };
 
+var TargetColor;
+
 function TargetCanvas(x, color) {
     
        var c=document.getElementById(x);
        var ctx=c.getContext("2d");
 
         
-       if ( color == "a" ) { 
+       if ( color == "a" ) {
+
+       TargetColor = "a"; 
     
        ctx.globalAlpha = 0.3;
        ctx.fillStyle="#DF013A";
