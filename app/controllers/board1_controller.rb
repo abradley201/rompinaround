@@ -9,6 +9,15 @@ class Board1Controller < ApplicationController
 		@gameNumber = GameStat.find_by_account(session[:account]).game
 
 		@gameArray = GameStat.where(game:@gameNumber)
+		
+
+		while @gameArray.length == 1
+
+			sleep(2)
+
+			@gameArray = GameStat.where(game:@gameNumber)
+
+		end
 
 
 		if @gameArray.first.account != session[:account]

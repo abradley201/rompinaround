@@ -52,7 +52,7 @@ function google(evt){
 
     									 }
 
-    if (String.fromCharCode(key)=="q"){ if ( yourHero.hp > 0 ) {
+    if (String.fromCharCode(key)=="q"){ if ( yourHero.hp > 0 && IsGameOver == false ) {
 
                                         command = "1";
 
