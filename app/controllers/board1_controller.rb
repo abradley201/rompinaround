@@ -11,13 +11,13 @@ class Board1Controller < ApplicationController
 		@gameArray = GameStat.where(game:@gameNumber)
 		
 
-		if @gameArray.length == 1
+		#if @gameArray.length == 1
 
-			sleep(3)
+			#sleep(3)
 
-			@gameArray = GameStat.where(game:@gameNumber)
+			#@gameArray = GameStat.where(game:@gameNumber)
 
-		end
+		#end
 
 
 		if @gameArray.first.account != session[:account]
