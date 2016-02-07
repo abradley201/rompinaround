@@ -246,6 +246,109 @@ class UniversalController < ApplicationController
 	
 		end
 
+		def EnemyHeroDeath()
+
+			GameStat.update(@enemyHero.id, :deaths => @enemyHero.deaths + 1)
+
+			GameStat.update(@yourHero.id, :kills => @yourHero.kills + 1)
+
+			GameStat.update(@enemyHero.id, :status => "dead†#{Time.now.to_f.round(3)}†")
+
+			@mapInfo = MapStat.find_by_game(@gameNumber).map.split
+
+			@WRS = MapStat.find_by_game(@gameNumber).WhiteRespawnSquare
+
+			@BRS = MapStat.find_by_game(@gameNumber).BlackRespawnSquare
+
+
+				@mapInfo[@enemyHero.pos] = "n"
+
+				if @enemyHero.allies == "black"
+
+					@mapInfo[@BRS] = "o"
+
+					GameStat.update(@enemyHero.id, :pos => @BRS)
+
+				else 
+
+					@mapInfo[@WRS] = "o"
+
+					GameStat.update(@enemyHero.id, :pos => @WRS)
+
+				end
+
+				@mapInfo = @mapInfo.reject(&:empty?).join(' ')
+
+				MapStat.update(MapStat.find_by_game(@gameNumber).id, :map => @mapInfo)
+
+		end
+
+		def CoreDeath(x)
+
+			if x == "white"
+
+				@winningAccountRow = GameStat.where(:game => @gameNumber).where(:allies => "black")
+
+				@winningAccount = @winningAccountRow.first.account
+
+				@CW = InfoStat.find_by_account(@winningAccount).wins
+
+				@losingAccountRow = GameStat.where(:game => @gameNumber).where(:allies => "white")
+
+				@losingAccount = @losingAccountRow.first.account
+
+				@CL = InfoStat.find_by_account(@losingAccount).losses
+
+				InfoStat.update(InfoStat.find_by_account(@winningAccount).id, :wins => @CW + 1)
+
+				InfoStat.update(InfoStat.find_by_account(@losingAccount).id, :losses => @CL + 1)
+
+			end
+
+			if x == "black"
+
+				@winningAccountRow = GameStat.where(:game => @gameNumber).where(:allies => "white")
+
+				@winningAccount = @winningAccountRow.first.account
+
+				@CW = InfoStat.find_by_account(@winningAccount).wins
+
+				@losingAccountRow = GameStat.where(:game => @gameNumber).where(:allies => "black")
+
+				@losingAccount = @losingAccountRow.first.account
+
+				@CL = InfoStat.find_by_account(@losingAccount).losses
+
+				InfoStat.update(InfoStat.find_by_account(@winningAccount).id, :wins => @CW + 1)
+
+				InfoStat.update(InfoStat.find_by_account(@losingAccount).id, :losses => @CL + 1)
+
+			end
+
+		end
+
+		def AttackDamage(x)
+
+			if x == "Joan"
+
+				return 55
+
+			end
+
+			if x == "Ima"
+
+				return 65
+
+			end
+
+			if x == "Steph"
+
+				return 45
+
+			end
+
+		end
+
 		if @canAttack == true 
 
 
@@ -263,40 +366,13 @@ class UniversalController < ApplicationController
 
 				  if @enemyHero.hp != 0
 
-					@newHP = @enemyHero.hp - 25
+					@newHP = @enemyHero.hp - AttackDamage(@yourHero.character)
 
 					if @newHP <= 0
 
 						@newHP = 0
 
-						GameStat.update(@enemyHero.id, :status => "dead†#{Time.now.to_f.round(3)}†")
-
-						@mapInfo = MapStat.find_by_game(@gameNumber).map.split
-
-						@WRS = MapStat.find_by_game(@gameNumber).WhiteRespawnSquare
-
-						@BRS = MapStat.find_by_game(@gameNumber).BlackRespawnSquare
-
-
-						@mapInfo[@enemyHero.pos] = "n"
-
-							if @enemyHero.allies == "black"
-
-								@mapInfo[@BRS] = "o"
-
-								GameStat.update(@enemyHero.id, :pos => @BRS)
-
-							else 
-
-								@mapInfo[@WRS] = "o"
-
-								GameStat.update(@enemyHero.id, :pos => @WRS)
-
-							end
-
-						@mapInfo = @mapInfo.reject(&:empty?).join(' ')
-
-						MapStat.update(MapStat.find_by_game(@gameNumber).id, :map => @mapInfo)
+						EnemyHeroDeath()
 
 					end
 
@@ -310,7 +386,7 @@ class UniversalController < ApplicationController
 
 					if MapStat.find_by_game(@gameNumber).BlackCoreHP > 0
 
-					@whiteCoreHP = MapStat.find_by_game(@gameNumber).WhiteCoreHP - 25
+					@whiteCoreHP = MapStat.find_by_game(@gameNumber).WhiteCoreHP - AttackDamage(@yourHero.character)
 
 					end
 
@@ -318,22 +394,7 @@ class UniversalController < ApplicationController
 
 						@whiteCoreHP = 0
 
-						@winningAccountRow = GameStat.where(:game => @gameNumber).where(:allies => "black")
-
-						@winningAccount = @winningAccountRow.first.account
-
-						@CW = InfoStat.find_by_account(@winningAccount).wins
-
-						@losingAccountRow = GameStat.where(:game => @gameNumber).where(:allies => "white")
-
-						@losingAccount = @losingAccountRow.first.account
-
-						@CL = InfoStat.find_by_account(@losingAccount).losses
-
-						InfoStat.update(InfoStat.find_by_account(@winningAccount).id, :wins => @CW + 1)
-
-						InfoStat.update(InfoStat.find_by_account(@losingAccount).id, :losses => @CL + 1)
-
+						CoreDeath("white")
 
 					end
 
@@ -346,7 +407,7 @@ class UniversalController < ApplicationController
 
 					if MapStat.find_by_game(@gameNumber).WhiteCoreHP > 0
 
-					@blackCoreHP = MapStat.find_by_game(@gameNumber).BlackCoreHP - 25
+					@blackCoreHP = MapStat.find_by_game(@gameNumber).BlackCoreHP - AttackDamage(@yourHero.character)
 
 					end
 
@@ -354,22 +415,7 @@ class UniversalController < ApplicationController
 
 						@blackCoreHP = 0
 
-						@winningAccountRow = GameStat.where(:game => @gameNumber).where(:allies => "white")
-
-						@winningAccount = @winningAccountRow.first.account
-
-						@CW = InfoStat.find_by_account(@winningAccount).wins
-
-						@losingAccountRow = GameStat.where(:game => @gameNumber).where(:allies => "black")
-
-						@losingAccount = @losingAccountRow.first.account
-
-						@CL = InfoStat.find_by_account(@losingAccount).losses
-
-						InfoStat.update(InfoStat.find_by_account(@winningAccount).id, :wins => @CW + 1)
-
-						InfoStat.update(InfoStat.find_by_account(@losingAccount).id, :losses => @CL + 1)
-
+						CoreDeath("black")
 
 					end
 
@@ -420,7 +466,7 @@ class UniversalController < ApplicationController
 
 				@whenDied = @yourHero.status.split("†")[1].to_f
 
-				if (Time.now.to_f.round(3) - @whenDied) >= 5 
+				if (Time.now.to_f.round(3) - @whenDied) >= (2 + (@yourHero.deaths * 3)) 
 
 					GameStat.update(@yourHero.id, :hp => @yourHero.maxhp)
 

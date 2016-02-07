@@ -64,7 +64,7 @@ class Board1Controller < ApplicationController
 
 		if MapStat.find_by_game(@gameNumber) == nil
 
-		MapStat.create(:game => @gameNumber, :room => 1, :creation => Time.now.to_i, :map => "f n n n n n n o n n o f f n n n n n n n n n n f f n n n n n n n n n n f f n n n n n n n n n n f f n n n n n n n n n n f f n n n n n n n n n n f f n n n n n n n n n n f f n n n n n n n n n n f f n n n n n n n n n n f f o n n o n n n n n n f f", :e => 12, :WhiteCoreHP => 300, :BlackCoreHP => 300, :WhiteCorePOS => 10, :BlackCorePOS => 109, :WhiteRespawnSquare => 7, :BlackRespawnSquare => 112)
+		MapStat.create(:game => @gameNumber, :room => 1, :creation => Time.now.to_i, :map => "f n n n n n n o n n o f f n n n n n n n n n n f f n n n n n n n n n n f f n n n n n n n n n n f f n n n n n n n n n n f f n n n n n n n n n n f f n n n n n n n n n n f f n n n n n n n n n n f f n n n n n n n n n n f f o n n o n n n n n n f f", :e => 12, :WhiteCoreHP => 500, :BlackCoreHP => 500, :WhiteCorePOS => 10, :BlackCorePOS => 109, :WhiteRespawnSquare => 7, :BlackRespawnSquare => 112)
 
 		end
 
