@@ -488,27 +488,44 @@ class UniversalController < ApplicationController
 
 		if @game != nil
 
+			@yourHero = GameStat.find_by_account(session[:account])
+
 			@gameNumber = @game.game
 
+			@gameArray = GameStat.where(game:@gameNumber)
+
+				if @gameArray.first.account != session[:account]
+
+					@enemyHero = @gameArray.first
+
+				else
+
+					@enemyHero = @gameArray.last
+
+				end
 
 			@whiteCoreHP = MapStat.find_by_game(@gameNumber).WhiteCoreHP
 
 			@blackCoreHP = MapStat.find_by_game(@gameNumber).BlackCoreHP
 
+			@whiteRespawnSquare = MapStat.find_by_game(@gameNumber).WhiteRespawnSquare
+
+			@blackRespawnSquare = MapStat.find_by_game(@gameNumber).BlackRespawnSquare
+
 
 			if @whiteCoreHP == 0 || @blackCoreHP == 0
 
-			sleep(5)
+				render :json => { :gameOver => "true", :whiteCoreHP => @whiteCoreHP, :blackCoreHP => @blackCoreHP, :whiteRespawnSquare => @whiteRespawnSquare, :blackRespawnSquare => @blackRespawnSquare, :yourHp => @yourHero.hp, :yourMaxhp => @yourHero.maxhp, :yourShield => @yourHero.shield, :yourMp => @yourHero.mp, :yourMaxmp => @yourHero.maxmp, :yourPos => @yourHero.pos, :yourKills => @yourHero.kills, :yourDeaths => @yourHero.deaths, :yourStatus => @yourHero.status, :yourExp => @yourHero.exp, :yourAllies => @yourHero.allies, :enemyHp => @enemyHero.hp, :enemyMaxhp => @enemyHero.maxhp, :enemyShield => @enemyHero.shield, :enemyMp => @enemyHero.mp, :enemyMaxmp => @enemyHero.maxmp, :enemyPos => @enemyHero.pos, :enemyKills => @enemyHero.kills, :enemyDeaths => @enemyHero.deaths, :enemyStatus => @enemyHero.status, :enemyExp => @enemyHero.exp, :enemyAllies => @enemyHero.allies }
 
-			MapStat.where(game:@gameNumber).delete_all
+				sleep(5)
 
-			GameStat.where(game:@gameNumber).delete_all
+				MapStat.where(game:@gameNumber).delete_all
 
-			render :json => { :gameOver => "true" }
+				GameStat.where(game:@gameNumber).delete_all
 
 			else
 
-		    render :json => { :gameOver => "false" }
+		    	render :json => { :gameOver => "false", :whiteCoreHP => @whiteCoreHP, :blackCoreHP => @blackCoreHP, :whiteRespawnSquare => @whiteRespawnSquare, :blackRespawnSquare => @blackRespawnSquare, :yourHp => @yourHero.hp, :yourMaxhp => @yourHero.maxhp, :yourShield => @yourHero.shield, :yourMp => @yourHero.mp, :yourMaxmp => @yourHero.maxmp, :yourPos => @yourHero.pos, :yourKills => @yourHero.kills, :yourDeaths => @yourHero.deaths, :yourStatus => @yourHero.status, :yourExp => @yourHero.exp, :yourAllies => @yourHero.allies, :enemyHp => @enemyHero.hp, :enemyMaxhp => @enemyHero.maxhp, :enemyShield => @enemyHero.shield, :enemyMp => @enemyHero.mp, :enemyMaxmp => @enemyHero.maxmp, :enemyPos => @enemyHero.pos, :enemyKills => @enemyHero.kills, :enemyDeaths => @enemyHero.deaths, :enemyStatus => @enemyHero.status, :enemyExp => @enemyHero.exp, :enemyAllies => @enemyHero.allies }
 
 			end
 
