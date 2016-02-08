@@ -293,7 +293,18 @@ function commander(x) { if (IsGameOver == true) { return };
         if ( theparse.gameOver == "true" ) { return };
 
     if (yourHero.pos != theparse.yourPos) { MovementCommandReceived = true; TurnCanvasOn(yourHero.pos); setTimeout(function(){ MovementCommandReceived = false; }, 300); };
-    if (enemyHero.pos != theparse.enemyPos) { TurnCanvasOn(enemyHero.pos) };
+    if (enemyHero.pos != theparse.enemyPos) { TurnCanvasOn(enemyHero.pos); 
+
+        if (theparse.enemyStatus.indexOf('†') != -1) { 
+
+                var c=document.getElementById(enemyHero.pos);
+                var ctx=c.getContext("2d");
+                var img=document.getElementById("cross");
+                ctx.drawImage(img,20,20);
+
+        };
+
+     };
      
         yourHero['hp'] = Number(theparse.yourHp);
         yourHero['maxhp'] = Number(theparse.yourMaxhp);
