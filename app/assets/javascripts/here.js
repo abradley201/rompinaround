@@ -20,7 +20,7 @@
     
     var column = [a];
 
-    for ( n=1; n<=h; n++ ) {
+    for ( n=1; n<=hi; n++ ) {
          if (document.getElementById( a + ( e * n ) ).className !== "off") { 
          column.push( a + ( e * n ) ) }
          if (document.getElementById( a + ( e * n ) ).className == "off") { break } }
@@ -57,7 +57,7 @@
     
     var row = [a];
 
-    for ( n=1; n<=h; n++ ) {
+    for ( n=1; n<=hi; n++ ) {
          if (document.getElementById( a + ( 1 * n ) ).className !== "off") { 
          row.push( a + ( 1 * n ) ) }
          if (document.getElementById( a + ( 1 * n ) ).className == "off") { break } }

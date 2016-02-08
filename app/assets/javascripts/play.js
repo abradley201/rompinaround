@@ -206,9 +206,9 @@ function holyexplosion() { if ( document.getElementsByClassName("target").length
 
     var clm = Clm(yourHero.pos);
 
-    while ( x < row.length ) { if (ValidTargetSquares.indexOf(document.getElementById(row[x]).className) > -1) { TargetCanvas(row[x],"c") }; x++ };
+    while ( x < row.length ) { if (ValidTargetSquares.indexOf(document.getElementById(row[x]).className) > -1 && row[x] != yourHero.pos) { TargetCanvas(row[x],"c") }; x++ };
 
-    while ( y < clm.length ) { if (ValidTargetSquares.indexOf(document.getElementById(clm[y]).className) > -1) { TargetCanvas(clm[y],"c") }; y++ };
+    while ( y < clm.length ) { if (ValidTargetSquares.indexOf(document.getElementById(clm[y]).className) > -1 && clm[y] != yourHero.pos) { TargetCanvas(clm[y],"c") }; y++ };
 
 };
 
