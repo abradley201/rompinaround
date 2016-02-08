@@ -641,9 +641,9 @@ function here(x) {   console.log(x);
 
             if (yourHero.id == "Joan") { commander(); }
 
-            if (yourHero.id == "Ima") { crossbow(); }
+            if (yourHero.id == "Ima") { if ( document.getElementsByClassName("target").length > 0 ) { sheath() } else { crossbow(); }
 
-            if (yourHero.id == "Steph") { holyexplosion(); }
+            if (yourHero.id == "Steph") { if ( document.getElementsByClassName("target").length > 0 ) { sheath() } else { holyexplosion(); }
 
 
 
