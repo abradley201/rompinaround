@@ -561,7 +561,7 @@ function Distancetx(a, b) {
 
 
 
-function blankClick(x) {
+function blankClick(x) { SpecialTapped = false;
 
 	var y = yourHero.pos;
 
