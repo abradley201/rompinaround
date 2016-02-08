@@ -203,7 +203,8 @@ function Pulsate() {
             xmlhttpo.onreadystatechange=function() {
             if (xmlhttpo.readyState==4 && xmlhttpo.status==200)
             { theparse = JSON.parse(xmlhttpo.responseText);
-            if ( theparse.gameOver == "true" ) { setTimeout(function(){ document.getElementById("header").innerHTML = "<center><button type='button' onclick='LeaveGame()'>Leave</button></center>"; }, 1500); }
+            if ( theparse.gameOver == "true" && yourHero.allies == "white" ) { setTimeout(function(){ document.getElementById("header").innerHTML = "<center><button type='button' onclick='LeaveGame()'>Leave</button><br><br>VICTORY!</center>"; }, 1500); }
+            if ( theparse.gameOver == "true" && yourHero.allies == "black" ) { setTimeout(function(){ document.getElementById("header").innerHTML = "<center><button type='button' onclick='LeaveGame()'>Leave</button><br><br>Defeat.</center>"; }, 1500); }
             } };
 
             xmlhttpo.open("GET","/endgameButton",true);
@@ -227,7 +228,8 @@ function Pulsate() {
             xmlhttpo.onreadystatechange=function() {
             if (xmlhttpo.readyState==4 && xmlhttpo.status==200)
             { theparse = JSON.parse(xmlhttpo.responseText);
-            if ( theparse.gameOver == "true" ) { setTimeout(function(){ document.getElementById("header").innerHTML = "<center><button type='button' onclick='LeaveGame()'>Leave</button></center>"; }, 1500); }
+            if ( theparse.gameOver == "true" && yourHero.allies == "black" ) { setTimeout(function(){ document.getElementById("header").innerHTML = "<center><button type='button' onclick='LeaveGame()'>Leave</button><br><br>VICTORY!</center>"; }, 1500); }
+            if ( theparse.gameOver == "true" && yourHero.allies == "white" ) { setTimeout(function(){ document.getElementById("header").innerHTML = "<center><button type='button' onclick='LeaveGame()'>Leave</button><br><br>Defeat</center>"; }, 1500); }
             } };
 
             xmlhttpo.open("GET","/endgameButton",true);
@@ -235,7 +237,7 @@ function Pulsate() {
 
         };
 
-    }
+    MovementCommandReceived = false; }
   }
 
 xmlhttp.open("GET","/pacemaker",true);
@@ -292,7 +294,7 @@ function commander(x) { if (IsGameOver == true) { return };
 
         if ( theparse.gameOver == "true" ) { return };
 
-    if (yourHero.pos != theparse.yourPos) { MovementCommandReceived = true; TurnCanvasOn(yourHero.pos); setTimeout(function(){ MovementCommandReceived = false; }, 500); };
+    if (yourHero.pos != theparse.yourPos) { MovementCommandReceived = true; TurnCanvasOn(yourHero.pos); };
     if (enemyHero.pos != theparse.enemyPos) { TurnCanvasOn(enemyHero.pos) };
      
         yourHero['hp'] = Number(theparse.yourHp);
