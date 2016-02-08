@@ -33,7 +33,7 @@ class UniversalController < ApplicationController
 
 					@newHP = @yourHero.hp + 2
 
-					@newMP = @yourHero.mp + 5
+					@newMP = @yourHero.mp + 4
 
 				end
 
@@ -120,7 +120,7 @@ class UniversalController < ApplicationController
 
 				end
 
-			m = 0.75
+			m = 0.7
 
 		else
 
