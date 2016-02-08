@@ -104,8 +104,6 @@ class UniversalController < ApplicationController
 
 		if @yourHero.character == "Joan" && @yourHero.status.include?("♱") == true
 
-			#needs a way to expire without command, using pacemaker
-
 			@statusArray = @yourHero.status.split("♱")
 
 			@buffTimer = @statusArray[1].to_f
@@ -691,6 +689,26 @@ class UniversalController < ApplicationController
 	  @gameNumber = GameStat.find_by_account(session[:account]).game
 
 	  if @yourHero != nil
+
+	  		if @yourHero.character == "Joan" && @yourHero.status.include?("♱") == true
+
+				@statusArray = @yourHero.status.split("♱")
+
+				@buffTimer = @statusArray[1].to_f
+
+				if Time.now.to_f.round(3) - @buffTimer >= 5
+
+					@statusArray[0].slice! "crusade"
+
+					@statusArray.delete_at(1)
+
+					@status = @statusArray.join
+
+					GameStat.update(@yourHero.id, :status => @status)
+
+				end
+
+			end
 
 	  		if @yourHero.status.include?("⚕") == true
 

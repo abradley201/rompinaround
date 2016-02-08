@@ -292,7 +292,7 @@ function commander(x) { if (IsGameOver == true) { return };
 
         if ( theparse.gameOver == "true" ) { return };
 
-    if (yourHero.pos != theparse.yourPos) { MovementCommandReceived = true; TurnCanvasOn(yourHero.pos); setTimeout(function(){ MovementCommandReceived = false; }, 300); };
+    if (yourHero.pos != theparse.yourPos) { MovementCommandReceived = true; TurnCanvasOn(yourHero.pos); setTimeout(function(){ MovementCommandReceived = false; }, 500); };
     if (enemyHero.pos != theparse.enemyPos) { TurnCanvasOn(enemyHero.pos) };
      
         yourHero['hp'] = Number(theparse.yourHp);
