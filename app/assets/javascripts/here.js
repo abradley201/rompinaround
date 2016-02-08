@@ -634,7 +634,7 @@ function here(x) {   console.log(x);
 
 	if ( document.getElementById(x).className == "target" ) {
 
-		commander(x);
+		commander(x); SpecialTapped = false;
 
 	} else {
 
