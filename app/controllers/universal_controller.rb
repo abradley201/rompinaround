@@ -104,6 +104,8 @@ class UniversalController < ApplicationController
 
 		if @yourHero.character == "Joan" && @yourHero.status.include?("♱") == true
 
+			#needs a way to expire without command, using pacemaker
+
 			@statusArray = @yourHero.status.split("♱")
 
 			@buffTimer = @statusArray[1].to_f
@@ -557,7 +559,7 @@ class UniversalController < ApplicationController
 
 			if @yourHero.character == "Ima" && @yourHero.mp >= 70
 
-				#need to fix the board wrap-around problem here: Distancetx etc. needed server side
+				#need to fix the board wrap-around problem here: Distancetx etc. needed server side. OR use mapstats, checking for f
 
 				@TargetArray = [@yourHero.pos + 3 * e, @yourHero.pos - 3 * e, @yourHero.pos + 3, @yourHero.pos - 3, @yourHero.pos + 1 + 2 * e, @yourHero.pos + 2 + e, @yourHero.pos + 2 - e, @yourHero.pos + 1 - 2 * e, @yourHero.pos - 1 - 2 * e, @yourHero.pos - 2 - e, @yourHero.pos - 2 + e, @yourHero.pos - 1 + 2 * e];
 
@@ -577,11 +579,55 @@ class UniversalController < ApplicationController
 
 			if @yourHero.character == "Steph" && @yourHero.mp >= 40
 
+				@mapInfo = MapStat.find_by_game(@gameNumber).map.split
 
+				q = 1
 
+				while @mapInfo[@yourHero.pos + q] != "f"
 
+				 @TargetArray.push(@yourHero.pos + q)
 
+				 q = q + 1
 
+				end
+
+				w = 1
+
+				while @mapInfo[@yourHero.pos - w] != "f"
+
+				 @TargetArray.push(@yourHero.pos - w)
+
+				 w = w + 1
+
+				end
+
+				qq = 1
+
+				while @mapInfo[@yourHero.pos + qq * e] != "f"
+
+				 @TargetArray.push(@yourHero.pos + qq * e)
+
+				 qq = qq + 1
+
+				end
+
+				ww = 1
+
+				while @mapInfo[@yourHero.pos - ww * e] != "f"
+
+				 @TargetArray.push(@yourHero.pos - ww * e)
+
+				 ww = ww + 1
+
+				end
+
+				if @TargetArray.include?(params[:command].slice(2,100).to_i) == true && @enemyHero.pos == params[:command].slice(2,100).to_i
+
+					DamageEnemy(AttackDamage(@yourHero.character)) 
+
+				end
+
+				CoreDamage(AttackDamage(@yourHero.character))
 
 				GameStat.update(@yourHero.id, :mp => @yourHero.mp - 40)
 

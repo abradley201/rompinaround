@@ -643,7 +643,7 @@ function here(x) {   console.log(x);
 
             if (yourHero.id == "Ima") { crossbow(); }
 
-            if (yourHero.id == "Steph") { }
+            if (yourHero.id == "Steph") { holyexplosion(); }
 
 
 
