@@ -579,19 +579,17 @@ class UniversalController < ApplicationController
 
 			if @yourHero.character == "Steph" && @yourHero.mp >= 40
 
+				#the value 10 below needs to be more dynamic for different-sized maps
+
 				@mapInfo = MapStat.find_by_game(@gameNumber).map.split
 
 				@TargetArray = []
 
 				q = 1
 
-				while q <= 20
+				while q <= 10
 
-				 if @mapInfo[@yourHero.pos + q] == "f"
-
-				 	break
-
-				 end
+				 break if @mapInfo[@yourHero.pos + q] == "f"
 
 				 @TargetArray.push(@yourHero.pos + q)
 
@@ -601,13 +599,9 @@ class UniversalController < ApplicationController
 
 				w = 1
 
-				while w <= 20
+				while w <= 10
 
-				 if @mapInfo[@yourHero.pos - w] == "f"
-
-				 	break
-
-				 end
+				 break if @mapInfo[@yourHero.pos - w] == "f"
 
 				 @TargetArray.push(@yourHero.pos - w)
 
@@ -617,13 +611,9 @@ class UniversalController < ApplicationController
 
 				qq = 1
 
-				while qq <= 20
+				while qq <= 10
 
-				 if @mapInfo[@yourHero.pos + qq * e] == "f"
-
-				 	break
-
-				 end
+				 break if @mapInfo[@yourHero.pos + qq * e] == "f" 
 
 				 @TargetArray.push(@yourHero.pos + qq * e)
 
@@ -633,13 +623,9 @@ class UniversalController < ApplicationController
 
 				ww = 1
 
-				while ww <= 20
+				while ww <= 10
 
-				 if @mapInfo[@yourHero.pos - ww * e] == "f"
-
-				 	break
-
-				 end
+				 break if @mapInfo[@yourHero.pos - ww * e] == "f"
 
 				 @TargetArray.push(@yourHero.pos - ww * e)
 
