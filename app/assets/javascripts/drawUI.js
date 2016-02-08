@@ -51,6 +51,8 @@ function ClearUI() { if (yourHero === undefined) { return }
 
 
     };
+
+    if (yourHero.status.indexOf("♱") != -1) { DrawPicture("UI", "speed") };
     
 };
 

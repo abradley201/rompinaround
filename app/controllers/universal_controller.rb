@@ -120,7 +120,7 @@ class UniversalController < ApplicationController
 
 				end
 
-			m = 0.7
+			m = 0.65
 
 		else
 
