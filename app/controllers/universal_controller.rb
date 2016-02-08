@@ -240,7 +240,7 @@ class UniversalController < ApplicationController
 
 			if x == "Ima"
 
-				return 65
+				return 60
 
 			end
 

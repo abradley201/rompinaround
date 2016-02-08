@@ -334,7 +334,13 @@ function TurnCanvasOff(x, y) {
     if (y == 0) {
       document.getElementById(x).className = 'pit' };
     if (y == 1) {
-      document.getElementById(x).className = 'wall' };
+      document.getElementById(x).className = 'wall';
+
+       var c=document.getElementById(x);
+       var ctx=c.getContext("2d");
+       DrawPicture(x,"castle1");
+
+       };
 };
 
 function TurnCanvasOn(x) {

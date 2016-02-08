@@ -17,7 +17,7 @@
       
 </head>   
 
-<body onKeyPress="google(event)" onload="CreateContent(600,600,'#b0c4de','817px');CreateBoard(40,40,10,10);assign();ClearUI();HPMPbars();GeneratePiece('whiteCore',10);GeneratePiece('blackCore',109);CheckForEnemy();">
+<body onKeyPress="google(event)" onload="CreateContent(600,600,'#b0c4de','817px');CreateBoard(40,40,10,10);assign();ClearUI();HPMPbars();GeneratePiece('whiteCore',10);GeneratePiece('blackCore',109);BuildWall();CheckForEnemy();">
 
     <div class="container" id="container">
 
@@ -160,6 +160,29 @@
             xmlhttp.send();
 
         } } };
+
+
+        function BuildWall() {
+
+          TurnCanvasOff(113, 1);
+          TurnCanvasOff(101, 1);
+          TurnCanvasOff(89, 1);
+          TurnCanvasOff(77, 1);
+          TurnCanvasOff(76, 1);
+          TurnCanvasOff(64, 1);
+          TurnCanvasOff(6, 1);
+          TurnCanvasOff(18, 1);
+          TurnCanvasOff(30, 1);
+          TurnCanvasOff(42, 1);
+          TurnCanvasOff(43, 1);
+          TurnCanvasOff(55, 1);
+
+        };
+
+
+
+
+
 
 
 
