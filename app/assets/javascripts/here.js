@@ -9,7 +9,7 @@
      var optionsDGLTR = [];
      var optionsDGLTL = [];
      var optionsDGLBR = [];
-     var optionsDGLBL = []; //USED FOR DETERMINING ROWS, COLUMNS, AND DIAGONALS.
+     var optionsDGLBL = []; //USED FOR DETERMINING ROWS, COLUMNS, AND DIAGONALS
 
 
 
