@@ -571,9 +571,21 @@ class UniversalController < ApplicationController
 
 			if @yourHero.character == "Ima" && @yourHero.mp >= 70
 
-				#need to fix the board wrap-around problem here: Distancetx etc. needed server side. OR use mapstats, checking for f
+				@mapInfo = MapStat.find_by_game(@gameNumber).map.split
 
 				@TargetArray = [@yourHero.pos + 3 * e, @yourHero.pos - 3 * e, @yourHero.pos + 3, @yourHero.pos - 3, @yourHero.pos + 1 + 2 * e, @yourHero.pos + 2 + e, @yourHero.pos + 2 - e, @yourHero.pos + 1 - 2 * e, @yourHero.pos - 1 - 2 * e, @yourHero.pos - 2 - e, @yourHero.pos - 2 + e, @yourHero.pos - 1 + 2 * e];
+
+				if @mapInfo[@yourHero.pos + 1] == "f"
+
+					@TargetArray.delete_at(@TargetArray.index(@yourHero.pos + 3))
+
+				end
+
+				if @mapInfo[@yourHero.pos - 1] == "f"
+
+					@TargetArray.delete_at(@TargetArray.index(@yourHero.pos - 3))
+
+				end
 
 				if @TargetArray.include?(params[:command].slice(2,100).to_i) == true && @enemyHero.pos == params[:command].slice(2,100).to_i
 
