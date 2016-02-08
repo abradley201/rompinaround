@@ -252,6 +252,71 @@ class UniversalController < ApplicationController
 
 		end
 
+		def CoreDamage(y)
+
+			if params[:command].slice(2,100).to_i == MapStat.find_by_game(@gameNumber).WhiteCorePOS && @yourHero.allies == "black"
+
+				if MapStat.find_by_game(@gameNumber).BlackCoreHP > 0
+
+					@whiteCoreHP = MapStat.find_by_game(@gameNumber).WhiteCoreHP - y
+
+				end
+
+				if @whiteCoreHP <= 0
+
+					@whiteCoreHP = 0
+
+					CoreDeath("white")
+
+				end
+
+				MapStat.update(MapStat.find_by_game(@gameNumber).id, :WhiteCoreHP => @whiteCoreHP)
+
+			end
+
+			if params[:command].slice(2,100).to_i == MapStat.find_by_game(@gameNumber).BlackCorePOS && @yourHero.allies == "white"
+
+				if MapStat.find_by_game(@gameNumber).WhiteCoreHP > 0
+
+					@blackCoreHP = MapStat.find_by_game(@gameNumber).BlackCoreHP - y
+
+				end
+
+				if @blackCoreHP <= 0
+
+					@blackCoreHP = 0
+
+					CoreDeath("black")
+
+				end
+
+				MapStat.update(MapStat.find_by_game(@gameNumber).id, :BlackCoreHP => @blackCoreHP)
+
+			end
+
+		end
+
+		def DamageEnemy(z)
+
+			if @enemyHero.hp != 0
+
+				@newHP = @enemyHero.hp - z
+
+					if @newHP <= 0
+
+						@newHP = 0
+
+						EnemyHeroDeath()
+
+					end
+
+				GameStat.update(@enemyHero.id, :hp => @newHP)
+
+			end
+
+		end
+
+
 		if @canMove == true
 
 			regen(@yourHero,@gameNumber)
@@ -460,75 +525,16 @@ class UniversalController < ApplicationController
 
 				if @enemyHero.pos == params[:command].slice(2,100).to_i
 
-				  if @enemyHero.hp != 0
-
-					@newHP = @enemyHero.hp - AttackDamage(@yourHero.character)
-
-					if @newHP <= 0
-
-						@newHP = 0
-
-						EnemyHeroDeath()
-
-					end
-
-				    GameStat.update(@enemyHero.id, :hp => @newHP)
-
-				  end
+					DamageEnemy(AttackDamage(@yourHero.character)) 
 
 				end
-
-					def CoreDamage(y)
-
-						if params[:command].slice(2,100).to_i == MapStat.find_by_game(@gameNumber).WhiteCorePOS && @yourHero.allies == "black"
-
-							if MapStat.find_by_game(@gameNumber).BlackCoreHP > 0
-
-							@whiteCoreHP = MapStat.find_by_game(@gameNumber).WhiteCoreHP - y
-
-							end
-
-							if @whiteCoreHP <= 0
-
-								@whiteCoreHP = 0
-
-								CoreDeath("white")
-
-							end
-
-							MapStat.update(MapStat.find_by_game(@gameNumber).id, :WhiteCoreHP => @whiteCoreHP)
-
-
-						end
-
-						if params[:command].slice(2,100).to_i == MapStat.find_by_game(@gameNumber).BlackCorePOS && @yourHero.allies == "white"
-
-							if MapStat.find_by_game(@gameNumber).WhiteCoreHP > 0
-
-							@blackCoreHP = MapStat.find_by_game(@gameNumber).BlackCoreHP - y
-
-							end
-
-							if @blackCoreHP <= 0
-
-								@blackCoreHP = 0
-
-								CoreDeath("black")
-
-							end
-
-							MapStat.update(MapStat.find_by_game(@gameNumber).id, :BlackCoreHP => @blackCoreHP)
-
-
-						end
-
-					end
-
+					
 				CoreDamage(AttackDamage(@yourHero.character))
 
 				GameStat.update(@yourHero.id, :attacked => Time.now.to_f.round(3))
 
-		  end
+
+		    end
 
 			render :json => { :yourHp => @yourHero.hp, :yourMaxhp => @yourHero.maxhp, :yourShield => @yourHero.shield, :yourMp => @yourHero.mp, :yourMaxmp => @yourHero.maxmp, :yourPos => @yourHero.pos, :yourKills => @yourHero.kills, :yourDeaths => @yourHero.deaths, :yourStatus => @yourHero.status, :yourExp => @yourHero.exp, :yourAllies => @yourHero.allies, :enemyHp => @enemyHero.hp, :enemyMaxhp => @enemyHero.maxhp, :enemyShield => @enemyHero.shield, :enemyMp => @enemyHero.mp, :enemyMaxmp => @enemyHero.maxmp, :enemyPos => @enemyHero.pos, :enemyKills => @enemyHero.kills, :enemyDeaths => @enemyHero.deaths, :enemyStatus => @enemyHero.status, :enemyExp => @enemyHero.exp, :enemyAllies => @enemyHero.allies }
 
@@ -549,41 +555,30 @@ class UniversalController < ApplicationController
 
 			end
 
-			if @yourHero.character == "Ima" && @yourHero.mp >= 60
+			if @yourHero.character == "Ima" && @yourHero.mp >= 80
 
-				#need to fix the board wrap-around problem here
+				#need to fix the board wrap-around problem here: Distancetx etc. needed server side
 
 				@TargetArray = [@yourHero.pos + 3 * e, @yourHero.pos - 3 * e, @yourHero.pos + 3, @yourHero.pos - 3, @yourHero.pos + 1 + 2 * e, @yourHero.pos + 2 + e, @yourHero.pos + 2 - e, @yourHero.pos + 1 - 2 * e, @yourHero.pos - 1 - 2 * e, @yourHero.pos - 2 - e, @yourHero.pos - 2 + e, @yourHero.pos - 1 + 2 * e];
 
 				if @TargetArray.include?(params[:command].slice(2,100).to_i) == true && @enemyHero.pos == params[:command].slice(2,100).to_i
 
-						if @enemyHero.hp != 0
-
-							@newHP = @enemyHero.hp - 120
-
-								if @newHP <= 0
-
-									@newHP = 0
-
-									EnemyHeroDeath()
-
-								end
-
-				    		GameStat.update(@enemyHero.id, :hp => @newHP)
-
-				  		end
-
-				  		CoreDamage(120)
-
-				GameStat.update(@yourHero.id, :mp => @yourHero.mp - 60)
-
-				GameStat.update(@yourHero.id, :casted => Time.now.to_f.round(3))
+					DamageEnemy(120) 
 
 				end
+
+				CoreDamage(120)
+
+				GameStat.update(@yourHero.id, :mp => @yourHero.mp - 80)
+
+				GameStat.update(@yourHero.id, :casted => Time.now.to_f.round(3))	
 
 			end
 
 			if @yourHero.character == "Steph" && @yourHero.mp >= 40
+
+
+
 
 
 

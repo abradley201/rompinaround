@@ -254,11 +254,20 @@ function commander(x) { if (IsGameOver == true) { return };
         if (command == "s") {message = "↓"};
         if (command == "a") {message = "←"};
         if (command == "d") {message = "→"};
-        if (command == "e") {message = "☄"};
+        if (command == "e") {
+
+            if (yourHero.id == "Joan" && yourHero.mp < 70) { message = "need 70 mp" }
+
+            else if (yourHero.id == "Ima" && yourHero.mp < 80) { message = "need 80 mp" }
+
+            else if (yourHero.id == "Steph" && yourHero.mp < 40) { message = "need 40 mp" }
+
+            else { message = "☄" } };
+
         if (command.slice(0,1) == "1") {message = "⚔"};
 
 
-    var c=document.getElementById("UI");
+        var c=document.getElementById("UI");
         var ctx=c.getContext("2d");
                 
         
@@ -267,6 +276,9 @@ function commander(x) { if (IsGameOver == true) { return };
             ctx.fillStyle="white";
             ctx.font = "50px Arial";
             ctx.fillText(message,window.innerWidth / 2 + 10,85);
+            
+
+        if (message.length != 1) { return }
 
 
         var theparse;
