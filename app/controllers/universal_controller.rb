@@ -549,7 +549,21 @@ class UniversalController < ApplicationController
 
 			if @yourHero.character == "Joan" && @yourHero.mp >= 60
 
+				if @yourHero.status.include?("♱") == true
+
+			    @statusArray = @yourHero.status.split("♱")
+
+			    @statusArray[1] = "♱#{Time.now.to_f.round(3)}♱"
+
+				@status = @statusArray.join
+
+				GameStat.update(@yourHero.id, :status => @status)
+
+				else
+
 				GameStat.update(@yourHero.id, :status => "#{@yourHero.status}crusade♱#{Time.now.to_f.round(3)}♱")
+
+				end
 
 				GameStat.update(@yourHero.id, :mp => @yourHero.mp - 60)
 
