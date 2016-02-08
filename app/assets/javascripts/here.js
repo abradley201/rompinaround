@@ -561,7 +561,7 @@ function Distancetx(a, b) {
 
 
 
-function blankClick(x) { SpecialTapped = false;
+function blankClick(x) { 
 
 	var y = yourHero.pos;
 
@@ -634,7 +634,7 @@ function here(x) {   console.log(x);
 
 	if ( document.getElementById(x).className == "target" ) {
 
-		commander(x); SpecialTapped = false;
+		commander(x); 
 
 	} else {
 
@@ -645,9 +645,9 @@ function here(x) {   console.log(x);
 
             if (yourHero.id == "Joan") { commander(); }
 
-            if (yourHero.id == "Ima") { if (SpecialTapped == false) { crossbow(); SpecialTapped = true } else { sheath(); SpecialTapped = false } }
+            if (yourHero.id == "Ima") { if (SpecialTapped == false) { crossbow(); SpecialTapped = true } else { sheath() } }
 
-            if (yourHero.id == "Steph") { if (SpecialTapped == false) { holyexplosion(); SpecialTapped = true } else { sheath(); SpecialTapped = false } }
+            if (yourHero.id == "Steph") { if (SpecialTapped == false) { holyexplosion(); SpecialTapped = true } else { sheath() } }
 
 
 

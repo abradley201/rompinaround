@@ -236,7 +236,7 @@ function attack() { if ( document.getElementsByClassName("target").length > 0 &&
     
 };
 
-function sheath() { 
+function sheath() { SpecialTapped = false;
 
     var turnstile = [yourHero.id, enemyHero.id, whiteCore.id, blackCore.id];
 
