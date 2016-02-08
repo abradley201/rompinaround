@@ -255,11 +255,11 @@ function commander(x) { if (IsGameOver == true) { return };
         if (command == "d") {message = "→"};
         if (command == "e") {
 
-            if (yourHero.id == "Joan" && yourHero.mp < 60) { message = "need 70 mp" }
+            if (yourHero.id == "Joan" && yourHero.mp < 60) { message = "60mp" }
 
-            else if (yourHero.id == "Ima" && yourHero.mp < 70) { message = "need 80 mp" }
+            else if (yourHero.id == "Ima" && yourHero.mp < 70) { message = "70mp" }
 
-            else if (yourHero.id == "Steph" && yourHero.mp < 40) { message = "need 40 mp" }
+            else if (yourHero.id == "Steph" && yourHero.mp < 40) { message = "40mp" }
 
             else { message = "☄" } };
 
