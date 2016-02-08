@@ -478,53 +478,53 @@ class UniversalController < ApplicationController
 
 				end
 
-			def CoreDamage()
+					def CoreDamage(y)
 
-				if params[:command].slice(2,100).to_i == MapStat.find_by_game(@gameNumber).WhiteCorePOS && @yourHero.allies == "black"
+						if params[:command].slice(2,100).to_i == MapStat.find_by_game(@gameNumber).WhiteCorePOS && @yourHero.allies == "black"
 
-					if MapStat.find_by_game(@gameNumber).BlackCoreHP > 0
+							if MapStat.find_by_game(@gameNumber).BlackCoreHP > 0
 
-					@whiteCoreHP = MapStat.find_by_game(@gameNumber).WhiteCoreHP - AttackDamage(@yourHero.character)
+							@whiteCoreHP = MapStat.find_by_game(@gameNumber).WhiteCoreHP - y
+
+							end
+
+							if @whiteCoreHP <= 0
+
+								@whiteCoreHP = 0
+
+								CoreDeath("white")
+
+							end
+
+							MapStat.update(MapStat.find_by_game(@gameNumber).id, :WhiteCoreHP => @whiteCoreHP)
+
+
+						end
+
+						if params[:command].slice(2,100).to_i == MapStat.find_by_game(@gameNumber).BlackCorePOS && @yourHero.allies == "white"
+
+							if MapStat.find_by_game(@gameNumber).WhiteCoreHP > 0
+
+							@blackCoreHP = MapStat.find_by_game(@gameNumber).BlackCoreHP - y
+
+							end
+
+							if @blackCoreHP <= 0
+
+								@blackCoreHP = 0
+
+								CoreDeath("black")
+
+							end
+
+							MapStat.update(MapStat.find_by_game(@gameNumber).id, :BlackCoreHP => @blackCoreHP)
+
+
+						end
 
 					end
 
-					if @whiteCoreHP <= 0
-
-						@whiteCoreHP = 0
-
-						CoreDeath("white")
-
-					end
-
-					MapStat.update(MapStat.find_by_game(@gameNumber).id, :WhiteCoreHP => @whiteCoreHP)
-
-
-				end
-
-				if params[:command].slice(2,100).to_i == MapStat.find_by_game(@gameNumber).BlackCorePOS && @yourHero.allies == "white"
-
-					if MapStat.find_by_game(@gameNumber).WhiteCoreHP > 0
-
-					@blackCoreHP = MapStat.find_by_game(@gameNumber).BlackCoreHP - AttackDamage(@yourHero.character)
-
-					end
-
-					if @blackCoreHP <= 0
-
-						@blackCoreHP = 0
-
-						CoreDeath("black")
-
-					end
-
-					MapStat.update(MapStat.find_by_game(@gameNumber).id, :BlackCoreHP => @blackCoreHP)
-
-
-				end
-
-			end
-
-				CoreDamage()
+				CoreDamage(AttackDamage(@yourHero.character))
 
 				GameStat.update(@yourHero.id, :attacked => Time.now.to_f.round(3))
 
@@ -549,7 +549,9 @@ class UniversalController < ApplicationController
 
 			end
 
-			if @yourHero.character == "Ima" && @yourHero.mp >= 50
+			if @yourHero.character == "Ima" && @yourHero.mp >= 60
+
+				#need to fix the board wrap-around problem here
 
 				@TargetArray = [@yourHero.pos + 3 * e, @yourHero.pos - 3 * e, @yourHero.pos + 3, @yourHero.pos - 3, @yourHero.pos + 1 + 2 * e, @yourHero.pos + 2 + e, @yourHero.pos + 2 - e, @yourHero.pos + 1 - 2 * e, @yourHero.pos - 1 - 2 * e, @yourHero.pos - 2 - e, @yourHero.pos - 2 + e, @yourHero.pos - 1 + 2 * e];
 
@@ -557,7 +559,7 @@ class UniversalController < ApplicationController
 
 						if @enemyHero.hp != 0
 
-							@newHP = @enemyHero.hp - AttackDamage(@yourHero.character)
+							@newHP = @enemyHero.hp - 120
 
 								if @newHP <= 0
 
@@ -571,9 +573,9 @@ class UniversalController < ApplicationController
 
 				  		end
 
-				  		CoreDamage()
+				  		CoreDamage(120)
 
-				GameStat.update(@yourHero.id, :mp => @yourHero.mp - 50)
+				GameStat.update(@yourHero.id, :mp => @yourHero.mp - 60)
 
 				GameStat.update(@yourHero.id, :casted => Time.now.to_f.round(3))
 

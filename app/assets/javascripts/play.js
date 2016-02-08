@@ -186,7 +186,7 @@ function crossbow() { if ( document.getElementsByClassName("target").length > 0 
 
     var x = 0;
 
-    while ( x < TargetArray.length ) { if (ValidTargetSquares.indexOf(document.getElementById(TargetArray[x]).className) > -1) { TargetCanvas(TargetArray[x],"b") } x++ };
+    while ( x < TargetArray.length ) { if (ValidTargetSquares.indexOf(document.getElementById(TargetArray[x]).className) > -1 && Distancetx(yourHero.pos,TargetArray[x]).length <= 4) { TargetCanvas(TargetArray[x],"b") } x++ };
 
 };
 
