@@ -158,6 +158,16 @@ function TargetCanvas(x, color) {
        ctx.globalAlpha = 0.3;
        ctx.fillStyle="#DF013A";
        ctx.fillRect(0, 0, 50, 50)  }
+
+
+
+       if ( color == "b" ) {
+
+       TargetColor = "b"; 
+    
+       ctx.globalAlpha = 0.3;
+       ctx.fillStyle="#FE2EC8";
+       ctx.fillRect(0, 0, 50, 50)  }
     
     
     
@@ -170,7 +180,18 @@ function TargetCanvas(x, color) {
 var ValidTargetSquares = ['on','occupied'];
 
 
-function attack() {
+function crossbow() { if ( document.getElementsByClassName("target").length > 0 && TargetColor != "b" ) { sheath() };
+
+    var TargetArray = [yourHero.pos + 3 * e, yourHero.pos - 3 * e, yourHero.pos + 3, yourHero.pos - 3, yourHero.pos + 1 + 2 * e, yourHero.pos + 2 + e, yourHero.pos + 2 - e, yourHero.pos + 1 - 2 * e, yourHero.pos - 1 - 2 * e, yourHero.pos - 2 - e, yourHero.pos - 2 + e, yourHero.pos - 1 + 2 * e];
+
+    var x = 0;
+
+    while ( x < TargetArray.length ) { if (ValidTargetSquares.indexOf(document.getElementById(TargetArray[x]).className) > -1) { TargetCanvas(TargetArray[x],"b") } x++ };
+
+};
+
+
+function attack() { if ( document.getElementsByClassName("target").length > 0 && TargetColor != "a" ) { sheath() };
         
     
     function AC(x) {
@@ -194,11 +215,11 @@ function attack() {
     
 };
 
-function sheath() { //make white and black core as pieces, then add them to turnstile
+function sheath() { 
 
     var turnstile = [yourHero.id, enemyHero.id, whiteCore.id, blackCore.id];
 
-    function StringTransform(x) { //edit this function to find other things on board too, like cores.
+    function StringTransform(x) { //edit this function to find other things on board too, like pawns.
                     
                     if ( x == "Joan" ) { return Joan }; 
                     
@@ -273,11 +294,7 @@ var PieceinQ;
           TurnCanvasOn(Number(document.getElementsByClassName("target")[n].id));
 
         }       }      }      }   };
-    
-        
-        
-        
-        
+          
     
     
 } };

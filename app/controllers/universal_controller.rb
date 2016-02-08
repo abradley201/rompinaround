@@ -137,7 +137,7 @@ class UniversalController < ApplicationController
 			@canAttack = true
 		end
 
-		if Time.now.to_f.round(3) - @yourHero.casted >= 1 && ["e"].include?(params[:command]) == true
+		if Time.now.to_f.round(3) - @yourHero.casted >= 1 && ["e"].include?(params[:command].slice(0)) == true
 			@canCast = true
 		end
 
@@ -529,7 +529,7 @@ class UniversalController < ApplicationController
 
 		end
 
-		if @canCast == true && params[:command] == "e"
+		if @canCast == true && params[:command].slice(0) == "e"
 
 			regen(@yourHero,@gameNumber)
 
@@ -544,6 +544,8 @@ class UniversalController < ApplicationController
 			end
 
 			if @yourHero.character == "Ima" && @yourHero.mp >= 50
+
+				#params[:command].slice(2,100).to_i
 
 
 

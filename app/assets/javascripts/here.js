@@ -599,7 +599,7 @@ function here(x) {   console.log(x);
 
             if (yourHero.id == "Joan") { commander(); }
 
-            if (yourHero.id == "Ima") { }
+            if (yourHero.id == "Ima") { crossbow(); }
 
             if (yourHero.id == "Steph") { }
 
