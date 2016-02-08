@@ -1,0 +1,177 @@
+<!DOCTYPE html> 
+
+<html>
+  <head>
+      
+       <link rel="icon" 
+      type="image/png" 
+      href="/favicon.ico">
+      
+      <meta charset="UTF-8">
+      <meta http-equiv="X-UA-Compatible" content="chrome=1, IE=edge">
+
+      
+<title>board1</title>  
+      
+
+      
+</head>   
+
+<body onKeyPress="google(event)" onload="CreateContent(600,600,'#b0c4de','817px');CreateBoard(40,40,10,10);assign();ClearUI();HPMPbars();GeneratePiece('whiteCore',10);GeneratePiece('blackCore',109);CheckForEnemy();">
+
+    <div class="container" id="container">
+
+
+    <script type="text/javascript" charset="utf-8">
+
+
+    Joan = new piece("Joan", "JoanP1", "JoanB1", 20, 20, 0, 10, 10, 0, 0, 0, null, 0, null);
+
+    Ima = new piece("Ima", "ImaP1", "ImaB1", 20, 20, 0, 10, 10, 0, 0, 0, null, 0, null);
+
+    Steph = new piece("Steph", "StephP1", "StephB1", 20, 20, 0, 10, 10, 0, 0, 0, null, 0, null);
+
+
+    var yourHero;
+
+    var enemyHero;
+
+
+    function assign() { 
+
+      yourHero = '<%= h @yourHero -%>';  
+
+      if (yourHero == "Joan") { yourHero = Joan }
+
+      if (yourHero == "Ima") { yourHero = Ima }
+
+      if (yourHero == "Steph") { yourHero = Steph }
+
+      enemyHero = '<%= h @enemyHero -%>';
+
+      if (enemyHero == "Joan") { enemyHero = Joan }
+
+      if (enemyHero == "Ima") { enemyHero = Ima }
+
+      if (enemyHero == "Steph") { enemyHero = Steph }
+
+
+        var yourHp = '<%= h @yourHp -%>';
+        var yourMaxhp = '<%= h @yourMaxhp -%>';
+        var yourShield = '<%= h @yourShield -%>';
+        var yourMp = '<%= h @yourMp -%>';
+        var yourMaxmp = '<%= h @yourMaxmp -%>';
+        var yourPos = '<%= h @yourPos -%>';
+        var yourKills = '<%= h @yourKills -%>';
+        var yourDeaths = '<%= h @yourDeaths -%>';
+        var yourStatus = '<%= h @yourStatus -%>';
+        var yourExp = '<%= h @yourExp -%>';
+        var yourAllies = '<%= h @yourAllies -%>';
+
+        var enemyHp = '<%= h @enemyHp -%>';
+        var enemyMaxhp = '<%= h @enemyMaxhp -%>';
+        var enemyShield = '<%= h @enemyShield -%>';
+        var enemyMp = '<%= h @enemyMp -%>';
+        var enemyMaxmp = '<%= h @enemyMaxmp -%>';
+        var enemyPos = '<%= h @enemyPos -%>';
+        var enemyKills = '<%= h @enemyKills -%>';
+        var enemyDeaths = '<%= h @enemyDeaths -%>';
+        var enemyStatus = '<%= h @enemyStatus -%>';
+        var enemyExp = '<%= h @enemyExp -%>';
+        var enemyAllies = '<%= h @enemyAllies -%>';
+
+
+
+        yourHero['hp'] = Number(yourHp);
+        yourHero['maxhp'] = Number(yourMaxhp);
+        yourHero['shield'] = Number(yourShield);
+        yourHero['mp'] = Number(yourMp);
+        yourHero['maxmp'] = Number(yourMaxmp);
+        yourHero['pos'] = Number(yourPos);
+        yourHero['kills'] = Number(yourKills);
+        yourHero['deaths'] = Number(yourDeaths);
+        yourHero['status'] = yourStatus;
+        yourHero['exp'] = Number(yourExp);
+        yourHero['allies'] = yourAllies;
+
+        enemyHero['hp'] = Number(enemyHp);
+        enemyHero['maxhp'] = Number(enemyMaxhp);
+        enemyHero['shield'] = Number(enemyShield);
+        enemyHero['mp'] = Number(enemyMp);
+        enemyHero['maxmp'] = Number(enemyMaxmp);
+        enemyHero['pos'] = Number(enemyPos);
+        enemyHero['kills'] = Number(enemyKills);
+        enemyHero['deaths'] = Number(enemyDeaths);
+        enemyHero['status'] = enemyStatus;
+        enemyHero['exp'] = Number(enemyExp);
+        enemyHero['allies'] = enemyAllies;
+
+        place(yourHero.pos,yourHero);
+        if (enemyHero.id != yourHero.id) { 
+        place(enemyHero.pos, enemyHero) };
+
+
+       };
+
+
+    function CheckForEnemy() {
+    
+        if (enemyHero.id == yourHero.id) {
+
+
+          var FindEnemy;
+
+          FindEnemy=window.setInterval(function(){EnemySearch()},1000); 
+
+
+          function EnemySearch() { var theparse;
+
+            if (enemyHero.id != yourHero.id) { clearInterval(FindEnemy); return }
+
+                var xmlhttp = new XMLHttpRequest();
+                xmlhttp.onreadystatechange=function() {
+                if (xmlhttp.readyState==4 && xmlhttp.status==200) { 
+
+                      theparse = JSON.parse(xmlhttp.responseText);
+
+                      if ( theparse.enemyFound == "true" ) {
+
+                          if (theparse.enemyHero == "Joan") { enemyHero = Joan }
+
+                          if (theparse.enemyHero == "Ima") { enemyHero = Ima }
+
+                          if (theparse.enemyHero == "Steph") { enemyHero = Steph }
+
+                          enemyHero['hp'] = Number(theparse.enemyHp);
+                          enemyHero['maxhp'] = Number(theparse.enemyMaxhp);
+                          enemyHero['shield'] = Number(theparse.enemyShield);
+                          enemyHero['mp'] = Number(theparse.enemyMp);
+                          enemyHero['maxmp'] = Number(theparse.enemyMaxmp);
+                          enemyHero['pos'] = Number(theparse.enemyPos);
+                          enemyHero['kills'] = Number(theparse.enemyKills);
+                          enemyHero['deaths'] = Number(theparse.enemyDeaths);
+                          enemyHero['status'] = theparse.enemyStatus;
+                          enemyHero['exp'] = Number(theparse.enemyExp);
+                          enemyHero['allies'] = theparse.enemyAllies;
+
+                      } } }
+
+            xmlhttp.open("GET","/locateEnemy",true);
+            xmlhttp.send();
+
+        } } };
+
+
+
+
+            setTimeout(function(){ Pulsate() }, 1000);
+
+
+    </script>
+
+
+
+     </div> 
+
+</body>
+</html>

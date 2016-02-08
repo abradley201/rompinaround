@@ -1,0 +1,22 @@
+<html>
+<head>
+<script type="text/javascript">
+function delayedRedirect(){
+    window.location = "/"
+}
+</script>
+</head>
+<body onLoad="setTimeout('delayedRedirect()', 2500)">
+
+<% if @info.errors.any? %>
+      <p style="font-size:45px">Error occurred:</p><br>
+      <ul>
+        <% @info.errors.full_messages.each do |msg| %>
+        <li><p style="font-size:30px" ><%= msg %></p></li>
+        <% end %>
+        </ul>
+ 
+      <% end %>
+
+</body>
+</html>

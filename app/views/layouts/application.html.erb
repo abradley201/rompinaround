@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>RompinAround</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+
+  <link rel="icon" 
+      type="image/png" 
+      href="/assets/favicon.ico">
+
+
+
+  <style>   
+        
+          HTML, BODY { height: 100%; }
+          
+
+          
+div.container {
+   align-content: center;
+   width: 970px;
+   height: 990px;
+   margin-right: auto;
+   margin-left: auto;
+   padding-right: 15px;
+   -webkit-touch-callout: none;
+   -webkit-user-select: none;
+   -khtml-user-select: none;
+   -moz-user-select: none;
+   -ms-user-select: none;
+    user-select: none;
+    color: white;
+    
+    
+}
+             
+div.message {
+    width: 940px;
+    height: 200px;
+    position: relative;
+    right: 0;
+    left: 0;
+    background-color: #000000;
+    padding: 10px 10px 10px 10px; 
+    margin-right: auto;
+    margin-left: auto;
+    border-width: 5px;
+    border-color: grey;
+    border-style: solid;
+    border-bottom: 0;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+     user-select: none;
+    color: white;
+    
+}
+    
+          
+div.data {
+    font-size : 26px;
+    width: 940px;
+    height: 710px;
+    position: relative;
+    right: 0;
+    left: 0;
+    margin-right: auto;
+    margin-left: auto;
+    padding: 20px 10px 10px 10px; 
+    background-color: #000000;
+    border-style: solid;
+    border-width: 5px;
+    border-color: grey;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+     user-select: none;
+    color: white;
+    
+    
+}
+          
+          
+div.content {
+    position: relative;
+    margin-right: auto;
+    margin-left: auto;
+    border-style: solid;
+    border-width: 5px;
+    border-color: #000000;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+     user-select: none;
+             
+}
+          
+div.board {
+    position: relative;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+     user-select: none;
+             
+}
+          
+div.frontText {
+    display: block;
+    position: absolute;
+    top: 25px;
+    left: 240px;
+    color: white;
+    font-size: 30px; 
+    
+}
+          
+          
+div.login {
+    display: block;
+    position: absolute;
+    top: 25px;
+    right: 35px;
+    color: white;
+    
+}
+
+          
+div.info {       
+    padding-top: 10px;
+    padding-left: 20px;
+    height: 40px;
+    width: 627px;
+    font-size : 29px;
+    line-height: 1.275em;
+    display: block;
+    position: absolute;
+    top: 685px;
+    left: 230px;
+    border-style: solid;
+    border-width: 5px;
+    border-color: grey;
+    color: white;
+} 
+
+          
+div.header {
+   position:fixed;
+   left:0px;
+   bottom:0px;
+   height:160px;
+   width:100%;
+   background:#999;
+   padding: 10px; 
+    background-color: #000000;
+    border-style: solid;
+    border-width: 5px;
+    border-left: 0px;
+    border-right: 0px;
+    border-bottom: 0px;
+    border-color: grey;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+     user-select: none;  
+
+}
+
+           
+button, input, select, textarea {
+  -webkit-appearance: none;
+  width : 235px;
+  height : 45px;
+  font-family : inherit;
+  font-size   : 28px;
+  border-radius: 14px;
+  -webkit-border-radius: 14px;
+  -moz-border-radius: 14px;
+  outline: none;
+  background-color: floralwhite;
+  padding: 0px;
+
+    
+}
+
+          
+          
+canvas {border:1px solid grey;vertical-align:top}
+          
+canvas.UI {border:0px }
+
+A:link {text-decoration: none; color: #FFFFFF}
+A:visited {text-decoration: none; color: #FFFFFF}
+A:active {text-decoration: none; color: #FFFFFF}
+A:hover {text-decoration: underline; color: #FFFFFF}
+          
+          
+span {
+    
+    font-size: 28px;
+    white-space:pre
+}
+          
+label {
+    
+    font-size: 45px;
+
+}
+
+  </style>
+
+  	 
+
+
+</head>
+
+<img class = "hidden" style = "display: none;" id = "JoanP1" src = "/assets/JoanP1.png" />
+<img class = "hidden" style = "display: none;" id = "JoanB1" src = "/assets/JoanB1.png" />
+<img class = "hidden" style = "display: none;" id = "ImaP1" src = "/assets/ImaP1.png" />
+<img class = "hidden" style = "display: none;" id = "ImaB1" src = "/assets/ImaB1.png" />
+<img class = "hidden" style = "display: none;" id = "StephP1" src = "/assets/StephP1.png" />
+<img class = "hidden" style = "display: none;" id = "StephB1" src = "/assets/StephB1.png" />
+<img class = "hidden" style = "display: none;" id = "castle1" src = "/assets/castle1.png" />
+<img class = "hidden" style = "display: none;" id = "accuracy" src = "/assets/accuracy.png" />
+<img class = "hidden" style = "display: none;" id = "cross" src = "/assets/cross.png" />
+<img class = "hidden" style = "display: none;" id = "whiteCore" src = "/assets/WhiteTower.png" />
+<img class = "hidden" style = "display: none;" id = "blackCore" src = "/assets/BlackTower.png" />
+<img class = "hidden" style = "display: none;" id = "speed" src = "/assets/speed.png" />
+
+
+
+
+<body>
+
+	<!-- things here go on every single page of the web application -->
+
+
+
+
+
+
+<%= yield %>
+
+</body>
+</html>
