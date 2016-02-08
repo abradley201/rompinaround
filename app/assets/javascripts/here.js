@@ -12,6 +12,28 @@
      var optionsDGLBL = []; //USED FOR DETERMINING ROWS, COLUMNS, AND DIAGONALS.
 
 
+
+
+     function Clm(a) { 
+    
+     if (document.getElementById(a).className == "off") { return "not on board" };
+    
+    var column = [a];
+
+    for ( n=1; n<=h; n++ ) {
+         if (document.getElementById( a + ( e * n ) ).className !== "off") { 
+         column.push( a + ( e * n ) ) }
+         if (document.getElementById( a + ( e * n ) ).className == "off") { break } }
+    for ( n=1; n<=e-2; n++ ) {  
+         if (document.getElementById( a - ( e * n ) ).className !== "off") { 
+         column.push( a - ( e * n ) ) } 
+         if (document.getElementById( a - ( e * n ) ).className == "off") { break } }
+
+    return column;
+
+    };
+
+
      function ClmNumber(a) {
     
     if (document.getElementById(a).className == "off") { return "not on board" };
@@ -27,6 +49,26 @@
     return column[0];
     
 	};
+
+
+    function Row(a) { 
+    
+    if (document.getElementById(a).className == "off") { return "not on board" };
+    
+    var row = [a];
+
+    for ( n=1; n<=h; n++ ) {
+         if (document.getElementById( a + ( 1 * n ) ).className !== "off") { 
+         row.push( a + ( 1 * n ) ) }
+         if (document.getElementById( a + ( 1 * n ) ).className == "off") { break } }
+    for ( n=1; n<=e-2; n++ ) {  
+         if (document.getElementById( a - ( 1 * n ) ).className !== "off") { 
+         row.push( a - ( 1 * n ) ) } 
+         if (document.getElementById( a - ( 1 * n ) ).className == "off") { break } }
+
+    return row;
+
+    };
 
 
 	function RowNumber(a) {

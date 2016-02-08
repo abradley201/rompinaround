@@ -545,17 +545,17 @@ class UniversalController < ApplicationController
 
 			regen(@yourHero,@gameNumber)
 
-			if @yourHero.character == "Joan" && @yourHero.mp >= 70
+			if @yourHero.character == "Joan" && @yourHero.mp >= 60
 
 				GameStat.update(@yourHero.id, :status => "#{@yourHero.status}crusade♱#{Time.now.to_f.round(3)}♱")
 
-				GameStat.update(@yourHero.id, :mp => @yourHero.mp - 70)
+				GameStat.update(@yourHero.id, :mp => @yourHero.mp - 60)
 
 				GameStat.update(@yourHero.id, :casted => Time.now.to_f.round(3))
 
 			end
 
-			if @yourHero.character == "Ima" && @yourHero.mp >= 80
+			if @yourHero.character == "Ima" && @yourHero.mp >= 70
 
 				#need to fix the board wrap-around problem here: Distancetx etc. needed server side
 
@@ -569,7 +569,7 @@ class UniversalController < ApplicationController
 
 				CoreDamage(120)
 
-				GameStat.update(@yourHero.id, :mp => @yourHero.mp - 80)
+				GameStat.update(@yourHero.id, :mp => @yourHero.mp - 70)
 
 				GameStat.update(@yourHero.id, :casted => Time.now.to_f.round(3))	
 

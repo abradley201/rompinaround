@@ -157,8 +157,7 @@ function TargetCanvas(x, color) {
     
        ctx.globalAlpha = 0.3;
        ctx.fillStyle="#DF013A";
-       ctx.fillRect(0, 0, 50, 50)  }
-
+       ctx.fillRect(0, 0, 50, 50)  };
 
 
        if ( color == "b" ) {
@@ -167,12 +166,19 @@ function TargetCanvas(x, color) {
     
        ctx.globalAlpha = 0.3;
        ctx.fillStyle="#FE2EC8";
-       ctx.fillRect(0, 0, 50, 50)  }
+       ctx.fillRect(0, 0, 50, 50)  }; 
+
+    
+        if ( color == "c" ) {
+
+       TargetColor = "c"; 
+    
+       ctx.globalAlpha = 0.3;
+       ctx.fillStyle="#FF8000";
+       ctx.fillRect(0, 0, 50, 50)  };
     
     
-    
-    
-    document.getElementById(x).className = 'target' 
+    document.getElementById(x).className = 'target'; 
   
 };
 
@@ -190,6 +196,21 @@ function crossbow() { if ( document.getElementsByClassName("target").length > 0 
 
 };
 
+function holyexplosion() { if ( document.getElementsByClassName("target").length > 0 && TargetColor != "c" ) { sheath() };
+
+    var x = 0;
+
+    var y = 0;
+
+    var row = Row(yourHero.pos);
+
+    var clm = Clm(yourHero.pos);
+
+    while ( x < row.length ) { if (ValidTargetSquares.indexOf(document.getElementById(row[x]).className) > -1) { TargetCanvas(row[x],"c") }; x++ };
+
+    while ( y < clm.length ) { if (ValidTargetSquares.indexOf(document.getElementById(clm[y]).className) > -1) { TargetCanvas(clm[y],"c") }; y++ };
+
+};
 
 function attack() { if ( document.getElementsByClassName("target").length > 0 && TargetColor != "a" ) { sheath() };
         

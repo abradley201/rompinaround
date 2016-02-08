@@ -68,15 +68,14 @@ function google(evt){
 
                                         if (yourHero.id == "Ima") { crossbow(); }
 
-                                        if (yourHero.id == "Steph") { }
+                                        if (yourHero.id == "Steph") { holyexplosion(); }
 
                                          }
 
                                          }
+                                    
                      
-                     
-                     
-}
+};
 
 var IsGameOver = false;
 
@@ -256,9 +255,9 @@ function commander(x) { if (IsGameOver == true) { return };
         if (command == "d") {message = "→"};
         if (command == "e") {
 
-            if (yourHero.id == "Joan" && yourHero.mp < 70) { message = "need 70 mp" }
+            if (yourHero.id == "Joan" && yourHero.mp < 60) { message = "need 70 mp" }
 
-            else if (yourHero.id == "Ima" && yourHero.mp < 80) { message = "need 80 mp" }
+            else if (yourHero.id == "Ima" && yourHero.mp < 70) { message = "need 80 mp" }
 
             else if (yourHero.id == "Steph" && yourHero.mp < 40) { message = "need 40 mp" }
 
@@ -276,7 +275,7 @@ function commander(x) { if (IsGameOver == true) { return };
             ctx.fillStyle="white";
             ctx.font = "50px Arial";
             ctx.fillText(message,window.innerWidth / 2 + 10,85);
-            
+
 
         if (message.length != 1) { return }
 
