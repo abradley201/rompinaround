@@ -105,7 +105,7 @@ function Pulsate() {
         if ( theparse.gameOver == "true" ) { return };
 
 
-    if (MovementCommandReceived == false) { if (yourHero.pos != theparse.yourPos) { TurnCanvasOn(yourHero.pos) } };
+    if (yourHero.pos != theparse.yourPos) { TurnCanvasOn(yourHero.pos) };
     if (enemyHero.pos != theparse.enemyPos) { TurnCanvasOn(enemyHero.pos) };
 
 
