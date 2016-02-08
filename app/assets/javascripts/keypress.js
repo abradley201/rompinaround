@@ -249,7 +249,16 @@ xmlhttp.send();
 
 var MovementCommandReceived = false;
 
-function commander(x) { if (IsGameOver == true) { return }; 
+var LastCommandAttempt = 0;
+
+function commander(x) {  if (IsGameOver == true) { return }; 
+
+        var d = new Date();
+        var n = d.getTime();
+
+        if (n - LastCommandAttempt < 300) { console.log("too fast"); return };
+
+        LastCommandAttempt = n;
 
         if (command == "w") {message = "↑"};
         if (command == "s") {message = "↓"};
