@@ -626,6 +626,10 @@ function blankClick(x) {
 
 
 //here(x) is a function that is called when a square is clicked.
+
+var SpecialTapped = false;
+
+
 function here(x) {   console.log(x); 
 
 	if ( document.getElementById(x).className == "target" ) {
@@ -641,9 +645,9 @@ function here(x) {   console.log(x);
 
             if (yourHero.id == "Joan") { commander(); }
 
-            if (yourHero.id == "Ima") { crossbow(); }
+            if (yourHero.id == "Ima") { if (SpecialTapped == false) { crossbow(); SpecialTapped = true } else { sheath(); SpecialTapped = false } }
 
-            if (yourHero.id == "Steph") { holyexplosion(); }
+            if (yourHero.id == "Steph") { if (SpecialTapped == false) { holyexplosion(); SpecialTapped = true } else { sheath(); SpecialTapped = false } }
 
 
 
