@@ -105,7 +105,7 @@ function Pulsate() {
         if ( theparse.gameOver == "true" ) { return };
 
 
-    if (yourHero.pos != theparse.yourPos) { TurnCanvasOn(yourHero.pos) };
+    if (MovementCommandReceived == false) { if (yourHero.pos != theparse.yourPos) { TurnCanvasOn(yourHero.pos) } };
     if (enemyHero.pos != theparse.enemyPos) { TurnCanvasOn(enemyHero.pos) };
 
 
@@ -203,8 +203,8 @@ function Pulsate() {
             xmlhttpo.onreadystatechange=function() {
             if (xmlhttpo.readyState==4 && xmlhttpo.status==200)
             { theparse = JSON.parse(xmlhttpo.responseText);
-            if ( theparse.gameOver == "true" && yourHero.allies == "white" ) { setTimeout(function(){ document.getElementById("header").innerHTML = "<center><button type='button' onclick='LeaveGame()'>Leave</button><br><br>VICTORY!</center>"; }, 1500); }
-            if ( theparse.gameOver == "true" && yourHero.allies == "black" ) { setTimeout(function(){ document.getElementById("header").innerHTML = "<center><button type='button' onclick='LeaveGame()'>Leave</button><br><br>Defeat.</center>"; }, 1500); }
+            if ( theparse.gameOver == "true" && yourHero.allies == "white" ) { setTimeout(function(){ document.getElementById("header").innerHTML = "<center><button type='button' onclick='LeaveGame()'>Leave</button><br><br><h2>VICTORY!</h2></center>"; }, 1500); }
+            if ( theparse.gameOver == "true" && yourHero.allies == "black" ) { setTimeout(function(){ document.getElementById("header").innerHTML = "<center><button type='button' onclick='LeaveGame()'>Leave</button><br><br><h2>Defeat</h2></center>"; }, 1500); }
             } };
 
             xmlhttpo.open("GET","/endgameButton",true);
@@ -228,8 +228,8 @@ function Pulsate() {
             xmlhttpo.onreadystatechange=function() {
             if (xmlhttpo.readyState==4 && xmlhttpo.status==200)
             { theparse = JSON.parse(xmlhttpo.responseText);
-            if ( theparse.gameOver == "true" && yourHero.allies == "black" ) { setTimeout(function(){ document.getElementById("header").innerHTML = "<center><button type='button' onclick='LeaveGame()'>Leave</button><br><br>VICTORY!</center>"; }, 1500); }
-            if ( theparse.gameOver == "true" && yourHero.allies == "white" ) { setTimeout(function(){ document.getElementById("header").innerHTML = "<center><button type='button' onclick='LeaveGame()'>Leave</button><br><br>Defeat</center>"; }, 1500); }
+            if ( theparse.gameOver == "true" && yourHero.allies == "black" ) { setTimeout(function(){ document.getElementById("header").innerHTML = "<center><button type='button' onclick='LeaveGame()'>Leave</button><br><br><h2>VICTORY!</h2></center>"; }, 1500); }
+            if ( theparse.gameOver == "true" && yourHero.allies == "white" ) { setTimeout(function(){ document.getElementById("header").innerHTML = "<center><button type='button' onclick='LeaveGame()'>Leave</button><br><br><h2>Defeat</h2></center>"; }, 1500); }
             } };
 
             xmlhttpo.open("GET","/endgameButton",true);
