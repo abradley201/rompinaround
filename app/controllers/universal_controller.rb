@@ -581,9 +581,17 @@ class UniversalController < ApplicationController
 
 				@mapInfo = MapStat.find_by_game(@gameNumber).map.split
 
+				@TargetArray = []
+
 				q = 1
 
-				while @mapInfo[@yourHero.pos + q] != "f"
+				while q <= 20
+
+				 if @mapInfo[@yourHero.pos + q] == "f"
+
+				 	break
+
+				 end
 
 				 @TargetArray.push(@yourHero.pos + q)
 
@@ -593,7 +601,13 @@ class UniversalController < ApplicationController
 
 				w = 1
 
-				while @mapInfo[@yourHero.pos - w] != "f"
+				while w <= 20
+
+				 if @mapInfo[@yourHero.pos - w] == "f"
+
+				 	break
+
+				 end
 
 				 @TargetArray.push(@yourHero.pos - w)
 
@@ -603,7 +617,13 @@ class UniversalController < ApplicationController
 
 				qq = 1
 
-				while @mapInfo[@yourHero.pos + qq * e] != "f"
+				while qq <= 20
+
+				 if @mapInfo[@yourHero.pos + qq * e] == "f"
+
+				 	break
+
+				 end
 
 				 @TargetArray.push(@yourHero.pos + qq * e)
 
@@ -613,7 +633,13 @@ class UniversalController < ApplicationController
 
 				ww = 1
 
-				while @mapInfo[@yourHero.pos - ww * e] != "f"
+				while ww <= 20
+
+				 if @mapInfo[@yourHero.pos - ww * e] == "f"
+
+				 	break
+
+				 end
 
 				 @TargetArray.push(@yourHero.pos - ww * e)
 
