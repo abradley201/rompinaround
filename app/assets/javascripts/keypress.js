@@ -133,7 +133,7 @@ function Pulsate() {
         enemyHero['exp'] = Number(theparse.enemyExp);
         enemyHero['allies'] = theparse.enemyAllies;
 
-    place(yourHero.pos, yourHero);
+    if (MovementCommandReceived == false) { place(yourHero.pos, yourHero); };
     if (yourHero.id != enemyHero.id){  
     if (document.getElementById(enemyHero.pos).className == "target") { place(enemyHero.pos, enemyHero); TargetCanvas(enemyHero.pos,TargetColor) } else { place(enemyHero.pos, enemyHero) } };
 
@@ -245,7 +245,7 @@ xmlhttp.send();
 
 }  Timer() };
 
-
+var MovementCommandReceived = false;
 
 function commander(x) { if (IsGameOver == true) { return }; 
 
@@ -292,7 +292,7 @@ function commander(x) { if (IsGameOver == true) { return };
 
         if ( theparse.gameOver == "true" ) { return };
 
-    if (yourHero.pos != theparse.yourPos) { TurnCanvasOn(yourHero.pos) };
+    if (yourHero.pos != theparse.yourPos) { MovementCommandReceived = true; TurnCanvasOn(yourHero.pos); setTimeout(function(){ MovementCommandReceived = false; }, 300); };
     if (enemyHero.pos != theparse.enemyPos) { TurnCanvasOn(enemyHero.pos) };
      
         yourHero['hp'] = Number(theparse.yourHp);
