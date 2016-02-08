@@ -59,6 +59,20 @@ function google(evt){
                                         attack(); }
 
                                          }
+
+    if (String.fromCharCode(key)=="e"){ if ( yourHero.hp > 0 && IsGameOver == false ) {
+
+                                        command = "e";
+
+                                        if (yourHero.id == "Joan") { commander(); }
+
+                                        if (yourHero.id == "Ima") { }
+
+                                        if (yourHero.id == "Steph") { }
+
+                                         }
+
+                                         }
                      
                      
                      
@@ -240,6 +254,7 @@ function commander(x) { if (IsGameOver == true) { return };
         if (command == "s") {message = "↓"};
         if (command == "a") {message = "←"};
         if (command == "d") {message = "→"};
+        if (command == "e") {message = "☄"};
         if (command.slice(0,1) == "1") {message = "⚔"};
 
 

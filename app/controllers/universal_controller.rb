@@ -102,13 +102,43 @@ class UniversalController < ApplicationController
 		e = MapStat.find_by_game(@gameNumber).e
 
 
+		if @yourHero.character == "Joan" && @yourHero.status.include?("♱") == true
 
-		if Time.now.to_f.round(3) - @yourHero.moved >= 1 && ["w","a","s","d"].include?(params[:command]) == true
+			@statusArray = @yourHero.status.split("♱")
+
+			@buffTimer = @statusArray[1].to_f
+
+				if Time.now.to_f.round(3) - @buffTimer >= 5
+
+					@statusArray[0].slice! "crusade"
+
+					@statusArray.delete_at(1)
+
+					@status = @statusArray.join
+
+					GameStat.update(@yourHero.id, :status => @status)
+
+				end
+
+			m = 0.75
+
+		else
+
+			m = 1
+
+		end
+
+
+		if Time.now.to_f.round(3) - @yourHero.moved >= m && ["w","a","s","d"].include?(params[:command]) == true
 			@canMove = true
 		end
 
 		if Time.now.to_f.round(3) - @yourHero.attacked >= 1 && params[:command].slice(0) == "1"
 			@canAttack = true
+		end
+
+		if Time.now.to_f.round(3) - @yourHero.casted >= 1 && ["e"].include?(params[:command]) == true
+			@canCast = true
 		end
 
 
@@ -221,7 +251,6 @@ class UniversalController < ApplicationController
 			end
 
 		end
-
 
 		if @canMove == true
 
@@ -426,7 +455,6 @@ class UniversalController < ApplicationController
 		#slice(2,100) needs to be changed so that 100 is dynamic
 
 
-
 			if (params[:command].slice(2,100).to_i - @yourHero.pos).abs == 1 || (params[:command].slice(2,100).to_i - @yourHero.pos).abs == e
 
 
@@ -501,9 +529,47 @@ class UniversalController < ApplicationController
 
 		end
 
-		#how to include @canCast here? use @firstValidation && @secondValidation
+		if @canCast == true && params[:command] == "e"
+
+			regen(@yourHero,@gameNumber)
+
+			if @yourHero.character == "Joan" && @yourHero.mp >= 70
+
+				GameStat.update(@yourHero.id, :status => "#{@yourHero.status}crusade♱#{Time.now.to_f.round(3)}♱")
+
+				GameStat.update(@yourHero.id, :mp => @yourHero.mp - 70)
+
+				GameStat.update(@yourHero.id, :casted => Time.now.to_f.round(3))
+
+			end
+
+			if @yourHero.character == "Ima" && @yourHero.mp >= 50
+
+
+
+
+				GameStat.update(@yourHero.id, :mp => @yourHero.mp - 50)
+
+				GameStat.update(@yourHero.id, :casted => Time.now.to_f.round(3))
+
+			end
+
+			if @yourHero.character == "Steph" && @yourHero.mp >= 40
+
+
+
+
+				GameStat.update(@yourHero.id, :mp => @yourHero.mp - 40)
+
+				GameStat.update(@yourHero.id, :casted => Time.now.to_f.round(3))
+
+			end
+
+			render :json => { :yourHp => @yourHero.hp, :yourMaxhp => @yourHero.maxhp, :yourShield => @yourHero.shield, :yourMp => @yourHero.mp, :yourMaxmp => @yourHero.maxmp, :yourPos => @yourHero.pos, :yourKills => @yourHero.kills, :yourDeaths => @yourHero.deaths, :yourStatus => @yourHero.status, :yourExp => @yourHero.exp, :yourAllies => @yourHero.allies, :enemyHp => @enemyHero.hp, :enemyMaxhp => @enemyHero.maxhp, :enemyShield => @enemyHero.shield, :enemyMp => @enemyHero.mp, :enemyMaxmp => @enemyHero.maxmp, :enemyPos => @enemyHero.pos, :enemyKills => @enemyHero.kills, :enemyDeaths => @enemyHero.deaths, :enemyStatus => @enemyHero.status, :enemyExp => @enemyHero.exp, :enemyAllies => @enemyHero.allies }
+
+		end
 		
-		if @canMove == false && @canAttack == false
+		if [@canMove, @canAttack, @canCast].include?(true) == false
 
 			render :json => { :yourHp => @yourHero.hp, :yourMaxhp => @yourHero.maxhp, :yourShield => @yourHero.shield, :yourMp => @yourHero.mp, :yourMaxmp => @yourHero.maxmp, :yourPos => @yourHero.pos, :yourKills => @yourHero.kills, :yourDeaths => @yourHero.deaths, :yourStatus => @yourHero.status, :yourExp => @yourHero.exp, :yourAllies => @yourHero.allies, :enemyHp => @enemyHero.hp, :enemyMaxhp => @enemyHero.maxhp, :enemyShield => @enemyHero.shield, :enemyMp => @enemyHero.mp, :enemyMaxmp => @enemyHero.maxmp, :enemyPos => @enemyHero.pos, :enemyKills => @enemyHero.kills, :enemyDeaths => @enemyHero.deaths, :enemyStatus => @enemyHero.status, :enemyExp => @enemyHero.exp, :enemyAllies => @enemyHero.allies }
 

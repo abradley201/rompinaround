@@ -594,11 +594,14 @@ function here(x) {   console.log(x);
 
 		if ( document.getElementById(x).className == "occupied" ) {
 
-        if ( yourHero.pos == x ) { 
+        if ( yourHero.pos == x ) { command = "e";
 
 
+            if (yourHero.id == "Joan") { commander(); }
 
+            if (yourHero.id == "Ima") { }
 
+            if (yourHero.id == "Steph") { }
 
 
 
