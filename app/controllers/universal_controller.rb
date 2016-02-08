@@ -108,7 +108,7 @@ class UniversalController < ApplicationController
 
 			@buffTimer = @statusArray[1].to_f
 
-				if Time.now.to_f.round(3) - @buffTimer >= 5
+				if Time.now.to_f.round(3) - @buffTimer >= 6
 
 					@statusArray[0].slice! "crusade"
 

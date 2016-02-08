@@ -411,7 +411,7 @@ function SelectSquare(p) { if ( IsSearching == true ) { return }; var HeroArray 
                 context.rect(0,0,150,150);
                 context.stroke(); 
 
-                var TipArray = ["Tip: Stay on your respawn square to regain health & mana rapidly.","Tip: Each time you die, your respawn timer increases by 3 seconds.","Tip: Movement has a cooldown of 1 square per second.","Tip: You can't move onto your enemy's respawn square.","Tip: Specials that target squares can be canceled by tapping your hero again."];
+                var TipArray = ["Tip: Stay on your respawn square to regain health & mana rapidly.","Tip: Each time you die, your respawn timer increases by 3 seconds.","Tip: Movement has a cooldown of 1 square per second.","Tip: You can't move onto your enemy's respawn square.","Tip: Specials that target squares can be canceled by tapping your hero again.","Tip: For best pathing, click away from walls."];
                 var Tip = Math.round(Math.random() * (TipArray.length - 1));
 
                 if ( p == 1 ) { var c = document.getElementById("HeroInfo");
