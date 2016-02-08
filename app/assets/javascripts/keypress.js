@@ -256,7 +256,7 @@ function commander(x) {  if (IsGameOver == true) { return };
         var d = new Date();
         var n = d.getTime();
 
-        if (n - LastCommandAttempt < 300) { console.log("too fast"); return };
+        if (n - LastCommandAttempt < 300) { return };
 
         LastCommandAttempt = n;
 
