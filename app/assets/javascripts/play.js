@@ -399,7 +399,55 @@ function SelectSquare(p) { if ( IsSearching == true ) { return }; var HeroArray 
                 context.strokeStyle="blue";
                 context.lineWidth = 6;
                 context.rect(0,0,150,150);
-                context.stroke(); }
+                context.stroke(); 
+
+                var TipArray = ["Tip: Stay on your respawn square (the white or black one) to regain health & mana rapidly.","Tip: Each time you die, your respawn timer increases by 3 seconds.","Tip: Movement has a cooldown of 1 square per second.","Tip: You can't move onto your enemy's respawn square."];
+                var Tip = Math.round(Math.random() * (TipArray.length - 1));
+
+                if ( p == 1 ) { var c = document.getElementById("HeroInfo");
+                var ctx = c.getContext('2d');
+                ctx.clearRect(0,0,800,300);
+                ctx.font="25px Georgia";
+                ctx.fillStyle="white";
+                ctx.fillText("Joan: Powerful holy warrior.",50,50);
+                ctx.fillText("Special ability Crusader boosts her movement speed.",50,100);
+                ctx.fillText("Tap repeatedly on a distant square to charge at your enemies.",50,150);
+                ctx.font="20px Georgia";
+                ctx.fillText(TipArray[Tip],50,200);
+
+
+
+                };
+
+                if ( p == 2 ) { var c = document.getElementById("HeroInfo");
+                var ctx = c.getContext('2d');
+                ctx.clearRect(0,0,800,300);
+                ctx.font="25px Georgia";
+                ctx.fillStyle="white";
+                ctx.fillText("Ima: Renegade rogue.",50,50);
+                ctx.fillText("Special ability is a crossbow with a range of 3.",50,100);
+                ctx.fillText("Click a targeted square to shoot a powerful bolt.",50,150);
+                ctx.font="20px Georgia";
+                ctx.fillText(TipArray[Tip],50,200);
+
+                };
+
+                if ( p == 3 ) { var c = document.getElementById("HeroInfo");
+                var ctx = c.getContext('2d');
+                ctx.clearRect(0,0,800,300);
+                ctx.font="25px Georgia";
+                ctx.fillStyle="white";
+                ctx.fillText("Steph: Loose cannon mage.",50,50);
+                ctx.fillText("Special ability targets all squares in her column & row.",50,100);
+                ctx.fillText("Click a targeted square to scorch an enemy with fire.",50,150);
+                ctx.font="20px Georgia";
+                ctx.fillText(TipArray[Tip],50,200);
+
+                };
+
+
+
+            };
 
 
 
