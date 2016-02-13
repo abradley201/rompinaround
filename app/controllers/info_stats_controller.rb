@@ -74,24 +74,20 @@ class InfoStatsController < ApplicationController
 
                         session[:account] = @info.account
 
-                            if GameStat.inGameStat?(session[:account]) == true
+                        @possibleQuery = BaseStat.find_by_account(session[:account])
 
-                                @gameNumber = GameStat.find_by_account(session[:account]).game
+                        if @possibleQuery != nil
 
-                                if GameStat.inGameStat?(session[:account]) == true
+                            @gameNumber = @possibleQuery.game
 
-                                    @gameNumber = GameStat.find_by_account(session[:account]).game
+                        else
 
-                                    @gameArray = GameStat.where(game:@gameNumber)
+                            @gameNumber = -1
 
-                                    if @gameArray.length == 2
+                        end
 
+                            if GameStat.inGameStat?(session[:account]) == true || GameStat.find_by_game(@gameNumber) != nil
                                         redirect_to "/board1"
-
-                                    end
-
-                                end
-
                             end
 
 
@@ -105,18 +101,20 @@ class InfoStatsController < ApplicationController
 
             else
 
-                if GameStat.inGameStat?(session[:account]) == true
+                @possibleQuery = BaseStat.find_by_account(session[:account])
 
-                    @gameNumber = GameStat.find_by_account(session[:account]).game
+                        if @possibleQuery != nil
 
-                    @gameArray = GameStat.where(game:@gameNumber)
+                            @gameNumber = @possibleQuery.game
 
-                    if @gameArray.length == 2
+                        else
 
+                            @gameNumber = -1
+
+                        end
+
+                if GameStat.inGameStat?(session[:account]) == true || GameStat.find_by_game(@gameNumber) != nil
                     redirect_to "/board1"
-
-                    end
-
                 end
 
             end
