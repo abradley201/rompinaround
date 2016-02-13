@@ -76,39 +76,37 @@ class InfoStatsController < ApplicationController
 
                             if GameStat.inGameStat?(session[:account]) == true
 
-                                @gameNumber = GameStat.find_by_account(session[:account]).game
-
-                                if GameStat.inGameStat?(session[:account]) == true
-
-                                    @gameNumber = GameStat.find_by_account(session[:account]).game
-
-                                    @gameArray = GameStat.where(game:@gameNumber)
-
-                                    if @gameArray.length == 2
-
-                                        redirect_to "/board1"
-
-                                    end
-
-                                end
-
-                            end
-
-                            @possibleQuery = BaseStat.find_by_account(session[:account])
-
-                            if @possibleQuery != nil
-
-                                @gameNumber = @possibleQuery.game
+                                redirect_to "/board1"
 
                             else
 
-                                @gameNumber = -1
+                                @possibleQuery = BaseStat.find_by_account(session[:account])
 
-                            end
+                                if @possibleQuery != nil
 
-                            if GameStat.inGameStat?(@gameNumber) == true
+                                    @gameNumber = @possibleQuery.game
 
-                                redirect_to "/makematch"
+                                else
+
+                                    @gameNumber = -1
+
+                                end
+
+                                if GameStat.inGameStat?(@gameNumber) == true
+
+                                    @yourHero = BaseStat.find_by_account(session[:account]).character
+                                    @yourHero_hp = BaseStat.find_by_character(@yourHero).hp
+                                    @yourHero_maxhp = BaseStat.find_by_character(@yourHero).maxhp
+                                    @yourHero_mp = BaseStat.find_by_character(@yourHero).mp
+                                    @yourHero_maxmp = BaseStat.find_by_character(@yourHero).maxmp
+
+                                    GameStat.create(:account => session[:account], :game => @gameNumber, :room => 1, :character => @yourHero, :hp => @yourHero_hp, :maxhp => @yourHero_maxhp, :shield => 0, :mp => @yourHero_mp, :maxmp => @yourHero_maxmp, :pos => 0, :kills => 0, :deaths => 0, :status => "fine", :exp => 0, :allies => "black")
+
+                                    BaseStat.update(BaseStat.find_by_account(session[:account]).id, :account => nil, :game => nil)
+
+                                    redirect_to "/board1"
+
+                                end
 
                             end
 
@@ -125,35 +123,39 @@ class InfoStatsController < ApplicationController
 
                 if GameStat.inGameStat?(session[:account]) == true
 
-                    @gameNumber = GameStat.find_by_account(session[:account]).game
-
-                    @gameArray = GameStat.where(game:@gameNumber)
-
-                    if @gameArray.length == 2
-
                     redirect_to "/board1"
+
+                else
+
+                    @possibleQuery = BaseStat.find_by_account(session[:account])
+
+                    if @possibleQuery != nil
+
+                        @gameNumber = @possibleQuery.game
+
+                    else
+
+                        @gameNumber = -1
+
+                    end
+
+                    if GameStat.inGameStat?(@gameNumber) == true
+
+                        @yourHero = BaseStat.find_by_account(session[:account]).character
+                        @yourHero_hp = BaseStat.find_by_character(@yourHero).hp
+                        @yourHero_maxhp = BaseStat.find_by_character(@yourHero).maxhp
+                        @yourHero_mp = BaseStat.find_by_character(@yourHero).mp
+                        @yourHero_maxmp = BaseStat.find_by_character(@yourHero).maxmp
+
+                        GameStat.create(:account => session[:account], :game => @gameNumber, :room => 1, :character => @yourHero, :hp => @yourHero_hp, :maxhp => @yourHero_maxhp, :shield => 0, :mp => @yourHero_mp, :maxmp => @yourHero_maxmp, :pos => 0, :kills => 0, :deaths => 0, :status => "fine", :exp => 0, :allies => "black")
+
+                        BaseStat.update(BaseStat.find_by_account(session[:account]).id, :account => nil, :game => nil)
+
+                        redirect_to "/board1"
 
                     end
 
                 end
-
-                @possibleQuery = BaseStat.find_by_account(session[:account])
-
-                            if @possibleQuery != nil
-
-                                @gameNumber = @possibleQuery.game
-
-                            else
-
-                                @gameNumber = -1
-
-                            end
-
-                            if GameStat.inGameStat?(@gameNumber) == true
-
-                                redirect_to "/makematch"
-
-                            end
 
             end
 
