@@ -109,6 +109,18 @@ function Pulsate() {
     if (enemyHero.pos != theparse.enemyPos) { TurnCanvasOn(enemyHero.pos) };
 
 
+        enemyHero['hp'] = Number(theparse.enemyHp);
+        enemyHero['maxhp'] = Number(theparse.enemyMaxhp);
+        enemyHero['shield'] = Number(theparse.enemyShield);
+        enemyHero['mp'] = Number(theparse.enemyMp);
+        enemyHero['maxmp'] = Number(theparse.enemyMaxmp);
+        enemyHero['pos'] = Number(theparse.enemyPos);
+        enemyHero['kills'] = Number(theparse.enemyKills);
+        enemyHero['deaths'] = Number(theparse.enemyDeaths);
+        enemyHero['status'] = theparse.enemyStatus;
+        enemyHero['exp'] = Number(theparse.enemyExp);
+        enemyHero['allies'] = theparse.enemyAllies;
+
         yourHero['hp'] = Number(theparse.yourHp);
         yourHero['maxhp'] = Number(theparse.yourMaxhp);
         yourHero['shield'] = Number(theparse.yourShield);
@@ -121,17 +133,6 @@ function Pulsate() {
         yourHero['exp'] = Number(theparse.yourExp);
         yourHero['allies'] = theparse.yourAllies;
 
-        enemyHero['hp'] = Number(theparse.enemyHp);
-        enemyHero['maxhp'] = Number(theparse.enemyMaxhp);
-        enemyHero['shield'] = Number(theparse.enemyShield);
-        enemyHero['mp'] = Number(theparse.enemyMp);
-        enemyHero['maxmp'] = Number(theparse.enemyMaxmp);
-        enemyHero['pos'] = Number(theparse.enemyPos);
-        enemyHero['kills'] = Number(theparse.enemyKills);
-        enemyHero['deaths'] = Number(theparse.enemyDeaths);
-        enemyHero['status'] = theparse.enemyStatus;
-        enemyHero['exp'] = Number(theparse.enemyExp);
-        enemyHero['allies'] = theparse.enemyAllies;
 
     if (MovementCommandReceived == false) { place(yourHero.pos, yourHero); };
     if (yourHero.id != enemyHero.id){  
@@ -306,17 +307,6 @@ function commander(x) {  if (IsGameOver == true) { return };
     if (yourHero.pos != theparse.yourPos) { MovementCommandReceived = true; TurnCanvasOn(yourHero.pos); };
     if (enemyHero.pos != theparse.enemyPos) { TurnCanvasOn(enemyHero.pos) };
      
-        yourHero['hp'] = Number(theparse.yourHp);
-        yourHero['maxhp'] = Number(theparse.yourMaxhp);
-        yourHero['shield'] = Number(theparse.yourShield);
-        yourHero['mp'] = Number(theparse.yourMp);
-        yourHero['maxmp'] = Number(theparse.yourMaxmp);
-        yourHero['pos'] = Number(theparse.yourPos);
-        yourHero['kills'] = Number(theparse.yourKills);
-        yourHero['deaths'] = Number(theparse.yourDeaths);
-        yourHero['status'] = theparse.yourStatus;
-        yourHero['exp'] = Number(theparse.yourExp);
-        yourHero['allies'] = theparse.yourAllies;
 
         enemyHero['hp'] = Number(theparse.enemyHp);
         enemyHero['maxhp'] = Number(theparse.enemyMaxhp);
@@ -330,7 +320,19 @@ function commander(x) {  if (IsGameOver == true) { return };
         enemyHero['exp'] = Number(theparse.enemyExp);
         enemyHero['allies'] = theparse.enemyAllies;
 
+        yourHero['hp'] = Number(theparse.yourHp);
+        yourHero['maxhp'] = Number(theparse.yourMaxhp);
+        yourHero['shield'] = Number(theparse.yourShield);
+        yourHero['mp'] = Number(theparse.yourMp);
+        yourHero['maxmp'] = Number(theparse.yourMaxmp);
+        yourHero['pos'] = Number(theparse.yourPos);
+        yourHero['kills'] = Number(theparse.yourKills);
+        yourHero['deaths'] = Number(theparse.yourDeaths);
+        yourHero['status'] = theparse.yourStatus;
+        yourHero['exp'] = Number(theparse.yourExp);
+        yourHero['allies'] = theparse.yourAllies;
 
+       
       if (yourHero.status.indexOf('†') === -1) { place(yourHero.pos, yourHero) };
       if (enemyHero.status.indexOf('†') === -1 && enemyHero.id != yourHero.id) { place(enemyHero.pos, enemyHero) };
 
