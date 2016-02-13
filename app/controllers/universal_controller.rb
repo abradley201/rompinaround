@@ -609,7 +609,7 @@ class UniversalController < ApplicationController
 
 				q = 1
 
-				while q <= 10
+				while q <= 6
 
 				 break if @mapInfo[@yourHero.pos + q] == "f"
 
@@ -621,7 +621,7 @@ class UniversalController < ApplicationController
 
 				w = 1
 
-				while w <= 10
+				while w <= 6
 
 				 break if @mapInfo[@yourHero.pos - w] == "f"
 
@@ -633,7 +633,7 @@ class UniversalController < ApplicationController
 
 				qq = 1
 
-				while qq <= 10
+				while qq <= 6
 
 				 break if @mapInfo[@yourHero.pos + qq * e] == "f" 
 
@@ -645,7 +645,7 @@ class UniversalController < ApplicationController
 
 				ww = 1
 
-				while ww <= 10
+				while ww <= 6
 
 				 break if @mapInfo[@yourHero.pos - ww * e] == "f"
 
@@ -655,13 +655,15 @@ class UniversalController < ApplicationController
 
 				end
 
+				@bonusDMG = 10
+
 				if @TargetArray.include?(params[:command].slice(2,100).to_i) == true && @enemyHero.pos == params[:command].slice(2,100).to_i
 
-					DamageEnemy(AttackDamage(@yourHero.character)) 
+					DamageEnemy(AttackDamage(@yourHero.character) + @bonusDMG) 
 
 				end
 
-				CoreDamage(AttackDamage(@yourHero.character))
+				CoreDamage(AttackDamage(@yourHero.character) + @bonusDMG)
 
 				GameStat.update(@yourHero.id, :mp => @yourHero.mp - 40)
 

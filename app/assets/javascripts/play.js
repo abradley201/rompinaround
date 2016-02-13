@@ -210,9 +210,9 @@ function holyexplosion() { if ( document.getElementsByClassName("target").length
 
     var clm = Clm(yourHero.pos);
 
-    while ( x < row.length ) { if (ValidTargetSquares.indexOf(document.getElementById(row[x]).className) > -1 && row[x] != yourHero.pos) { TargetCanvas(row[x],"c") }; x++ };
+    while ( x < row.length ) { if (ValidTargetSquares.indexOf(document.getElementById(row[x]).className) > -1 && row[x] != yourHero.pos) { if (simpleDistance(yourHero.pos, row[x]).length - 1 <= 6) { TargetCanvas(row[x],"c") }; }; x++ };
 
-    while ( y < clm.length ) { if (ValidTargetSquares.indexOf(document.getElementById(clm[y]).className) > -1 && clm[y] != yourHero.pos) { TargetCanvas(clm[y],"c") }; y++ };
+    while ( y < clm.length ) { if (ValidTargetSquares.indexOf(document.getElementById(clm[y]).className) > -1 && clm[y] != yourHero.pos) { if (simpleDistance(yourHero.pos, clm[y]).length - 1 <= 6) { TargetCanvas(clm[y],"c") }; }; y++ };
 
 };
 
@@ -450,7 +450,7 @@ function SelectSquare(p) { if ( IsSearching == true ) { return }; var HeroArray 
                 ctx.font="25px Georgia";
                 ctx.fillStyle="white";
                 ctx.fillText("Steph: Loose cannon mage.",50,50);
-                ctx.fillText("Special ability targets all squares in her column & row.",50,100);
+                ctx.fillText("Special ability targets the first 6 squares in her column & row.",50,100);
                 ctx.fillText("Click a targeted square to scorch an enemy with fire.",50,150);
                 ctx.fillText("--Ω--",380,200);
                 ctx.font="20px Georgia";
