@@ -603,8 +603,6 @@ class UniversalController < ApplicationController
 
 			if @yourHero.character == "Steph" && @yourHero.mp >= 40
 
-				#the value 10 below needs to be more dynamic for different-sized maps
-
 				@mapInfo = MapStat.find_by_game(@gameNumber).map.split
 
 				@TargetArray = []

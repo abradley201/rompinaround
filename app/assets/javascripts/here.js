@@ -630,7 +630,11 @@ function blankClick(x) {
 var SpecialTapped = false;
 
 
-function here(x) {   console.log(x); 
+function here(x) {   if ( IsGameOver == true ) { return }; 
+
+
+        console.log(x); 
+
 
 	if ( document.getElementById(x).className == "target" ) {
 
