@@ -92,7 +92,7 @@ class InfoStatsController < ApplicationController
 
                                 end
 
-                                if GameStat.inGameStat?(@gameNumber) == true
+                                if GameStat.find_by_game(@gameNumber) != nil
 
                                     @yourHero = BaseStat.find_by_account(session[:account]).character
                                     @yourHero_hp = BaseStat.find_by_character(@yourHero).hp
@@ -139,7 +139,7 @@ class InfoStatsController < ApplicationController
 
                     end
 
-                    if GameStat.inGameStat?(@gameNumber) == true
+                    if GameStat.find_by_game(@gameNumber) != nil
 
                         @yourHero = BaseStat.find_by_account(session[:account]).character
                         @yourHero_hp = BaseStat.find_by_character(@yourHero).hp
