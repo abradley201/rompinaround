@@ -74,20 +74,42 @@ class InfoStatsController < ApplicationController
 
                         session[:account] = @info.account
 
-                        @possibleQuery = BaseStat.find_by_account(session[:account])
+                            if GameStat.inGameStat?(session[:account]) == true
 
-                        if @possibleQuery != nil
+                                @gameNumber = GameStat.find_by_account(session[:account]).game
 
-                            @gameNumber = @possibleQuery.game
+                                if GameStat.inGameStat?(session[:account]) == true
 
-                        else
+                                    @gameNumber = GameStat.find_by_account(session[:account]).game
 
-                            @gameNumber = -1
+                                    @gameArray = GameStat.where(game:@gameNumber)
 
-                        end
+                                    if @gameArray.length == 2
 
-                            if GameStat.inGameStat?(session[:account]) == true || GameStat.find_by_game(@gameNumber) != nil
                                         redirect_to "/board1"
+
+                                    end
+
+                                end
+
+                            end
+
+                            @possibleQuery = BaseStat.find_by_account(session[:account])
+
+                            if @possibleQuery != nil
+
+                                @gameNumber = @possibleQuery.game
+
+                            else
+
+                                @gameNumber = -1
+
+                            end
+
+                            if GameStat.inGameStat?(@gameNumber) == true
+
+                                redirect_to "/makematch"
+
                             end
 
 
@@ -101,21 +123,37 @@ class InfoStatsController < ApplicationController
 
             else
 
+                if GameStat.inGameStat?(session[:account]) == true
+
+                    @gameNumber = GameStat.find_by_account(session[:account]).game
+
+                    @gameArray = GameStat.where(game:@gameNumber)
+
+                    if @gameArray.length == 2
+
+                    redirect_to "/board1"
+
+                    end
+
+                end
+
                 @possibleQuery = BaseStat.find_by_account(session[:account])
 
-                        if @possibleQuery != nil
+                            if @possibleQuery != nil
 
-                            @gameNumber = @possibleQuery.game
+                                @gameNumber = @possibleQuery.game
 
-                        else
+                            else
 
-                            @gameNumber = -1
+                                @gameNumber = -1
 
-                        end
+                            end
 
-                if GameStat.inGameStat?(session[:account]) == true || GameStat.find_by_game(@gameNumber) != nil
-                    redirect_to "/board1"
-                end
+                            if GameStat.inGameStat?(@gameNumber) == true
+
+                                redirect_to "/makematch"
+
+                            end
 
             end
 
