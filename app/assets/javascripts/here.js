@@ -630,7 +630,7 @@ function blankClick(x) {
 var SpecialTapped = false;
 
 
-function here(x) {   if ( IsGameOver == true ) { return }; 
+function here(x) {   if ( IsGameOver == true || yourHero.hp == 0 ) { return }; 
 
 
         console.log(x); 
