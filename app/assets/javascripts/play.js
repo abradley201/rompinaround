@@ -519,7 +519,7 @@ function DuelMatchMaker() {
         document.getElementById("frontText").innerHTML = "searching... <button type='button' onclick='CancelDuelSearch()'>Cancel Search</button>"; } }
 
         else if ( theparse.account == "mirror" ) { if ( IsSearching == true ) {
-        document.getElementById("frontText").innerHTML = "searching... <button type='button' onclick='CancelDuelSearch()'>Cancel Search</button><br><br><p style='font-size:8px'>Someone is searching with <img src='/assets/" + yourHero.bpic + ".png' height='50' width='50'/> already.</p>"; 
+        document.getElementById("frontText").innerHTML = "searching... <button type='button' onclick='CancelDuelSearch()'>Cancel Search</button><br><br><p style='font-size:15px'>Someone is searching with <img src='/assets/" + yourHero.bpic + ".png' height='50' width='50'/> already.</p>"; 
 
     }  } else { document.getElementById("frontText").innerHTML = "Match found!"; IsSearching = false; GameFound = true;
 
