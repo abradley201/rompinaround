@@ -238,7 +238,15 @@ function Pulsate() {
 
         };
 
-    }
+    if (SpecialTapped == true) { 
+
+        if (TargetColor == "a") { attack() }
+
+        if (TargetColor == "b") { crossbow() }
+
+        if (TargetColor == "c") { holyexplosion() }
+
+     }; }
   }
 
 xmlhttp.open("GET","/pacemaker",true);

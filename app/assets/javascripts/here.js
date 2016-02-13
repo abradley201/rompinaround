@@ -645,9 +645,9 @@ function here(x) {   console.log(x);
 
             if (yourHero.id == "Joan") { commander(); }
 
-            if (yourHero.id == "Ima") { if (SpecialTapped == false) { crossbow(); SpecialTapped = true } else { sheath() } }
+            if (yourHero.id == "Ima") { if (SpecialTapped == false) { crossbow() } else { sheath() } }
 
-            if (yourHero.id == "Steph") { if (SpecialTapped == false) { holyexplosion(); SpecialTapped = true } else { sheath() } }
+            if (yourHero.id == "Steph") { if (SpecialTapped == false) { holyexplosion() } else { sheath() } }
 
 
 

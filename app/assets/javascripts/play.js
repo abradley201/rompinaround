@@ -186,7 +186,7 @@ function TargetCanvas(x, color) {
 var ValidTargetSquares = ['on','occupied'];
 
 
-function crossbow() { if ( document.getElementsByClassName("target").length > 0 && TargetColor != "b" ) { sheath() };
+function crossbow() { if ( document.getElementsByClassName("target").length > 0 && TargetColor != "b" ) { sheath() }; SpecialTapped = true;
 
     var TargetArray = [yourHero.pos + 3 * e, yourHero.pos - 3 * e, yourHero.pos + 3, yourHero.pos - 3, yourHero.pos + 1 + 2 * e, yourHero.pos + 2 + e, yourHero.pos + 2 - e, yourHero.pos + 1 - 2 * e, yourHero.pos - 1 - 2 * e, yourHero.pos - 2 - e, yourHero.pos - 2 + e, yourHero.pos - 1 + 2 * e];
 
@@ -200,7 +200,7 @@ function crossbow() { if ( document.getElementsByClassName("target").length > 0 
 
 };
 
-function holyexplosion() { if ( document.getElementsByClassName("target").length > 0 && TargetColor != "c" ) { sheath() };
+function holyexplosion() { if ( document.getElementsByClassName("target").length > 0 && TargetColor != "c" ) { sheath() }; SpecialTapped = true;
 
     var x = 0;
 
@@ -216,7 +216,7 @@ function holyexplosion() { if ( document.getElementsByClassName("target").length
 
 };
 
-function attack() { if ( document.getElementsByClassName("target").length > 0 && TargetColor != "a" ) { sheath() };
+function attack() { if ( document.getElementsByClassName("target").length > 0 && TargetColor != "a" ) { sheath() }; SpecialTapped = true;
         
     
     function AC(x) {
