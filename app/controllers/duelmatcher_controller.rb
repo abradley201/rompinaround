@@ -96,6 +96,9 @@ class DuelmatcherController < ApplicationController
 
 					render :json => { :account => false }
 
+				elsif otherAccount != false && BaseStat.find_by_account(otherAccount).character == params[:character]
+
+					render :json => { :account => "mirror" }
 
 				else
 

@@ -513,27 +513,17 @@ function DuelMatchMaker() {
 
   {
   if (xmlhttp.readyState==4 && xmlhttp.status==200)
-    {
+    { theparse = JSON.parse(xmlhttp.responseText);
     
-        if ( xmlhttp.responseText == '{"account":false}' ) { if ( IsSearching == true ) {
-        document.getElementById("frontText").innerHTML = "searching... <button type='button' onclick='CancelDuelSearch()'>Cancel Search</button>"; }
+        if ( theparse.account == false ) { if ( IsSearching == true ) {
+        document.getElementById("frontText").innerHTML = "searching... <button type='button' onclick='CancelDuelSearch()'>Cancel Search</button>"; } }
 
-   
+        else if ( theparse.account == "mirror" ) { if ( IsSearching == true ) {
+        document.getElementById("frontText").innerHTML = "searching... <button type='button' onclick='CancelDuelSearch()'>Cancel Search</button><br><br>Someone is searching with <img src='" + yourHero.bpic + ".png'> already."; 
 
-
-
-    } else { document.getElementById("frontText").innerHTML = "Match found!"; IsSearching = false; GameFound = true;
-
-
-
-
-
-
-
-
+    }  } else { document.getElementById("frontText").innerHTML = "Match found!"; IsSearching = false; GameFound = true;
 
                     }
-
 
     }
   }
