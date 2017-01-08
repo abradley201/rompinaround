@@ -27,7 +27,7 @@ class DuelmatcherController < ApplicationController
 					BaseStat.update(BaseStat.find_by_account(session[:account]).id, :account => nil, :game => nil)
 
 
-					@otherAccount = GameStat.find_by_game(@gameNumber).account
+					@otherAccount = BaseStat.find_by_game(@gameNumber).account
 					@otherHero = BaseStat.find_by_account(@otherAccount).character
 					@otherHero_hp = BaseStat.find_by_character(@otherHero).hp
 					@otherHero_maxhp = BaseStat.find_by_character(@otherHero).maxhp
