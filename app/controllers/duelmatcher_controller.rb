@@ -27,9 +27,19 @@ class DuelmatcherController < ApplicationController
 					BaseStat.update(BaseStat.find_by_account(session[:account]).id, :account => nil, :game => nil)
 
 
-					otherAccount = GameStat.find_by_game(@gameNumber).account
+					@otherAccount = GameStat.find_by_game(@gameNumber).account
+					@otherHero = BaseStat.find_by_account(@otherAccount).character
+					@otherHero_hp = BaseStat.find_by_character(@otherHero).hp
+					@otherHero_maxhp = BaseStat.find_by_character(@otherHero).maxhp
+					@otherHero_mp = BaseStat.find_by_character(@otherHero).mp
+					@otherHero_maxmp = BaseStat.find_by_character(@otherHero).maxmp
 
-					render :json => { :account => otherAccount }
+					#for other account
+					GameStat.create(:account => @otherAccount, :game => @gameNumber, :room => 1, :character => @otherHero, :hp => @otherHero_hp, :maxhp => @otherHero_maxhp, :shield => 0, :mp => @otherHero_mp, :maxmp => @otherHero_maxmp, :pos => 0, :kills => 0, :deaths => 0, :status => "fine", :exp => 0, :allies => "black")
+					#for other account
+					BaseStat.update(BaseStat.find_by_account(@otherAccount).id, :account => nil, :game => nil)
+
+					render :json => { :account => @otherAccount }
 
 				end
 
